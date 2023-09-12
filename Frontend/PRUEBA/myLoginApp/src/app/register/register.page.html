@@ -1,0 +1,22 @@
+<ion-content>
+  <div class="register-container">
+    <div class="register-logo">
+      <img src="assets/logo.png" alt="Logo">
+    </div>
+    <div class="register-form">
+        <ion-item>
+          <ion-label position="stacked">Email</ion-label>
+          <ion-input [(ngModel)]="email" type="email"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Password</ion-label>
+          <ion-input [(ngModel)]="password" type="password"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Confirm Password</ion-label>
+          <ion-input [(ngModel)]="confirmPassword" type="password"></ion-input>
+        </ion-item>
+        <ion-button expand="block" (click)="register()">REGISTER</ion-button>
+    </div>
+  </div>
+</ion-content>

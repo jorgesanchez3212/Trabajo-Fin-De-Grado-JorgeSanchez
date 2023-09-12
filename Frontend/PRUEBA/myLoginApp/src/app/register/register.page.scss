@@ -1,0 +1,80 @@
+ion-content {
+    --background: linear-gradient(93deg,  #f8f6f6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.register-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 5%;  // Añadir esto
+}
+
+.register-logo {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;  
+    margin-top: 1rem;  // Añadir esto
+    img {
+      width: 70%;
+      max-width: 350px;
+      min-width: 150px;
+      height: auto;
+    }
+}
+
+.register-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80%;
+    max-width: 400px;
+    padding: 1rem;
+    border-radius: 10px;
+    
+    ion-item {
+      --background: rgba(232, 230, 230, 0.8); 
+      --border-radius: 15px;
+      margin: 10px 0;
+    }
+
+    ion-button {
+        --background: #007BFF;
+        --color: white;
+        --border-radius: 10px;
+      }
+    }
+
+
+    // Media query para pantallas a partir de 768px (ejemplo de tamaño para tabletas en adelante)
+@media (min-width: 768px) {
+    .register-logo img {
+      width: 70%; // Aumentar el tamaño del logo para pantallas más grandes
+      max-width: 400px;
+      min-width: 300px;
+    }
+
+    .register-form {
+      width: 60%;
+      max-width: 600px; // Aumentar el tamaño máximo del formulario
+      ion-button {
+        width: 40%;
+
+    }
+    }
+}
+
+// Media query para pantallas menores de 768px (ejemplo de tamaño para móviles)
+@media (max-width: 767px) {
+    .register-form {
+        ion-button {
+            width: 100%;
+
+        }
+    }
+}
+  
