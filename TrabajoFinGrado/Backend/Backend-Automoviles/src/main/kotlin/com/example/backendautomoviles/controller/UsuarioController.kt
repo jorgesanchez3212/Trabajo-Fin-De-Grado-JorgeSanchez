@@ -1,0 +1,106 @@
+package com.example.backendautomoviles.controller
+
+import com.example.backendautomoviles.config.APIConfig
+import com.example.backendautomoviles.config.security.jwt.JwtTokenUtils
+import com.example.backendautomoviles.dto.*
+import com.example.backendautomoviles.mappers.toDto
+import com.example.backendautomoviles.mappers.toModel
+import com.example.backendautomoviles.models.Usuario
+import com.example.backendautomoviles.service.user.UsuarioService
+import com.example.backendautomoviles.validators.validate
+import jakarta.validation.Valid
+import kotlinx.coroutines.flow.toList
+import mu.KotlinLogging
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.http.ResponseEntity
+import org.springframework.security.access.prepost.PreAuthorize
+import org.springframework.security.authentication.AuthenticationManager
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
+import org.springframework.security.core.Authentication
+import org.springframework.security.core.annotation.AuthenticationPrincipal
+import org.springframework.security.core.context.SecurityContextHolder
+import org.springframework.stereotype.Controller
+import org.springframework.web.bind.annotation.*
+
+private val logger = KotlinLogging.logger {}
+
+
+@RestController
+@RequestMapping(APIConfig.API_PATH + "/users")
+class UsuarioController
+    @Autowired constructor(
+        private val usuariosService: UsuarioService,
+        private val authenticationManager: AuthenticationManager,
+        private val jwtTokenUtil: JwtTokenUtils,
+        // Lo utilizaremos para el avatar(la imagen) mas adelante
+        //private val storageService: StorageService
+    ) {
+
+    @PostMapping("/login")
+    fun login(@Valid @RequestBody logingDto: UsuarioLoginDto): ResponseEntity<UserWithTokenDto> {
+        logger.info { "Login de usuario: ${logingDto.username}" }
+
+        val authentication: Authentication = authenticationManager.authenticate(
+            UsernamePasswordAuthenticationToken(
+                logingDto.username,
+                logingDto.password
+            )
+        )
+        SecurityContextHolder.getContext().authentication = authentication
+        val user = authentication.principal as Usuario
+        val jwtToken: String = jwtTokenUtil.generateToken(user)
+        logger.info { "Token de usuario: ${jwtToken}" }
+        val userWithToken = UserWithTokenDto(user.toDto(), jwtToken)
+        return ResponseEntity.ok(userWithToken)
+    }
+
+
+    @PostMapping("/register")
+    suspend fun register(@Valid @RequestBody usuarioDto: UsuarioCreateDto): ResponseEntity<UserWithTokenDto> {
+        logger.info { "Registro de usuario: ${usuarioDto.username}" }
+
+        val user = usuarioDto.validate().toModel()
+        user.rol.forEach { println(it) }
+        val userSaved = usuariosService.save(user)
+        val jwtToken: String = jwtTokenUtil.generateToken(userSaved)
+        logger.info { "Token de usuario: ${jwtToken}" }
+        return ResponseEntity.ok(UserWithTokenDto(userSaved.toDto(), jwtToken))
+    }
+
+    @PreAuthorize("hasRole('CLIENTE')")
+    @GetMapping("/me")
+    fun meGet(@AuthenticationPrincipal usuario : Usuario) : ResponseEntity<UsuarioDto>{
+        logger.info { "Obteniendo informacion de usuario: ${usuario.username}"}
+        return ResponseEntity.ok(usuario.toDto())
+    }
+
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping("/listaUsuarios")
+    suspend fun listaUsuarios(@AuthenticationPrincipal usuario : Usuario) : ResponseEntity<List<UsuarioDto>>{
+        logger.info { "Obteniendo lista de todos los usuarios"}
+        return ResponseEntity.ok(usuariosService.findAll().toList().map { it.toDto() })
+    }
+
+
+    @PutMapping("/updateMe")
+    suspend fun updateMe(
+        @AuthenticationPrincipal user: Usuario,
+        @Valid @RequestBody usuarioDto: UsuarioUpdateDto
+    ): ResponseEntity<UsuarioDto> {
+        logger.info { "Actualizando usuario: ${user.username}" }
+
+        usuarioDto.validate()
+        var userUpdated = user.copy(
+            nombre = usuarioDto.nombre,
+            username = usuarioDto.username,
+            email = usuarioDto.email,
+            description = usuarioDto.descripcion
+        )
+
+        userUpdated = usuariosService.update(userUpdated)
+        return ResponseEntity.ok(userUpdated.toDto())
+    }
+
+}
+
