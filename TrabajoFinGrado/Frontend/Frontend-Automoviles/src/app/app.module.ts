@@ -15,13 +15,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginPage } from './components/login/login.page';
 import { RegisterPage } from './components/register/register.page';
+import { CatalogoPage } from './components/catalogo/catalogo.page';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginPage,
-    RegisterPage
+    RegisterPage,
+    CatalogoPage
   ],
   imports: [
     BrowserModule,
