@@ -1,0 +1,7 @@
+{
+  "name": "Frontend-Automoviles",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

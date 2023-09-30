@@ -1,0 +1,27 @@
+<ion-content>
+<div class="container">
+  <div class="element-father">
+    <div class="elements">
+    <div class="ion-text-center ion-padding">
+      <img class="imagen" src="assets/icon/logo.png" alt="Logo">
+    </div>
+
+    <div class="ion-padding">
+      <ion-item class="username">
+        <ion-label position="stacked">Username</ion-label>
+        <ion-input [(ngModel)]="username" type="username"></ion-input>
+      </ion-item>
+      <ion-item color="password">
+        <ion-label position="stacked">Password</ion-label>
+        <ion-input [(ngModel)]="password" type="password"></ion-input>
+      </ion-item>
+      <div class="ion-button-center ion-padding">
+      <ion-button  expand="full" size="default" color="success" shape="round" (click)="login()">LOGIN</ion-button><br>
+      <ion-button  expand="full" size="default" color="warning" shape="round" (click)="register()">REGISTER</ion-button>
+    </div>
+    </div>
+  </div>
+  </div>
+</div>
+
+</ion-content>
