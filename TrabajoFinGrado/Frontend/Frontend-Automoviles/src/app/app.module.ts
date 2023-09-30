@@ -15,6 +15,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginPage } from './components/login/login.page';
 import { RegisterPage } from './components/register/register.page';
+import { NavbarPage } from './components/navbar/navbar.page';
 import { CatalogoPage } from './components/catalogo/catalogo.page';
 
 
@@ -23,6 +24,7 @@ import { CatalogoPage } from './components/catalogo/catalogo.page';
     AppComponent,
     LoginPage,
     RegisterPage,
+    NavbarPage,
     CatalogoPage
   ],
   imports: [
