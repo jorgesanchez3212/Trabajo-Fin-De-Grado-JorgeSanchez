@@ -1,15 +1,17 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-contacto',
   templateUrl: './contacto.page.html',
   styleUrls: ['./contacto.page.scss'],
 })
-export class ContactoPage implements OnInit {
+export class ContactoPage  {
 
-  constructor() { }
+  constructor(private router : Router) { }
 
-  ngOnInit() {
+  aboutus(){
+    this.router.navigateByUrl('/aboutus');
   }
 
 }
