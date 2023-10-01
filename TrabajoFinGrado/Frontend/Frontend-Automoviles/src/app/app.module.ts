@@ -17,6 +17,8 @@ import { LoginPage } from './components/login/login.page';
 import { RegisterPage } from './components/register/register.page';
 import { NavbarPage } from './components/navbar/navbar.page';
 import { CatalogoPage } from './components/catalogo/catalogo.page';
+import { AboutusPage } from './components/aboutus/aboutus.page';
+import { ContactoPage } from './components/contacto/contacto.page';
 
 
 @NgModule({
@@ -25,7 +27,9 @@ import { CatalogoPage } from './components/catalogo/catalogo.page';
     LoginPage,
     RegisterPage,
     NavbarPage,
-    CatalogoPage
+    CatalogoPage,
+    AboutusPage,
+    ContactoPage
   ],
   imports: [
     BrowserModule,

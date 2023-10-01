@@ -4,6 +4,8 @@ import { LoginPage } from './components/login/login.page';
 import { RegisterPage } from './components/register/register.page';
 import { NavbarPage } from './components/navbar/navbar.page';
 import { CatalogoPage } from './components/catalogo/catalogo.page';
+import { AboutusPage } from './components/aboutus/aboutus.page';
+import { ContactoPage } from './components/contacto/contacto.page';
 
 
 const routes: Routes = [
@@ -11,6 +13,8 @@ const routes: Routes = [
   {path:'login',component: LoginPage},
   {path:'register',component: RegisterPage},
   {path:'catalogo',component: CatalogoPage},
+  {path:'aboutus',component:AboutusPage},
+  {path:'contacto',component:ContactoPage},
   
 ];
 
