@@ -75,7 +75,7 @@ class UsuarioController
     }
 
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMINISTRADOR')")
     @GetMapping("/listaUsuarios")
     suspend fun listaUsuarios(@AuthenticationPrincipal usuario : Usuario) : ResponseEntity<List<UsuarioDto>>{
         logger.info { "Obteniendo lista de todos los usuarios"}

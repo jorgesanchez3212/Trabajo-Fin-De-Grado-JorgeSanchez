@@ -1,0 +1,30 @@
+package com.example.backendautomoviles.models
+
+import kotlinx.serialization.Serializable
+import org.bson.types.ObjectId
+import org.springframework.data.annotation.Id
+import org.springframework.data.mongodb.core.mapping.Document
+import java.time.LocalDateTime
+import java.util.*
+
+
+@Document("automoviles")
+data class Automovil(
+    @Id
+    val id : String = ObjectId.get().toString(),
+    val uuid: UUID = UUID.randomUUID(),
+    val numeroChasis : String,
+    val marca : String,
+    val modelo : String,
+    val color : String,
+    val capacidad : Int,
+    val coste : Double,
+    val tipo : String = TipoAutomovil.COCHE.name,
+    val createdAt: LocalDateTime = LocalDateTime.now(),
+    val updatedAt: LocalDateTime = LocalDateTime.now(),
+    val deleted: Boolean = false,
+) {
+    enum class TipoAutomovil{
+        COCHE, FURGONETA, CAMION
+    }
+}

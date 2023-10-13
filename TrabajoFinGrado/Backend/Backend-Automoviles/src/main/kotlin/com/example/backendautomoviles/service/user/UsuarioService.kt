@@ -77,7 +77,7 @@ class UsuarioService
         )
         if (isAdmin)
             newUser = newUser.copy(
-                rol = Usuario.TipoUsuario.CLIENTE.name
+                rol = Usuario.TipoUsuario.ADMINISTRADOR.name
             )
         println(newUser)
         try {
