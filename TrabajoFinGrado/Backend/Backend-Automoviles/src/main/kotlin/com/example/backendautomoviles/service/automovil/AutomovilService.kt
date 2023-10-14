@@ -22,14 +22,13 @@ private val logger = KotlinLogging.logger {}
 class AutomovilService
 @Autowired constructor(
     private val repository : AutomovilesRepository,
-    private val passwordEncoder : PasswordEncoder
 ){
     suspend fun findAll() = withContext(Dispatchers.IO) {
         return@withContext repository.findAll()
     }
 
     @Cacheable("automoviles")
-    suspend fun loadUserById(automovilId: String) = withContext(Dispatchers.IO) {
+    suspend fun loadAutomovilById(automovilId: String) = withContext(Dispatchers.IO) {
         return@withContext repository.findById(automovilId)
                 ?: throw AutomovilesNotFoundException("No se ha encontrado el automovil con el id $automovilId")
 

@@ -31,7 +31,7 @@ class AutomovilController
 
     @PreAuthorize("hasRole('CLIENTE')")
     @GetMapping("/listaAutomoviles")
-    suspend fun listaUsuarios() : ResponseEntity<List<AutomovilDto>>{
+    suspend fun listaAutomoviles() : ResponseEntity<List<AutomovilDto>>{
         logger.info { "Obteniendo lista de todos los automoviles"}
         return ResponseEntity.ok(automovilesService.findAll().toList().map { it.toDto() })
     }
