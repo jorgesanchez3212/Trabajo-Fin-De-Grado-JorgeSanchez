@@ -53,7 +53,7 @@ export class RegisterComponent {
         image: null,
         rol: 'CLIENTE',
         password: this.registroForm.value.password,
-        description: this.registroForm.value.descripcion,
+        description: this.registroForm.value.description,
       };
 
       this.userService.userRegister(userData).subscribe(
