@@ -15,17 +15,13 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 
 
-
-
-
 // Componentes
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AutomovilesComponent } from './components/automoviles/automoviles.component';
-import { RouterModule } from '@angular/router';
 import { NavegacionComponent } from './components/navegacion/navegacion.component';
+import { AutomovilesComponent } from './components/automoviles/automoviles.component';
 
 @NgModule({
   declarations: [
@@ -44,9 +40,7 @@ import { NavegacionComponent } from './components/navegacion/navegacion.componen
     BrowserAnimationsModule,
     MatFormFieldModule,
     ToastrModule.forRoot(),
-    ReactiveFormsModule,
-    RouterModule
-    
+    ReactiveFormsModule
 
   ],
   providers: [],

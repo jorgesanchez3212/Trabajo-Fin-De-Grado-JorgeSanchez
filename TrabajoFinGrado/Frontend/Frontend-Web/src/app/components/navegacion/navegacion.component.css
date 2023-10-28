@@ -1,0 +1,12 @@
+.container-fluid{
+    background-size: cover;
+    height: 7vh;
+    
+}
+
+.navbar {
+    padding-top: 0;
+    padding-bottom: 0;
+    background-color: black;
+  }
+  

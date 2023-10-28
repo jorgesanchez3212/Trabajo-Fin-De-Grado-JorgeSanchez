@@ -1,0 +1,35 @@
+<div id="loginContainer" class="container-fluid">
+    <div class="col-md-8"></div>
+    <div class="col-md-4">
+        <form class="ng-pristine ng-valid" [formGroup]="loginForm" (ngSubmit)="login()">
+            <div class="jumbotron vertical-center" style="margin-bottom: -40px;">
+                <div class="col-md-12 login-box" style="background-color: #ffffffec;padding: 24px; border-radius: 20px;">
+                    <div style="color: #000000">
+                        <h1>Alquiler de Automóviles</h1>
+                    </div>
+                    <div class="alert alert-danger" *ngIf="error" style="text-align: left;">
+                        {{'Error al iniciar sesión'}}
+                    </div>
+                
+                    <div class="col-lg-6 col-lg-offset-3 text-center">
+                        <mat-spinner mode="indeterminate" *ngIf="isLoading" class="colorLogin" diameter="40"></mat-spinner>
+                    </div>
+                    <div >
+                        <mat-form-field style="border-radius: 10px;">
+                            <input matInput mdinput type="text" autofocus class="form-control form-line" id="username" [(ngModel)]="username" name="username" placeholder=" Usuario" formControlName="username" />
+                        </mat-form-field>
+                    </div>
+                    <div [attr.disabled]="showSpinner" >
+                        <mat-form-field>
+                            <input matInput mdInput type="password" placeholder=" Contraseña" class="form-control form-line" id="password" [(ngModel)]="password" name="password" formControlName="password" />
+                        </mat-form-field>
+                    </div>
+                    <button  type="submit" id="submit" class="btn btn-custom pull-right fs-12">Iniciar Sesión</button>
+                    <button  type="button" id="register" class="btn btn-custom pull-right fs-12" [routerLink]="'/register'" style="margin-left: 10px;">Registrarse</button>
+
+                    <p>&nbsp;</p>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,27 @@
+<nav class="navbar navbar-expand-sm mt-0" *ngIf="isNavbarVisible">
+    <div class="container-fluid navbar-dark bg-dark">
+        <a class="navbar-brand-icon nb-logo" [routerLink]="['login']" routerLinkActive="active" style="cursor:auto;">
+            <img alt="Brand" [src]="imgSrc" height="50"  class="p-0">
+        </a>
+      
+      <a  class="navbar-brand" routerLink="/automovil">Mi Perfil</a>
+      <a  class="navbar-brand" routerLink="/automovil">Automoviles</a>
+      <a class="navbar-brand" routerLink="/automovil">Usuarios</a>
+      <a class="navbar-brand" routerLink="/automovil">Reservas</a>
+      <a class="navbar-brand" routerLink="/automovil">Tiendas</a>
+
+
+      
+      
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  
+        </ul>
+        <form class="d-flex" role="search">
+          <input class="form-control me-2" type="search" placeholder="Buscar Automovil" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Buscar</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+

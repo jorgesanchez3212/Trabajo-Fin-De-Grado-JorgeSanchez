@@ -1,5 +1,4 @@
 .container-fluid{
-    background-image: url('assets/img/fondo.png');
     background-size: cover;
     height: 100vh;
     
@@ -8,12 +7,16 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    background-image: url('assets/img/fondo.png');
+
 }
 
 #registroContainer{
   display: flex;
   align-items: center;
   justify-content: center;
+  background-image: url('assets/img/fondo.png');
+
 }
  .login-box {
     background-color: rgb(255, 255, 255);
