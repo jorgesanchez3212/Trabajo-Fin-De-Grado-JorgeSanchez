@@ -9,6 +9,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ToastrModule } from 'ngx-toastr';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
 
 
 
@@ -40,7 +42,8 @@ import { AutomovilesComponent } from './components/automoviles/automoviles.compo
     BrowserAnimationsModule,
     MatFormFieldModule,
     ToastrModule.forRoot(),
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FontAwesomeModule
 
   ],
   providers: [],

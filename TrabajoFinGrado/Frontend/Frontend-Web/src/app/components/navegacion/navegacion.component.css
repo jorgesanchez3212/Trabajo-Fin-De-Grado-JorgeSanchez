@@ -1,12 +1,51 @@
-.container-fluid{
-    background-size: cover;
-    height: 7vh;
-    
+.example-container {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
 }
 
-.navbar {
-    padding-top: 0;
-    padding-bottom: 0;
-    background-color: black;
+.example-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
   
+
+mat-list-item {
+    display: flex;
+    align-items: center;
+}
+
+mat-icon {
+    margin-right: 8px; 
+    vertical-align: middle; 
+}
+
+
+
+
+a.mat-list-item {
+    padding: 10px 16px;
+}
+
+
+.example-is-mobile .example-toolbar {
+    position: fixed;
+    z-index: 2;
+}
+
+h1.example-app-name {
+    margin-left: 8px;
+}
+
+.example-sidenav-container {
+    flex: 1;
+}
+
+.example-is-mobile .example-sidenav-container {
+    flex: 1 0 auto;
+}

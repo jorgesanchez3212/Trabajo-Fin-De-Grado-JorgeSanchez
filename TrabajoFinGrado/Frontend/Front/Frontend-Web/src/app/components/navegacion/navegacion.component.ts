@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { Location } from '@angular/common';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
+
 
 
 @Component({
@@ -11,6 +13,7 @@ import { Location } from '@angular/common';
 export class NavegacionComponent implements OnInit {
 
   // Iconos
+  public faUser :any;
 
 
   isNavbarVisible: boolean = false;
@@ -21,6 +24,7 @@ export class NavegacionComponent implements OnInit {
   private activeTab = '';
 
   constructor(private router: Router, private location: Location) {
+    this.faUser = faUser;
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         console.log('Ruta actual:', event.url);
