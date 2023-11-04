@@ -1,7 +1,0 @@
-{
-  "name": "myLoginApp",
-  "integrations": {
-    "capacitor": {}
-  },
-  "type": "angular"
-}

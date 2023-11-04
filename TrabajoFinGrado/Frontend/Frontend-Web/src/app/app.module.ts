@@ -11,13 +11,9 @@ import { ToastrModule } from 'ngx-toastr';
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatListModule} from '@angular/material/list';
 import { MatToolbarModule } from '@angular/material/toolbar';
-
-
-
-
-
-
-
+import { MatCardModule } from '@angular/material/card';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 
@@ -35,6 +31,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { UsuarioComponent } from './components/usuario/usuario.component';
+import { DialogAmimationsComponent } from './components/usuario/dialog-amimations/dialog-amimations.component';
 
 
 @NgModule({
@@ -43,7 +41,9 @@ import { MatButtonModule } from '@angular/material/button';
     LoginComponent,
     RegisterComponent,
     NavegacionComponent,
-    AutomovilesComponent
+    AutomovilesComponent,
+    UsuarioComponent,
+    DialogAmimationsComponent
   ],
   imports: [
     BrowserModule,
@@ -61,7 +61,10 @@ import { MatButtonModule } from '@angular/material/button';
     MatListModule,
     MatIconModule,
     MatButtonModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatCardModule,
+    MatMenuModule,
+    MatDialogModule
 
   ],
   exports:[NavegacionComponent],

@@ -20,11 +20,10 @@ export class NavegacionComponent implements OnInit, OnDestroy {
   public imgSrc: string = 'assets/img/logo-oc.png';
 
 
-  // fillerNav = Array.from({length: 50}, (_, i) => `Nav Item ${i + 1}`);
   fillerNav = [
     {name:"Catalogo", route : "", icon:"home"},
     {name:"Mi Perfil", route : "", icon:"account_circle"},
-    {name:"Usuarios", route : "", icon:"group"},
+    {name:"Usuarios", route : "usuarios", icon:"group"},
     {name:"Automoviles", route : "automovil", icon:"directions_car"},
     {name:"Contacto", route : "", icon:"perm_contact_calendar"},
   ]

@@ -1,0 +1,25 @@
+<div class="example-button-container">
+  <button mat-fab class="add-button">
+    <mat-icon>add</mat-icon>
+  </button>
+</div>
+<div class="card-container">
+  <mat-card class="example-card" *ngFor="let usuario of usuarios">
+    <mat-card-header>
+      <div class="user-image">
+        <img mat-card-lg-image [src]="'assets/img/perfil2.png'" alt="{{usuario.username}}">
+      </div>
+      <div class="user-datos">
+        <mat-card-title>{{ usuario.username }} </mat-card-title>
+        <mat-card-subtitle>{{ usuario.email }}    <br>   {{ usuario.rol }}   
+        </mat-card-subtitle>
+      </div>
+      <div class="botones">
+        <button mat-flat-button color="warn" (click)="openDialog(usuario.id,'0ms', '0ms')"><mat-icon>delete</mat-icon> Borrar</button><br><br>
+        <button mat-flat-button color="primary"><mat-icon>edit</mat-icon>Modificar</button>
+      </div>
+    </mat-card-header>
+    <mat-card-content>
+    </mat-card-content>
+  </mat-card>
+</div>

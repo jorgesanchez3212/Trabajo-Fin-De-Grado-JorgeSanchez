@@ -45,6 +45,7 @@ export class LoginComponent {
     this.userService.login(this.loginF).subscribe(
       (response: UserToken) => {
         console.log('Usuario autenticado!', response);
+        localStorage.setItem('access_token', response.token);
         this.router.navigateByUrl('/automovil');
       },
       (error) => {
