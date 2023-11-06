@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { UserDto } from 'src/app/models/user/user-dto/user-dto';
 import { UtilsService } from 'src/app/services/utils.service';
 import { DialogAmimationsComponent } from './dialog-amimations/dialog-amimations.component';
+import { DetailUsuarioComponent } from './detail-usuario/detail-usuario.component';
 
 @Component({
   selector: 'app-usuario',
@@ -13,9 +14,11 @@ import { DialogAmimationsComponent } from './dialog-amimations/dialog-amimations
 export class UsuarioComponent implements OnInit{
 
   public usuarios : UserDto[]
+  public user : UserDto;
 
   constructor(private httpService: HttpClient, private utilsService : UtilsService, public dialog: MatDialog){
     this.usuarios = [];
+    this.user = new UserDto();
    
   }
 
@@ -28,7 +31,7 @@ export class UsuarioComponent implements OnInit{
 
     dialogRef.afterClosed().subscribe(result => {
       if (result !== undefined) {
-        if (result === true) {
+        if (result === 'Si') {
           this.deleteUsuarioById(usuarioId);
         } else {
           console.log("Usuario borrado")
@@ -51,7 +54,7 @@ export class UsuarioComponent implements OnInit{
         Authorization: `Bearer ${token}`
       });
   
-      this.httpService.delete(url, { headers }).toPromise().then((response: any) => {
+      this.httpService.post(url, { headers }).toPromise().then((response: any) => {
         console.log('Usuario eliminado correctamente');
       }).catch((error) => {
         console.error('Se ha producido un error al eliminar el usuario:', error);
@@ -78,6 +81,32 @@ export class UsuarioComponent implements OnInit{
       console.log('Se ha producido un error al obtener los usuarios');
     });
   }
+  }
+
+  openModal(id:string){
+    const url: string = `http://localhost:6969/api/users/find/${id}`; 
+
+    this.httpService.get(url).toPromise().then((data: any) => {
+      console.log(data);
+      this.user = data as UserDto;
+      this.dialog.open(DetailUsuarioComponent, {
+        width: '70%', height: '70%', data: {
+          usuario: this.user,
+        }
+      }).afterClosed().subscribe(() => {
+        this.getUsuariosAll();
+        //this.clearEmit();
+      });
+    }).catch(() => {
+      console.log('Se ha producido un error al obtener el usuario');
+    })
+
+  }
+  
+
+  onContextModificarClick(usuario : UserDto){
+    this.openModal( usuario.id as string);
+
   }
 
 

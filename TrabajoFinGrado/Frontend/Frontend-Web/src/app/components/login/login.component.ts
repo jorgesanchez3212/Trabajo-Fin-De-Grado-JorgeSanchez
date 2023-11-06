@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Login } from 'src/app/models/login/login';
@@ -11,7 +11,7 @@ import { UtilsService } from 'src/app/services/utils.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
 
   public isLoading = false;
   public error = false;
@@ -29,6 +29,9 @@ export class LoginComponent {
   private loginF:Login = new Login(this.loginForm.value.username!,this.loginForm.value.password!);
 
   constructor(private formBuilder: FormBuilder, private utilsService : UtilsService, private userService: UserRestService, private router:Router){}
+  ngOnInit(): void {
+    localStorage.clear;
+  }
 
   public login():void{
     this.isLoading = true;

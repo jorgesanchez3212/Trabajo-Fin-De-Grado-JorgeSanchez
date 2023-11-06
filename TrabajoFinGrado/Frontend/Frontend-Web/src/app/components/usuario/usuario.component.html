@@ -16,7 +16,7 @@
       </div>
       <div class="botones">
         <button mat-flat-button color="warn" (click)="openDialog(usuario.id,'0ms', '0ms')"><mat-icon>delete</mat-icon> Borrar</button><br><br>
-        <button mat-flat-button color="primary"><mat-icon>edit</mat-icon>Modificar</button>
+        <button mat-flat-button color="primary" (click)="onContextModificarClick(usuario)"><mat-icon>edit</mat-icon>Modificar</button>
       </div>
     </mat-card-header>
     <mat-card-content>

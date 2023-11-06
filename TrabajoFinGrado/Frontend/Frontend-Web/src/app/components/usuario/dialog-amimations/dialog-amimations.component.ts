@@ -13,5 +13,6 @@ export class DialogAmimationsComponent {
 
     this.dialogRef.close(result);
   }
+  
 
 }

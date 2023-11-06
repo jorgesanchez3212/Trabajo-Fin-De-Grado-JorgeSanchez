@@ -67,6 +67,17 @@ class UsuarioController
         return ResponseEntity.ok(UserWithTokenDto(userSaved.toDto(), jwtToken))
     }
 
+
+    @PostMapping("/añadir")
+    suspend fun añadirUsuario(@AuthenticationPrincipal usuario : Usuario, @Valid @RequestBody usuarioDto: UsuarioCreateDto): ResponseEntity<UsuarioDto> {
+        logger.info { "Añadir usuario por parte del administrador: ${usuarioDto.username}" }
+
+        val user = usuarioDto.validate().toModel()
+        user.rol.forEach { println(it) }
+        val userSaved = usuariosService.save(user, true)
+        return ResponseEntity.ok(userSaved.toDto())
+    }
+
     @PreAuthorize("hasRole('CLIENTE')")
     @GetMapping("/me")
     fun meGet(@AuthenticationPrincipal usuario : Usuario) : ResponseEntity<UsuarioDto>{
@@ -75,11 +86,31 @@ class UsuarioController
     }
 
 
+
+
+
     @PreAuthorize("hasRole('ADMINISTRADOR')")
     @GetMapping("/listaUsuarios")
     suspend fun listaUsuarios(@AuthenticationPrincipal usuario : Usuario) : ResponseEntity<List<UsuarioDto>>{
         logger.info { "Obteniendo lista de todos los usuarios"}
         return ResponseEntity.ok(usuariosService.findAll().toList().map { it.toDto() })
+    }
+
+
+    //@PreAuthorize("hasRole('ADMINISTRADOR')")
+    @PostMapping("/delete/{id}")
+    suspend fun deleteUsuario(@AuthenticationPrincipal usuario : Usuario, @PathVariable id : String) : ResponseEntity<Boolean>{
+        logger.info { "Borradno usuario con id ${id}"}
+        usuariosService.deleteById(id)
+        return ResponseEntity.ok(true)
+    }
+
+    //@PreAuthorize("hasRole('ADMINISTRADOR')")
+    @GetMapping("/find/{id}")
+    suspend fun findById(@AuthenticationPrincipal usuario : Usuario, @PathVariable id : String) : ResponseEntity<UsuarioDto>{
+        logger.info { "Buscando usuario con id ${id}"}
+        val user = usuariosService.loadUserById(id)
+        return ResponseEntity.ok(user?.toDto())
     }
 
 
@@ -96,6 +127,27 @@ class UsuarioController
             username = usuarioDto.username,
             email = usuarioDto.email,
             description = usuarioDto.descripcion
+        )
+
+        userUpdated = usuariosService.update(userUpdated)
+        return ResponseEntity.ok(userUpdated.toDto())
+    }
+
+    //@PreAuthorize("hasRole('ADMINISTRADOR')")
+    @PutMapping("/update")
+    suspend fun updateUsuario(
+        @AuthenticationPrincipal user: Usuario,
+        @Valid @RequestBody usuarioDto: UsuarioUpdateDto
+    ): ResponseEntity<UsuarioDto> {
+        logger.info { "Actualizando usuario: ${user.username}" }
+
+        usuarioDto.validate()
+
+        var userUpdated = user.copy(
+            nombre = usuarioDto.nombre,
+            username = usuarioDto.username,
+            email = usuarioDto.email,
+            description = usuarioDto.descripcion,
         )
 
         userUpdated = usuariosService.update(userUpdated)

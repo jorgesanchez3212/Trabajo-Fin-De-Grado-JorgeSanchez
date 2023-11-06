@@ -31,6 +31,7 @@ data class UsuarioLoginDto(
 
 
 data class UsuarioDto(
+    val id : String,
     val uuid: UUID? = null,
     val nombre: String,
     val username: String,
@@ -54,7 +55,8 @@ data class UsuarioUpdateDto(
     @NotEmpty(message = "El username no puede estar vacío")
     val username: String,
     @NotEmpty(message = "La descripcion no puede estar vacío")
-    val descripcion : String
+    val descripcion : String,
+    val password: String,
 )
 
 data class UserWithTokenDto(

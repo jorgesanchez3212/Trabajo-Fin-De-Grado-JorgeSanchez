@@ -39,6 +39,10 @@ class UsuarioService
         return@withContext repository.findAll()
     }
 
+
+    suspend fun deleteById(id : String) = withContext(Dispatchers.IO) {
+        return@withContext repository.deleteById(id)
+    }
     @Cacheable("usuarios")
     suspend fun loadUserById(userId: String) = withContext(Dispatchers.IO) {
         return@withContext repository.findById(userId)
@@ -77,7 +81,7 @@ class UsuarioService
         )
         if (isAdmin)
             newUser = newUser.copy(
-                rol = Usuario.TipoUsuario.ADMINISTRADOR.name
+                rol = user.rol
             )
         println(newUser)
         try {

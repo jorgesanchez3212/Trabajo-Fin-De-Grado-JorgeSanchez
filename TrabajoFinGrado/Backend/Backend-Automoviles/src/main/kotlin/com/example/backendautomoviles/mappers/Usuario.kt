@@ -7,6 +7,7 @@ import com.example.backendautomoviles.models.Usuario
 
 fun Usuario.toDto(): UsuarioDto {
     return UsuarioDto(
+        id=this.id,
         uuid = this.uuid,
         nombre = this.nombre,
         email = this.email,
