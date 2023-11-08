@@ -11,6 +11,7 @@ fun Usuario.toDto(): UsuarioDto {
         uuid = this.uuid,
         nombre = this.nombre,
         email = this.email,
+        descripcion = this.description,
         username = this.username,
         image = this.image,
         rol = this.rol.split(",").map { it.trim() }.toSet(),

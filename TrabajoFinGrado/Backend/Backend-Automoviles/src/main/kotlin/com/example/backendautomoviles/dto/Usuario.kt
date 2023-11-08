@@ -36,6 +36,7 @@ data class UsuarioDto(
     val nombre: String,
     val username: String,
     val email: String,
+    val descripcion: String,
     val image: String?,
     val rol: Set<String> = setOf(Usuario.TipoUsuario.CLIENTE.name),
     val metadata: MetaData? = null,
@@ -56,7 +57,7 @@ data class UsuarioUpdateDto(
     val username: String,
     @NotEmpty(message = "La descripcion no puede estar vacío")
     val descripcion : String,
-    val password: String,
+    val rol :   String
 )
 
 data class UserWithTokenDto(

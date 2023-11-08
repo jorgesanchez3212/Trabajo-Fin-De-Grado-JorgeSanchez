@@ -148,6 +148,7 @@ class UsuarioController
             username = usuarioDto.username,
             email = usuarioDto.email,
             description = usuarioDto.descripcion,
+            rol = usuarioDto.rol
         )
 
         userUpdated = usuariosService.update(userUpdated)

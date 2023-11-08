@@ -1,26 +1,43 @@
-<div class="example-container" [class.example-is-mobile]="mobileQuery.matches" *ngIf="shouldRun && isNavbarVisible">
-  <mat-toolbar class="example-toolbar" >
+<div class="example-container" [class.example-is-mobile]="mobileQuery.matches" >
+  <mat-toolbar class="example-toolbar">
     <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
     <a class="navbar-brand-icon nb-logo" [routerLink]="['login']" routerLinkActive="active" style="cursor:auto;">
-        <img alt="Brand" [src]="imgSrc" height="50" class="p-0">
+      <img alt="Brand" [src]="imgSrc" height="50" class="p-0">
     </a>
     <!-- Este div vacío actúa como un espacio para centrar el logo. -->
     <div></div>
-</mat-toolbar>
+  </mat-toolbar>
 
-
-  <mat-sidenav-container class="example-sidenav-container"
-                         [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
-    <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'"
-                 [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
+  <mat-sidenav-container class="example-sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+    <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
       <mat-nav-list>
-        <a mat-list-item [routerLink]="nav.route" *ngFor="let nav of fillerNav">
-          <mat-icon>{{nav.icon}}</mat-icon>
-          {{nav.name}}</a>
+        <a mat-list-item [routerLink]="'login'">
+          <mat-icon>home</mat-icon>
+          Iniciar sesion
+        </a>
+        <a mat-list-item [routerLink]="">
+          <mat-icon>home</mat-icon>
+          Catalogo
+        </a>
+        <a mat-list-item [routerLink]="">
+          <mat-icon>account_circle</mat-icon>
+          Mi Perfil
+        </a>
+        <a mat-list-item [routerLink]="'usuarios'">
+          <mat-icon>group</mat-icon>
+          Usuarios
+        </a>
+        <a mat-list-item [routerLink]="'automovil'">
+          <mat-icon>directions_car</mat-icon>
+          Automoviles
+        </a>
+        <a mat-list-item [routerLink]="">
+          <mat-icon>perm_contact_calendar</mat-icon>
+          Contacto
+        </a>
       </mat-nav-list>
     </mat-sidenav>
-
-    <mat-sidenav-content>
+    <mat-sidenav-content >
       <router-outlet></router-outlet>
     </mat-sidenav-content>
   </mat-sidenav-container>

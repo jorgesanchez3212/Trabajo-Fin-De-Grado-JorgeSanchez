@@ -98,10 +98,12 @@ class UsuarioService
 
         var userDB = repository.findByUsername(user.username)
             .firstOrNull()
+        /*
         if (userDB != null && userDB.id != user.id) {
             throw UsuariosBadRequestException("El username ya existe")
         }
 
+         */
         userDB = repository.findByEmail(user.email)
             .firstOrNull()
         if (userDB != null && userDB.id != user.id) {

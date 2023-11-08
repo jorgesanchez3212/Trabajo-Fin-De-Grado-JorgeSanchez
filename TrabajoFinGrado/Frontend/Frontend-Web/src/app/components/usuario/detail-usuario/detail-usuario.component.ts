@@ -4,6 +4,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { UserDto } from 'src/app/models/user/user-dto/user-dto';
 import { NewUsuarioPropertyService } from 'src/app/services/new-usuario-proerty.service';
 import { faFilePdf, faTimes, faInfo, faSave } from '@fortawesome/free-solid-svg-icons';
+import { UserUpdate } from 'src/app/models/user/user-update';
 
 
 @Component({
@@ -14,6 +15,7 @@ import { faFilePdf, faTimes, faInfo, faSave } from '@fortawesome/free-solid-svg-
 export class DetailUsuarioComponent implements OnInit{
 
   public usuario : UserDto;
+  public usuarioUpdate : UserUpdate;
   
   public faFilePdf = faFilePdf;
   public faTimes = faTimes;
@@ -24,6 +26,7 @@ export class DetailUsuarioComponent implements OnInit{
   private dialogRef: MatDialogRef<DetailUsuarioComponent>){
 
     this.usuario = data.usuario;
+    this.usuarioUpdate = new UserUpdate();
 
   }
   ngOnInit(): void {
@@ -38,6 +41,14 @@ export class DetailUsuarioComponent implements OnInit{
   private listenUsuario(){
     this.newUsuarioPropertyService.getUsuarioPropertyObservable().subscribe((usuario:UserDto)=>{
       this.usuario = usuario;
+      this.usuarioUpdate.username = this.usuario.username;
+      this.usuarioUpdate.nombre = usuario.nombre;
+      this.usuarioUpdate.descripcion = usuario.descripcion;
+      this.usuarioUpdate.rol = usuario.rol[0];
+      this.usuarioUpdate.email = usuario.email;
+
+
+
     });
   }
 
@@ -51,8 +62,9 @@ export class DetailUsuarioComponent implements OnInit{
         Authorization: `Bearer ${token}`
       });
 
-      this.httpClient.put(url, this.usuario, { headers }).toPromise().then((response: any) => {
+      this.httpClient.put(url, this.usuarioUpdate, { headers }).toPromise().then((response: any) => {
         console.log('Usuario updateado correctamente');
+        this.dialogRef.close();
       }).catch((error) => {
         console.error('Se ha producido un error al eliminar el usuario:', error);
       });
