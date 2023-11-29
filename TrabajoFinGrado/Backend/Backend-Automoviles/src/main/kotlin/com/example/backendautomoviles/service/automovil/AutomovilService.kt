@@ -11,10 +11,8 @@ import kotlinx.coroutines.withContext
 import mu.KotlinLogging
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.cache.annotation.Cacheable
-import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 import java.time.LocalDateTime
-import java.util.*
 
 private val logger = KotlinLogging.logger {}
 
@@ -35,7 +33,7 @@ class AutomovilService
     }
 
     @Cacheable("automoviles")
-    suspend fun loadUserByNumeroChasis(numeroChasis: String) = withContext(Dispatchers.IO) {
+    suspend fun loadAutomovilByNumeroChasis(numeroChasis: String) = withContext(Dispatchers.IO) {
         return@withContext repository.findByNumeroChasis(numeroChasis).firstOrNull()
                 ?: throw AutomovilesNotFoundException("No se ha encontrado el automovil con el numero de chasis $numeroChasis")
 

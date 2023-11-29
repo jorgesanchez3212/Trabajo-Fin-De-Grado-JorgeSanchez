@@ -32,7 +32,7 @@ data class UsuarioLoginDto(
 
 data class UsuarioDto(
     val id : String,
-    val uuid: UUID? = null,
+    val uuid: String? = null,
     val nombre: String,
     val username: String,
     val email: String,

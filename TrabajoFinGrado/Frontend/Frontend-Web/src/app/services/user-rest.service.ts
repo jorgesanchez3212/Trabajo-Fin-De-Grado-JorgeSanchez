@@ -9,8 +9,8 @@ import { UserCreate } from 'src/app/models/user/user-create/user-create';
 import { Observable } from 'rxjs';
 
 
-
 const DIR = 'http://localhost:6969/api/users'
+//const DIR = 'http://128.140.34.184:8080/api/users'
 @Injectable({
   providedIn: 'root'
 })

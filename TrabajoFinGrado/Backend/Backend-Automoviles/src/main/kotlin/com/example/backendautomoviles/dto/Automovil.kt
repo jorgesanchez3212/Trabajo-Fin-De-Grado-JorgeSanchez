@@ -7,25 +7,26 @@ import java.time.LocalDateTime
 import java.util.*
 
 data class AutomovilCreateDto(
-    val uuid: UUID? = null,
     val numeroChasis: String,
     val marca : String,
     val modelo : String,
     val color : String,
     val capacidad : String,
     val coste : Double,
+    val reservas : List<String>,
     val tipo : String = Automovil.TipoAutomovil.COCHE.name,
 ){}
 
 
 data class AutomovilDto(
-    val uuid: UUID? = null,
+    val uuid: String? = null,
     val numeroChasis: String,
     val marca : String,
     val modelo : String,
     val color : String,
     val capacidad : String,
     val coste : Double,
+    val reservas : List<String>,
     val tipo : String = Automovil.TipoAutomovil.COCHE.name,
     val metadata: MetaData? = null,
 ) {

@@ -4,6 +4,7 @@ import com.example.backendautomoviles.config.security.jwt.JwtAuthenticationFilte
 import com.example.backendautomoviles.config.security.jwt.JwtAuthorizationFilter
 import com.example.backendautomoviles.config.security.jwt.JwtTokenUtils
 import com.example.backendautomoviles.service.user.UsuarioService
+import jakarta.servlet.http.HttpServletResponse
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -34,9 +35,11 @@ class SecurityConfig @Autowired constructor(
     }
 
 
+
     @Bean
     fun filterChain(http: HttpSecurity): SecurityFilterChain {
         val authenticationManager = authManager(http)
+
         http
             .csrf()
             .disable()
@@ -45,18 +48,27 @@ class SecurityConfig @Autowired constructor(
             .authenticationManager(authenticationManager)
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             .and()
-            .authorizeHttpRequests()
-            .requestMatchers("/error/**").permitAll()
-            .requestMatchers("/api/**")
-            .permitAll()
-            .requestMatchers("users/login", "users/register").permitAll()
-            .requestMatchers("/user/me").hasAnyRole("USER", "ADMIN")
-            .requestMatchers(HttpMethod.GET, "/user/list").hasRole("ADMIN")
-            .anyRequest().authenticated()
-            .and()
             .addFilter(JwtAuthenticationFilter(jwtTokenUtils, authenticationManager))
             .addFilter(JwtAuthorizationFilter(jwtTokenUtils, userService, authenticationManager))
+            .exceptionHandling()
+            .authenticationEntryPoint { request, response, e ->
+                response.contentType = "application/json;charset=UTF-8"
+                response.status = HttpServletResponse.SC_FORBIDDEN
+                // Loggeando el error
+                println("Access denied: "+ e.toString())
+                println("Request details: " + request.toString())
+
+            } .and()
+            .authorizeHttpRequests()
+            //.requestMatchers("/error/**").permitAll()
+            .requestMatchers("/assets/*","/","/svg/", "/index.html", "/static/", ".css", "*.js").permitAll() // Permitir acceso a la raíz y a la carpeta static
+            .requestMatchers("/api/**").permitAll()
+            .requestMatchers("/**").permitAll() //Por esto de aqui debajo fallaba, solo le permitia a los que tenian api
+            .requestMatchers( "/api/users/register").permitAll()
+            .requestMatchers( "/api/users/login").permitAll()
+            .requestMatchers("/static/**").permitAll()
 
         return http.build()
     }
+
 }

@@ -17,7 +17,6 @@ export class NavegacionComponent implements OnInit, OnDestroy {
   mobileQuery: MediaQueryList;
   isNavbarVisible: boolean = false;
 
-  public imgSrc: string = 'assets/img/logo-oc.png';
 
 
   fillerNav = [

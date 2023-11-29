@@ -12,7 +12,7 @@ import java.util.*
 data class Automovil(
     @Id
     val id : String = ObjectId.get().toString(),
-    val uuid: UUID = UUID.randomUUID(),
+    val uuid: String = UUID.randomUUID().toString(),
     val numeroChasis : String,
     val marca : String,
     val modelo : String,
@@ -20,6 +20,7 @@ data class Automovil(
     val capacidad : Int,
     val coste : Double,
     val tipo : String = TipoAutomovil.COCHE.name,
+    val reservas : List<LocalDateTime>,
     val createdAt: LocalDateTime = LocalDateTime.now(),
     val updatedAt: LocalDateTime = LocalDateTime.now(),
     val deleted: Boolean = false,

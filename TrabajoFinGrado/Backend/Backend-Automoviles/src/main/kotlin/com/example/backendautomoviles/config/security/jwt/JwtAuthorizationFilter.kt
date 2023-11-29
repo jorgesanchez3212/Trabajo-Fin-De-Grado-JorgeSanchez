@@ -45,7 +45,7 @@ class JwtAuthorizationFilter(
 
         if (!jwtTokenUtil.isTokenValid(token)) return@runBlocking null
         val userId = jwtTokenUtil.getUserIdFromJwt(token)
-        val user = service.loadUserByUuid(userId.toUUID())
+        val user = service.loadUserByUuid(userId.toUUID().toString())
         return@runBlocking UsernamePasswordAuthenticationToken(
             user,
             null,

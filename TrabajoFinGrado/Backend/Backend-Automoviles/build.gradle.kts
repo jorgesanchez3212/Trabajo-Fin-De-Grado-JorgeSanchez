@@ -101,3 +101,9 @@ tasks.withType<KotlinCompile> {
 tasks.withType<Test> {
     useJUnitPlatform()
 }
+
+tasks.register<Jar>("createJar") {
+    archiveBaseName.set("proyectofingrado")
+    from(sourceSets.main.get().output)
+}
+

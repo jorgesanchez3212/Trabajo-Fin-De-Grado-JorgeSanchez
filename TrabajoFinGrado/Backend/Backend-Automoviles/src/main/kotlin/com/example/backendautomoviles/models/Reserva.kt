@@ -11,12 +11,13 @@ import java.util.*
 data class Reserva(
         @Id
         val id : String = ObjectId.get().toString(),
-        val uuid: UUID = UUID.randomUUID(),
+        val uuid: String = UUID.randomUUID().toString(),
         val clienteId : String,
         val automovilId : String,
         val fechaInicio : LocalDate,
         val fechaFinal : LocalDate,
         val costo : Double,
+        val recogidoPorCliente : Boolean,
         val createdAt: LocalDateTime = LocalDateTime.now(),
         val updatedAt: LocalDateTime = LocalDateTime.now(),
         val deleted: Boolean = false,

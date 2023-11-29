@@ -7,22 +7,23 @@ import java.time.LocalDateTime
 import java.util.*
 
 data class ReservaCreateDto(
-        val uuid: UUID? = null,
         val clienteId: String,
         val automovilId : String,
         val fechaInicio : String,
         val fechaFin : String,
+        val recogidoPorCliente : Boolean,
         val costo : String
 ){}
 
 
 data class ReservaDto(
-        val uuid: UUID? = null,
+        val uuid: String? = null,
         val automovilId:String,
         val clienteId: String,
         val fechaInicio : String,
         val fechaFin : String,
         val costo : String,
+        val recogidoPorCliente : Boolean,
         val metadata: MetaData? = null,
 ) {
     data class MetaData(

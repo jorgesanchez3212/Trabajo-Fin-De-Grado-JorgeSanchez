@@ -16,6 +16,7 @@ fun Reserva.toDto() : ReservaDto {
             fechaInicio = this.fechaInicio.toString(),
             fechaFin = this.fechaFinal.toString(),
             costo = this.costo.toString(),
+            recogidoPorCliente = this.recogidoPorCliente,
             metadata = ReservaDto.MetaData(
                     createdAt = this.createdAt,
                     updatedAt = this.updatedAt,
@@ -31,6 +32,7 @@ fun ReservaCreateDto.toModel() : Reserva{
             clienteId = this.clienteId,
             fechaInicio = LocalDate.parse(this.fechaInicio),
             fechaFinal = LocalDate.parse(this.fechaFin),
+            recogidoPorCliente = this.recogidoPorCliente,
             costo = this.costo.toDouble(),
     )
 

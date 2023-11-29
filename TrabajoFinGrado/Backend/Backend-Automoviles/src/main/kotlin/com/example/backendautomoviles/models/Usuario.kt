@@ -14,7 +14,7 @@ import java.util.*
 data class Usuario(
     @Id
     val id : String = ObjectId.get().toString(),
-    val uuid: UUID = UUID.randomUUID(),
+    val uuid: String = UUID.randomUUID().toString(),
     var nombre : String,
     val rol : String = TipoUsuario.CLIENTE.name,
     var email : String,

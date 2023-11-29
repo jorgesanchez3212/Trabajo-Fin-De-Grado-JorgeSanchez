@@ -1,7 +1,8 @@
 package com.example.backendautomoviles.controller
 
 import com.example.backendautomoviles.config.APIConfig
-import com.example.backendautomoviles.dto.*
+import com.example.backendautomoviles.dto.ReservaCreateDto
+import com.example.backendautomoviles.dto.ReservaDto
 import com.example.backendautomoviles.mappers.toDto
 import com.example.backendautomoviles.mappers.toModel
 import com.example.backendautomoviles.service.reserva.ReservaService
@@ -33,7 +34,7 @@ class ReservaController@Autowired constructor(
     @PreAuthorize("hasRole('ADMINISTRADOR')")
     @PostMapping("/newReserva")
     suspend fun new(@Valid @RequestBody reservaDto: ReservaCreateDto): ResponseEntity<ReservaCreateDto> {
-        logger.info { "Creacion de  la reserva con uuid: ${reservaDto.uuid}" }
+        logger.info { "Creacion de  la reserva con uuid: ${reservaDto}" }
         val reserva = reservaDto.validate().toModel()
         reservasService.save(reserva)
         return ResponseEntity.ok(reservaDto)

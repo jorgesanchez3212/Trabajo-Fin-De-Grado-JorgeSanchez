@@ -1,12 +1,11 @@
 package com.example.backendautomoviles.controller
 
 import com.example.backendautomoviles.config.APIConfig
-import com.example.backendautomoviles.dto.*
-import com.example.backendautomoviles.exceptions.AutomovilesBadRequestException
+import com.example.backendautomoviles.dto.AutomovilCreateDto
+import com.example.backendautomoviles.dto.AutomovilDto
+import com.example.backendautomoviles.dto.AutomovilUpdateDto
 import com.example.backendautomoviles.mappers.toDto
 import com.example.backendautomoviles.mappers.toModel
-import com.example.backendautomoviles.models.Automovil
-import com.example.backendautomoviles.models.Usuario
 import com.example.backendautomoviles.service.automovil.AutomovilService
 import com.example.backendautomoviles.validators.validate
 import jakarta.validation.Valid
@@ -15,9 +14,7 @@ import mu.KotlinLogging
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
 import org.springframework.security.access.prepost.PreAuthorize
-import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.web.bind.annotation.*
-import java.util.UUID
 
 private val logger = KotlinLogging.logger {}
 
@@ -25,7 +22,7 @@ private val logger = KotlinLogging.logger {}
 @RequestMapping(APIConfig.API_PATH + "/automoviles")
 class AutomovilController
 @Autowired constructor(
-    private val automovilesService: AutomovilService,
+    private val service: AutomovilService,
     ){
 
 
@@ -33,7 +30,7 @@ class AutomovilController
     @GetMapping("/listaAutomoviles")
     suspend fun listaAutomoviles() : ResponseEntity<List<AutomovilDto>>{
         logger.info { "Obteniendo lista de todos los automoviles"}
-        return ResponseEntity.ok(automovilesService.findAll().toList().map { it.toDto() })
+        return ResponseEntity.ok(service.findAll().toList().map { it.toDto() })
     }
 
     @PreAuthorize("hasRole('ADMINISTRADOR')")
@@ -41,7 +38,7 @@ class AutomovilController
     suspend fun new(@Valid @RequestBody automovilDto: AutomovilCreateDto): ResponseEntity<AutomovilCreateDto> {
         logger.info { "Creacion de automovil: ${automovilDto.numeroChasis}" }
         val automovil = automovilDto.validate().toModel()
-        val automovilSaved = automovilesService.save(automovil)
+        val automovilSaved = service.save(automovil)
         return ResponseEntity.ok(automovilDto)
     }
 
@@ -53,7 +50,7 @@ class AutomovilController
         logger.info { "Actualizando automovil con numero de chasis: ${automovilDto.numeroChasis}" }
 
         automovilDto.validate()
-        val automovil = automovilesService.loadUserByNumeroChasis(automovilDto.numeroChasis )
+        val automovil = service.loadAutomovilByNumeroChasis(automovilDto.numeroChasis )
         var automovilUpdated = automovil.copy(
                 marca = automovilDto.marca,
                 modelo = automovilDto.modelo,
@@ -62,7 +59,7 @@ class AutomovilController
                 coste = automovilDto.coste.toDouble()
         )
 
-        automovilUpdated = automovilesService.update(automovilUpdated)
+        automovilUpdated = service.update(automovilUpdated)
         return ResponseEntity.ok(automovilUpdated.toDto())
     }
 
@@ -72,8 +69,8 @@ class AutomovilController
     @PostMapping("/delete/{numeroChasis}")
     suspend fun delete(@PathVariable numeroChasis : String): ResponseEntity<AutomovilDto> {
         logger.info { "Borrar automovil con numeroChasis: $numeroChasis" }
-        val automovil = automovilesService.loadUserByNumeroChasis(numeroChasis)
-        automovilesService.delete(numeroChasis)
+        val automovil = service.loadAutomovilByNumeroChasis(numeroChasis)
+        service.delete(numeroChasis)
         return ResponseEntity.ok(automovil.toDto())
     }
 

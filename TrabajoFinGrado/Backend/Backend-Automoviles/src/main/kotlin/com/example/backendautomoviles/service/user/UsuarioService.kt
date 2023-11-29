@@ -49,7 +49,7 @@ class UsuarioService
     }
 
     @Cacheable("usuarios")
-    suspend fun loadUserByUuid(uuid: UUID) = withContext(Dispatchers.IO) {
+    suspend fun loadUserByUuid(uuid: String) = withContext(Dispatchers.IO) {
         return@withContext repository.findByUuid(uuid).firstOrNull()
     }
 
@@ -73,7 +73,7 @@ class UsuarioService
 
         logger.info { "El usuario no existe, lo guardamos" }
         var newUser = user.copy(
-            uuid = UUID.randomUUID(),
+            uuid = UUID.randomUUID().toString(),
             password = passwordEncoder.encode(user.password),
             rol = Usuario.TipoUsuario.CLIENTE.name,
             createdAt = LocalDateTime.now(),
