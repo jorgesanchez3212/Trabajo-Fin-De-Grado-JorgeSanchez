@@ -1,6 +1,6 @@
 <div class="example-container" [class.example-is-mobile]="mobileQuery.matches" >
   <mat-toolbar class="example-toolbar" *ngIf="isNavbarVisible">
-    <button mat-icon-button (click)="snav.toggle()" ><mat-icon>menu</mat-icon></button>
+    <button mat-icon-button (click)="snav.toggle()" ><mat-icon  [style.color]="'white'">menu</mat-icon></button>
     <a class="navbar-brand-icon nb-logo" [routerLink]="['login']" routerLinkActive="active" style="cursor:auto;">
       <img alt="Brand" height="50" class="p-0">
     </a>
