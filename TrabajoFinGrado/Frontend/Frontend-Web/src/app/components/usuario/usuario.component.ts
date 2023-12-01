@@ -5,6 +5,7 @@ import { UserDto } from 'src/app/models/user/user-dto/user-dto';
 import { UtilsService } from 'src/app/services/utils.service';
 import { DialogAmimationsComponent } from './dialog-amimations/dialog-amimations.component';
 import { DetailUsuarioComponent } from './detail-usuario/detail-usuario.component';
+import { NewUsuarioComponent } from './new-usuario/new-usuario.component';
 
 @Component({
   selector: 'app-usuario',
@@ -109,6 +110,22 @@ export class UsuarioComponent implements OnInit{
   onContextModificarClick(usuario : UserDto){
     this.openModal( usuario.id as string);
 
+  }
+
+
+  openModalNew(){
+      this.dialog.open(NewUsuarioComponent, {
+        width: '70%', height: '70%', data: {
+        }
+      }).afterClosed().subscribe(() => {
+        this.getUsuariosAll();
+        //this.clearEmit();
+      });
+
+  }
+
+  onContextNewClick(){
+    this.openModalNew();
   }
 
 

@@ -15,7 +15,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatTabsModule } from '@angular/material/tabs';
-
+import { MatSelectModule } from '@angular/material/select';
 
 
 
@@ -37,6 +37,9 @@ import { UsuarioComponent } from './components/usuario/usuario.component';
 import { DialogAmimationsComponent } from './components/usuario/dialog-amimations/dialog-amimations.component';
 import { DetailUsuarioComponent } from './components/usuario/detail-usuario/detail-usuario.component';
 import { GeneralNewUsuarioComponent } from './components/usuario/detail-usuario/general-new-usuario/general-new-usuario.component';
+import { NewUsuarioComponent } from './components/usuario/new-usuario/new-usuario.component';
+import { NewUsuarioGeneralComponent } from './components/usuario/new-usuario/new-usuario-general/new-usuario-general.component';
+
 
 
 @NgModule({
@@ -49,7 +52,9 @@ import { GeneralNewUsuarioComponent } from './components/usuario/detail-usuario/
     UsuarioComponent,
     DialogAmimationsComponent,
     DetailUsuarioComponent,
-    GeneralNewUsuarioComponent
+    GeneralNewUsuarioComponent,
+    NewUsuarioComponent,
+    NewUsuarioGeneralComponent
   ],
   imports: [
     BrowserModule,
@@ -71,7 +76,8 @@ import { GeneralNewUsuarioComponent } from './components/usuario/detail-usuario/
     MatCardModule,
     MatMenuModule,
     MatDialogModule,
-    MatTabsModule
+    MatTabsModule, 
+    MatSelectModule
 
   ],
   exports:[NavegacionComponent],

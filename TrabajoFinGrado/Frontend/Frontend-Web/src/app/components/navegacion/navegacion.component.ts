@@ -43,7 +43,7 @@ export class NavegacionComponent implements OnInit, OnDestroy {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         console.log('Ruta actual:', event.url);
-        this.isNavbarVisible = event.url !== '/login' && event.url !== '/register';
+        this.isNavbarVisible = event.url !== '/login' && event.url !== '/register' && event.url !== '/';
       }
     });
   }

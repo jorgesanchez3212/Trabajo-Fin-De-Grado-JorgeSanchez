@@ -18,7 +18,7 @@ data class UsuarioCreateDto(
     val rol: String,
     @NotEmpty(message = "El password no puede estar vacío")
     val password: String,
-    val description: String
+    val descripcion: String
 
 )
 
@@ -49,7 +49,7 @@ data class UsuarioDto(
 }
 
 data class UsuarioUpdateDto(
-    val uuid : String? = null,
+    val id : String? = null,
     @NotEmpty(message = "El nombre no puede estar vacío")
     val nombre: String,
     @Email(message = "El email debe ser válido")

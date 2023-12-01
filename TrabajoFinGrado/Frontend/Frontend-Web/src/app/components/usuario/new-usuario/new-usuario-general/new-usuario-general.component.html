@@ -1,0 +1,94 @@
+
+<div class="col-md-12">
+    <div class="row">
+        <!-- <div class="col-md-3">
+            <div class="form-group fg-asset">
+                <label class="txt-default-color form-label-asset txt-fz-12">Username <span class="txt-color-red">*</span>
+				</label> <input class="form-control form-line" name="usernameUsuario" type="text" (focusout)="focusOutUsuario()" [(ngModel)]="usuario.username" #usernameUsuario="ngModel" minlength="3" maxlength="200" required>
+            </div>
+            <div *ngIf="(usernameUsuario.invalid && (usernameUsuario.dirty || usernameUsuario.touched)) ||(usernameUsuario.errors?.['minlength']) || (usernameUsuario.errors?.['maxlength'])">
+                <div class="error-message">
+                    <fa-icon class="fa red" [icon]="faWarning"></fa-icon>&nbsp;&nbsp;Campo obligatorio (min.3, m&aacute;x 200 carac.)
+                </div>
+            </div>
+        </div> -->
+
+        <div class="col-md-3">
+            <div class="form-group fg-asset">
+                <label class="txt-default-color form-label-asset txt-fz-12">Nombre del 
+					Usuario <span class="txt-color-red">*</span>
+				</label> <input class="form-control form-line" name="nameUsuario" type="text" (focusout)="focusOutUsuario()" [(ngModel)]="usuario.nombre" #nombreUsuario="ngModel" minlength="3" maxlength="200" required>
+            </div>
+            <div *ngIf="(nombreUsuario.invalid && (nombreUsuario.dirty || nombreUsuario.touched)) ||(nombreUsuario.errors?.['minlength']) || (nombreUsuario.errors?.['maxlength'])">
+                <div class="error-message">
+                    <fa-icon class="fa red" [icon]="faWarning"></fa-icon>&nbsp;&nbsp;Campo obligatorio (min.3, m&aacute;x 200 carac.)
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="form-group fg-asset">
+                <label class="txt-default-color form-label-asset txt-fz-12">Email del 
+					Usuario <span class="txt-color-red">*</span>
+				</label> <input class="form-control form-line" name="emailUsuario" type="text" (focusout)="focusOutUsuario()" [(ngModel)]="usuario.email" #emailUsuario="ngModel" minlength="3" maxlength="200" required>
+            </div>
+            <div *ngIf="(emailUsuario.invalid && (emailUsuario.dirty || emailUsuario.touched)) ||(emailUsuario.errors?.['minlength']) || (emailUsuario.errors?.['maxlength'])">
+                <div class="error-message">
+                    <fa-icon class="fa red" [icon]="faWarning"></fa-icon>&nbsp;&nbsp;Campo obligatorio (min.3, m&aacute;x 200 carac.)
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-3">
+            <div class="form-group fg-asset">
+                <label class="txt-default-color form-label-asset txt-fz-12">Username del 
+					Usuario <span class="txt-color-red">*</span>
+				</label> <input class="form-control form-line" name="usernameUsuario" type="text" (focusout)="focusOutUsuario()" [(ngModel)]="usuario.username" #usernameUsuario="ngModel" minlength="3" maxlength="200" required>
+            </div>
+            <div *ngIf="(usernameUsuario.invalid && (usernameUsuario.dirty || usernameUsuario.touched)) ||(usernameUsuario.errors?.['minlength']) || (usernameUsuario.errors?.['maxlength'])">
+                <div class="error-message">
+                    <fa-icon class="fa red" [icon]="faWarning"></fa-icon>&nbsp;&nbsp;Campo obligatorio (min.3, m&aacute;x 200 carac.)
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group fg-asset">
+                <label class="txt-default-color form-label-asset txt-fz-12">Contraseña del 
+					Usuario <span class="txt-color-red">*</span>
+				</label> <input class="form-control form-line" name="passwordUsuario" type="text" (focusout)="focusOutUsuario()" [(ngModel)]="usuario.password" #passwordUsuario="ngModel" minlength="3" maxlength="200" required>
+            </div>
+            <div *ngIf="(passwordUsuario.invalid && (passwordUsuario.dirty || passwordUsuario.touched)) ||(passwordUsuario.errors?.['minlength']) || (passwordUsuario.errors?.['maxlength'])">
+                <div class="error-message">
+                    <fa-icon class="fa red" [icon]="faWarning"></fa-icon>&nbsp;&nbsp;Campo obligatorio (min.3, m&aacute;x 200 carac.)
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="form-group fg-asset">
+                <label class="txt-default-color form-label-asset txt-fz-12">Descripcion del 
+					Usuario <span class="txt-color-red">*</span>
+				</label> <input class="form-control form-line" name="descriptionUsuario" type="text" (focusout)="focusOutUsuario()" [(ngModel)]="usuario.descripcion" #descripcionUsuario="ngModel" minlength="3" maxlength="200" required>
+            </div>
+            <div *ngIf="(descripcionUsuario.invalid && (descripcionUsuario.dirty || descripcionUsuario.touched)) ||(descripcionUsuario.errors?.['minlength']) || (descripcionUsuario.errors?.['maxlength'])">
+                <div class="error-message">
+                    <fa-icon class="fa red" [icon]="faWarning"></fa-icon>&nbsp;&nbsp;Campo obligatorio (min.3, m&aacute;x 200 carac.)
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group fg-asset">
+                <label class="txt-default-color form-label-asset txt-fz-12">Roles
+					del Usuario</label> 
+                    <mat-form-field appearance="fill">
+                        <mat-label>Selecciona un Rol</mat-label>
+                        <mat-select [(ngModel)]="usuario.rol" (selectionChange)="focusOutRoles()">
+                          <mat-option *ngFor="let rol of roles" [value]="rol">
+                            {{ rol }}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+            </div>
+        </div>
+    </div>
+</div>

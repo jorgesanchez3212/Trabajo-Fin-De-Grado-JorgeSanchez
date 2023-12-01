@@ -7,36 +7,37 @@ import { faFilePdf, faTimes, faInfo, faSave } from '@fortawesome/free-solid-svg-
 import { UserUpdate } from 'src/app/models/user/user-update';
 
 
-@Component({
-  selector: 'app-detail-usuario',
-  templateUrl: './detail-usuario.component.html',
-  styleUrls: ['./detail-usuario.component.css']
-})
-export class DetailUsuarioComponent implements OnInit{
 
-  public usuario : UserDto;
-  public usuarioUpdate : UserUpdate;
+
+@Component({
+  selector: 'app-new-usuario',
+  templateUrl: './new-usuario.component.html',
+  styleUrls: ['./new-usuario.component.css']
+})
+export class NewUsuarioComponent {
   
   public faFilePdf = faFilePdf;
   public faTimes = faTimes;
   public faInfo = faInfo;
   public faFloppy = faSave;
 
-  constructor(private httpClient: HttpClient, @Inject(MAT_DIALOG_DATA) private data: any,  private newUsuarioPropertyService: NewUsuarioPropertyService,
-  private dialogRef: MatDialogRef<DetailUsuarioComponent>){
 
-    this.usuario = data.usuario;
+  public usuario : UserDto;
+  public usuarioUpdate : UserUpdate;
+
+  constructor(private httpClient: HttpClient, @Inject(MAT_DIALOG_DATA) private data: any,  private newUsuarioPropertyService: NewUsuarioPropertyService,
+  private dialogRef: MatDialogRef<NewUsuarioComponent>){
+
+    this.usuario = new UserDto();
     this.usuarioUpdate = new UserUpdate();
 
   }
+
   ngOnInit(): void {
-    this.loadData();
     this.listenUsuario();
   }
 
-  private loadData(){
-    this.newUsuarioPropertyService.emitUsuarioProperty(this.usuario);
-  }
+
 
   private listenUsuario(){
     this.newUsuarioPropertyService.getUsuarioPropertyObservable().subscribe((usuario:UserDto)=>{
@@ -47,15 +48,12 @@ export class DetailUsuarioComponent implements OnInit{
       this.usuarioUpdate.descripcion = usuario.descripcion;
       this.usuarioUpdate.rol = usuario.rol[0];
       this.usuarioUpdate.email = usuario.email;
-
-
-
     });
   }
 
   public async saveUsuario(){
-    const url: string = 'http://localhost:6969/api/users/update';
-    //const url: string = 'http://128.140.34.184:8080/api/users/update';
+    const url: string = 'http://localhost:6969/api/users/añadir';
+    //const url: string = 'http://128.140.34.184:8080/api/users/añadir';
 
 
     const token = localStorage.getItem('access_token');
@@ -65,11 +63,11 @@ export class DetailUsuarioComponent implements OnInit{
         Authorization: `Bearer ${token}`
       });
 
-      this.httpClient.put(url, this.usuarioUpdate, { headers }).toPromise().then((response: any) => {
-        console.log('Usuario updateado correctamente');
+      this.httpClient.post(url, this.usuario, { headers }).toPromise().then((response: any) => {
+        console.log('Usuario insertado correctamente');
         this.dialogRef.close();
       }).catch((error) => {
-        console.error('Se ha producido un error al updatear el usuario:', error);
+        console.error('Se ha producido un error al insertar el usuario:', error);
       });
     }
   }

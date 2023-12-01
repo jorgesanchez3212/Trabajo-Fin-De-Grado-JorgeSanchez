@@ -67,7 +67,7 @@ class UsuarioController
         return ResponseEntity.ok(UserWithTokenDto(userSaved.toDto(), jwtToken))
     }
 
-
+    @PreAuthorize("hasRole('ADMINISTRADOR')")
     @PostMapping("/añadir")
     suspend fun añadirUsuario(@AuthenticationPrincipal usuario : Usuario, @Valid @RequestBody usuarioDto: UsuarioCreateDto, @Valid @RequestBody file: MultipartFile? ): ResponseEntity<UsuarioDto> {
         logger.info { "Añadir usuario por parte del administrador: ${usuarioDto.username}" }
@@ -141,9 +141,9 @@ class UsuarioController
     suspend fun updateUsuario(
         @AuthenticationPrincipal user: Usuario,
         @Valid @RequestBody usuarioDto: UsuarioUpdateDto
-    ): Any {
+    ):  ResponseEntity<UsuarioDto> {
         logger.info { "Actualizando usuario: ${usuarioDto.username}" }
-        val usuarioExist : Usuario? = usuariosService.loadUserByUuid(usuarioDto.uuid!!)
+        val usuarioExist : Usuario? = usuariosService.loadUserById(usuarioDto.id!!)
         if (usuarioExist != null) {
             usuarioDto.validate()
 
@@ -158,7 +158,7 @@ class UsuarioController
             return ResponseEntity.ok(userUpdated.toDto())
 
         }else{
-            return ResponseEntity.badRequest()
+            return ResponseEntity.ok(usuarioExist)
 
         }
     }

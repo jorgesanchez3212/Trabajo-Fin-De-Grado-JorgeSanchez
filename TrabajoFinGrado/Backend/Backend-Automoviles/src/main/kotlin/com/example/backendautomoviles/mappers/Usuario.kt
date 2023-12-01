@@ -31,6 +31,6 @@ fun UsuarioCreateDto.toModel(): Usuario {
         password = this.password,
         image = this.image ?: "https://upload.wikimedia.org/wikipedia/commons/f/f4/User_Avatar_2.png",
         rol = this.rol,
-        description = this.description
+        description = this.descripcion
     )
 }
