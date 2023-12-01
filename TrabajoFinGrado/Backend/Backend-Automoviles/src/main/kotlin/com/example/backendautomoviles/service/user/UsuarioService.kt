@@ -16,6 +16,8 @@ import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
+import org.springframework.web.multipart.MultipartFile
+import java.io.IOException
 import java.time.LocalDateTime
 import java.util.*
 
@@ -76,6 +78,51 @@ class UsuarioService
             uuid = UUID.randomUUID().toString(),
             password = passwordEncoder.encode(user.password),
             rol = Usuario.TipoUsuario.CLIENTE.name,
+            createdAt = LocalDateTime.now(),
+            updatedAt = LocalDateTime.now()
+        )
+        if (isAdmin)
+            newUser = newUser.copy(
+                rol = user.rol
+            )
+        println(newUser)
+        try {
+            return@withContext repository.save(newUser)
+        } catch (e: Exception) {
+            throw UsuariosBadRequestException("Error al crear el usuario: Nombre de usuario o email ya existen")
+        }
+    }
+
+    suspend fun saveUserWithImage(file: MultipartFile, user : Usuario, isAdmin: Boolean = false ): Usuario = withContext(Dispatchers.IO) {
+        // Convertir MultipartFile a Base64
+        val imageString = try {
+            val bytes = file.bytes
+            Base64.getEncoder().encodeToString(bytes)
+        } catch (e: IOException) {
+            throw RuntimeException("Error al procesar el archivo", e)
+        }
+
+        logger.info { "Guardando usuario: $user" }
+
+        if (repository.findByUsername(user.username)
+                .firstOrNull() != null
+        ) {
+            logger.info { "El usuario ya existe" }
+            throw UsuariosBadRequestException("El username ya existe")
+        }
+        if (repository.findByEmail(user.email)
+                .firstOrNull() != null
+        ) {
+            logger.info { "El email ya existe" }
+            throw UsuariosBadRequestException("El email ya existe")
+        }
+
+        logger.info { "El usuario no existe, lo guardamos" }
+        var newUser = user.copy(
+            uuid = UUID.randomUUID().toString(),
+            password = passwordEncoder.encode(user.password),
+            rol = Usuario.TipoUsuario.CLIENTE.name,
+            image = imageString,
             createdAt = LocalDateTime.now(),
             updatedAt = LocalDateTime.now()
         )

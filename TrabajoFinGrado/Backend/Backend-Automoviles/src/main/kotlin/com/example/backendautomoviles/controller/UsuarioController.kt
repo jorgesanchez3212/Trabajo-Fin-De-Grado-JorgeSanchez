@@ -20,6 +20,7 @@ import org.springframework.security.core.Authentication
 import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.web.bind.annotation.*
+import org.springframework.web.multipart.MultipartFile
 
 private val logger = KotlinLogging.logger {}
 
@@ -68,13 +69,19 @@ class UsuarioController
 
 
     @PostMapping("/añadir")
-    suspend fun añadirUsuario(@AuthenticationPrincipal usuario : Usuario, @Valid @RequestBody usuarioDto: UsuarioCreateDto): ResponseEntity<UsuarioDto> {
+    suspend fun añadirUsuario(@AuthenticationPrincipal usuario : Usuario, @Valid @RequestBody usuarioDto: UsuarioCreateDto, @Valid @RequestBody file: MultipartFile? ): ResponseEntity<UsuarioDto> {
         logger.info { "Añadir usuario por parte del administrador: ${usuarioDto.username}" }
 
         val user = usuarioDto.validate().toModel()
         user.rol.forEach { println(it) }
-        val userSaved = usuariosService.save(user, true)
-        return ResponseEntity.ok(userSaved.toDto())
+        if (file != null){
+            val userSaved = usuariosService.saveUserWithImage(file, user, true)
+            return ResponseEntity.ok(userSaved.toDto())
+
+        }else{
+            val userSaved = usuariosService.save(user, true)
+            return ResponseEntity.ok(userSaved.toDto())
+        }
     }
 
     @PreAuthorize("hasRole('CLIENTE')")
