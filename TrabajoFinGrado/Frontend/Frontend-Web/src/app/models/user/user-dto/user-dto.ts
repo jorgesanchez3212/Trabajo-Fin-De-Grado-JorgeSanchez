@@ -5,6 +5,7 @@ export class UserDto {
     public username: string;
     public password : string;
     public descripcion : string;
+    public image : string | null;
     public rol: string;
   
     constructor() {
@@ -14,6 +15,7 @@ export class UserDto {
       this.username = '';
       this.password = '';
       this.descripcion = '';
+      this.image = null;
       this.rol = '';
     }
   }

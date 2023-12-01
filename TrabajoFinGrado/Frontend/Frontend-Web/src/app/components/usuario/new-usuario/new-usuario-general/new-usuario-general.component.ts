@@ -13,7 +13,10 @@ export class NewUsuarioGeneralComponent {
   public faWarning = faExclamationTriangle;
   public usuario : UserDto;
   public roles : string[];
-  
+  selectedFile: File | null = null;
+  private fileContentBase64: string | null = null;
+
+
   constructor(private newUsuarioPropertyService : NewUsuarioPropertyService){
 
     
@@ -24,16 +27,31 @@ export class NewUsuarioGeneralComponent {
   ngOnInit(): void {
   }
 
-  
+  onFileSelected(event: any): void {
+    this.selectedFile = event.target.files[0];
+    if (this.selectedFile) {
+      this.convertFileToBase64(this.selectedFile);
+    }
+}
+
+private convertFileToBase64(file: File) {
+  const reader = new FileReader();
+  reader.readAsDataURL(file);
+  reader.onload = () => {
+    this.fileContentBase64 = reader.result as string;
+    this.usuario.image = this.fileContentBase64;
+  };
+  reader.onerror = error => {
+    console.error('Error al leer el archivo:', error);
+  };
+}
 
   public focusOutUsuario(){
     this.newUsuarioPropertyService.emitUsuarioProperty(this.usuario);
-
   }
 
   public focusOutRoles(){
     this.newUsuarioPropertyService.emitUsuarioProperty(this.usuario);
-
   }
 
 }

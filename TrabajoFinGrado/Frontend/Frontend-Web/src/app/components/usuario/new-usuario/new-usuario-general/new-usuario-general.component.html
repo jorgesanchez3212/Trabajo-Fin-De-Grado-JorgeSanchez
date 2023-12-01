@@ -15,6 +15,13 @@
 
         <div class="col-md-3">
             <div class="form-group fg-asset">
+                <label class="txt-default-color form-label-asset txt-fz-12">Foto de Perfil </label>
+                <input type="file" (change)="onFileSelected($event)" (focusout)="focusOutUsuario()" class="form-control form-line" name="imageUsuario" accept="image/png">
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="form-group fg-asset">
                 <label class="txt-default-color form-label-asset txt-fz-12">Nombre del 
 					Usuario <span class="txt-color-red">*</span>
 				</label> <input class="form-control form-line" name="nameUsuario" type="text" (focusout)="focusOutUsuario()" [(ngModel)]="usuario.nombre" #nombreUsuario="ngModel" minlength="3" maxlength="200" required>

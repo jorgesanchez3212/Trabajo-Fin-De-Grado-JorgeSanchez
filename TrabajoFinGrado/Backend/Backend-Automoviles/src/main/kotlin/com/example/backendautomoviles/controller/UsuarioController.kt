@@ -69,19 +69,14 @@ class UsuarioController
 
     @PreAuthorize("hasRole('ADMINISTRADOR')")
     @PostMapping("/añadir")
-    suspend fun añadirUsuario(@AuthenticationPrincipal usuario : Usuario, @Valid @RequestBody usuarioDto: UsuarioCreateDto, @Valid @RequestBody file: MultipartFile? ): ResponseEntity<UsuarioDto> {
+    suspend fun añadirUsuario(@AuthenticationPrincipal usuario : Usuario, @Valid @RequestBody usuarioDto: UsuarioCreateDto ): ResponseEntity<UsuarioDto> {
         logger.info { "Añadir usuario por parte del administrador: ${usuarioDto.username}" }
 
         val user = usuarioDto.validate().toModel()
         user.rol.forEach { println(it) }
-        if (file != null){
-            val userSaved = usuariosService.saveUserWithImage(file, user, true)
-            return ResponseEntity.ok(userSaved.toDto())
-
-        }else{
-            val userSaved = usuariosService.save(user, true)
-            return ResponseEntity.ok(userSaved.toDto())
-        }
+        val userSaved = usuariosService.save(user, true)
+        return ResponseEntity.ok(userSaved.toDto())
+        
     }
 
     @PreAuthorize("hasRole('CLIENTE')")

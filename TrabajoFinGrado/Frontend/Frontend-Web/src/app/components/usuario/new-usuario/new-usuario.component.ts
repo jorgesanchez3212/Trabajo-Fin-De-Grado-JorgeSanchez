@@ -49,6 +49,8 @@ export class NewUsuarioComponent {
       this.usuarioUpdate.rol = usuario.rol[0];
       this.usuarioUpdate.email = usuario.email;
     });
+
+    
   }
 
   public async saveUsuario(){
