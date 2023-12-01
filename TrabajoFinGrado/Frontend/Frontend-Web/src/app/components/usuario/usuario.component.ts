@@ -6,6 +6,7 @@ import { UtilsService } from 'src/app/services/utils.service';
 import { DialogAmimationsComponent } from './dialog-amimations/dialog-amimations.component';
 import { DetailUsuarioComponent } from './detail-usuario/detail-usuario.component';
 import { NewUsuarioComponent } from './new-usuario/new-usuario.component';
+import { UserFilter } from 'src/app/models/user/user-filter/user-filter';
 
 @Component({
   selector: 'app-usuario',
@@ -18,6 +19,7 @@ export class UsuarioComponent implements OnInit{
   public user : UserDto;
   panelOpenState = false;
   filterUsername = '';
+  public userFilter : UserFilter = new UserFilter();
 
 
   constructor(private httpService: HttpClient, private utilsService : UtilsService, public dialog: MatDialog){
@@ -141,6 +143,32 @@ export class UsuarioComponent implements OnInit{
     this.openModalNew();
   }
 
+  onContextFiltrarClick(){
+    const url : string = 'http://localhost:6969/api/users/listaUsuariosFiltro'
+
+    const token = localStorage.getItem('access_token');
+
+    if (token) {
+      const headers = new HttpHeaders({
+        Authorization: `Bearer ${token}`
+      });
+
+    this.httpService.post(url, this.userFilter , { headers }).toPromise().then((value: any) => {
+      this.usuarios = value as UserDto[];
+      console.log(this.usuarios)
+    }).catch((error) => {
+      
+      console.log('Se ha producido un error al obtener los usuarios');
+    });
+  }
+
+}
+
+clearFilters() {
+  this.userFilter.username = '';
+  this.userFilter.id = '';
+  this.getUsuariosAll();
+}
 
 
 }

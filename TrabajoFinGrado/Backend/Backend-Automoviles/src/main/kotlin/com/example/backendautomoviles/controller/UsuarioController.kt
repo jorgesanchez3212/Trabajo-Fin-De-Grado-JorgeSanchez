@@ -3,6 +3,7 @@ package com.example.backendautomoviles.controller
 import com.example.backendautomoviles.config.APIConfig
 import com.example.backendautomoviles.config.security.jwt.JwtTokenUtils
 import com.example.backendautomoviles.dto.*
+import com.example.backendautomoviles.filters.UsuarioFilter
 import com.example.backendautomoviles.mappers.toDto
 import com.example.backendautomoviles.mappers.toModel
 import com.example.backendautomoviles.models.Usuario
@@ -76,7 +77,7 @@ class UsuarioController
         user.rol.forEach { println(it) }
         val userSaved = usuariosService.save(user, true)
         return ResponseEntity.ok(userSaved.toDto())
-        
+
     }
 
     @PreAuthorize("hasRole('CLIENTE')")
@@ -92,6 +93,13 @@ class UsuarioController
     suspend fun listaUsuarios(@AuthenticationPrincipal usuario : Usuario) : ResponseEntity<List<UsuarioDto>>{
         logger.info { "Obteniendo lista de todos los usuarios"}
         return ResponseEntity.ok(usuariosService.findAll().toList().map { it.toDto() })
+    }
+
+    @PreAuthorize("hasRole('ADMINISTRADOR')")
+    @PostMapping("/listaUsuariosFiltro")
+    suspend fun listaUsuariosFiltro(@AuthenticationPrincipal usuario : Usuario,@Valid @RequestBody usuarioFiltro: UsuarioFilter ) : ResponseEntity<List<UsuarioDto>>{
+        logger.info { "Obteniendo lista de todos los usuarios"}
+        return ResponseEntity.ok(usuariosService.findAllFiltros(usuarioFiltro).toList().map { it.toDto() })
     }
 
 

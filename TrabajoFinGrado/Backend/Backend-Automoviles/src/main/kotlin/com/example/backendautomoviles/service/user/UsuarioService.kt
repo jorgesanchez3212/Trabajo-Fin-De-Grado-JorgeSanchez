@@ -2,11 +2,13 @@ package com.example.backendautomoviles.service.user
 
 import com.example.backendautomoviles.exceptions.UsuariosBadRequestException
 import com.example.backendautomoviles.exceptions.UsuariosNotFoundException
+import com.example.backendautomoviles.filters.UsuarioFilter
 import com.example.backendautomoviles.models.Usuario
 import com.example.backendautomoviles.repositories.UsuariosRepository
 import com.example.backendautomoviles.service.BcryptService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.firstOrNull
+import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 import mu.KotlinLogging
@@ -40,6 +42,29 @@ class UsuarioService
     suspend fun findAll() = withContext(Dispatchers.IO) {
         return@withContext repository.findAll()
     }
+
+    suspend fun findAllFiltros(usuarioFilter: UsuarioFilter) = withContext(Dispatchers.IO) {
+        var listaFiltros = repository.findAll().toList()
+
+        usuarioFilter.id?.let {
+            listaFiltros = listaFiltros.filter { it.id == usuarioFilter.id }
+        }
+
+        usuarioFilter.email?.let {
+            listaFiltros = listaFiltros.filter { it.email == usuarioFilter.email }
+        }
+
+        usuarioFilter.rol?.let {
+            listaFiltros = listaFiltros.filter { it.rol == usuarioFilter.rol }
+        }
+
+        usuarioFilter.username?.let {
+            listaFiltros = listaFiltros.filter { it.username == usuarioFilter.username }
+        }
+        
+        return@withContext listaFiltros
+    }
+
 
 
     suspend fun deleteById(id : String) = withContext(Dispatchers.IO) {
