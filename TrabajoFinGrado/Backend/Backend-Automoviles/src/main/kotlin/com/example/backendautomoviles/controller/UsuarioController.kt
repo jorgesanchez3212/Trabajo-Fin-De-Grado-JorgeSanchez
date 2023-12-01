@@ -129,26 +129,31 @@ class UsuarioController
         return ResponseEntity.ok(userUpdated.toDto())
     }
 
-    //@PreAuthorize("hasRole('ADMINISTRADOR')")
+    @PreAuthorize("hasRole('ADMINISTRADOR')")
     @PutMapping("/update")
     suspend fun updateUsuario(
         @AuthenticationPrincipal user: Usuario,
         @Valid @RequestBody usuarioDto: UsuarioUpdateDto
-    ): ResponseEntity<UsuarioDto> {
-        logger.info { "Actualizando usuario: ${user.username}" }
+    ): Any {
+        logger.info { "Actualizando usuario: ${usuarioDto.username}" }
+        val usuarioExist : Usuario? = usuariosService.loadUserByUuid(usuarioDto.uuid!!)
+        if (usuarioExist != null) {
+            usuarioDto.validate()
 
-        usuarioDto.validate()
+            var userUpdated = usuarioExist.copy(
+                nombre = usuarioDto.nombre,
+                username = usuarioDto.username,
+                email = usuarioDto.email,
+                description = usuarioDto.descripcion,
+                rol = usuarioDto.rol
+            )
+            usuariosService.update(userUpdated)
+            return ResponseEntity.ok(userUpdated.toDto())
 
-        var userUpdated = user.copy(
-            nombre = usuarioDto.nombre,
-            username = usuarioDto.username,
-            email = usuarioDto.email,
-            description = usuarioDto.descripcion,
-            rol = usuarioDto.rol
-        )
+        }else{
+            return ResponseEntity.badRequest()
 
-        userUpdated = usuariosService.update(userUpdated)
-        return ResponseEntity.ok(userUpdated.toDto())
+        }
     }
 
 }

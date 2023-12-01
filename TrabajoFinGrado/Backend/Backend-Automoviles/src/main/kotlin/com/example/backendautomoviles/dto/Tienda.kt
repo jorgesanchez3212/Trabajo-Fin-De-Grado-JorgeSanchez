@@ -14,6 +14,7 @@ data class TiendaDto(
 ) {
 }
 data class TiendaUpdateDto(
+    val uuid: String? = null,
     val nombre : String,
     val idMapa : String,
 ) {

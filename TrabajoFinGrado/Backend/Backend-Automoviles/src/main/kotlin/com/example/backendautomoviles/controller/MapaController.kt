@@ -1,14 +1,11 @@
 package com.example.backendautomoviles.controller
 
 import com.example.backendautomoviles.config.APIConfig
-import com.example.backendautomoviles.dto.MapaCreateDto
-import com.example.backendautomoviles.dto.MapaDto
-import com.example.backendautomoviles.dto.TiendaCreateDto
-import com.example.backendautomoviles.dto.TiendaDto
+import com.example.backendautomoviles.dto.*
 import com.example.backendautomoviles.mappers.toDto
 import com.example.backendautomoviles.mappers.toModel
+import com.example.backendautomoviles.models.Mapa
 import com.example.backendautomoviles.service.mapa.MapaService
-import com.example.backendautomoviles.service.tienda.TiendaService
 import jakarta.validation.Valid
 import kotlinx.coroutines.flow.toList
 import mu.KotlinLogging
@@ -44,6 +41,35 @@ class MapaController
         val entity = service.save(entityDto.toModel())
         return ResponseEntity.ok(entityDto)
     }
+
+
+
+    @PreAuthorize("hasRole('ADMINISTRADOR')")
+    @PutMapping("/update")
+    suspend fun updateMe(@Valid @RequestBody mapaDto: MapaUpdateDto): Any {
+        logger.info { "Actualizando mapa con uuid: ${mapaDto.uuid}" }
+
+        val mapaExists : Mapa? = service.loadMapaByUUID(mapaDto.uuid!!)
+        if (mapaExists != null) {
+
+            var mapaUpdated = mapaExists.copy(
+                latidud = mapaDto.latidud,
+                longitud = mapaDto.longitud
+            )
+            service.update(mapaUpdated)
+            return ResponseEntity.ok(mapaUpdated.toDto())
+
+        }else{
+            return ResponseEntity.badRequest()
+
+        }
+    }
+
+
+
+
+
+
 
 
     @PreAuthorize("hasRole('ADMINISTRADOR')")

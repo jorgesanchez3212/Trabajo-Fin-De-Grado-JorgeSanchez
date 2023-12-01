@@ -35,6 +35,12 @@ class ReservaService @Autowired constructor(
 
     }
 
+    @Cacheable("reservas")
+    suspend fun loadReservaByUUID(reservaId: String) = withContext(Dispatchers.IO) {
+        return@withContext repository.findByUuid(reservaId)
+
+    }
+
     suspend fun save(reserva: Reserva): Reserva = withContext(Dispatchers.IO) {
         logger.info { "Guardando reserva: $reserva" }
 

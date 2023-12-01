@@ -3,9 +3,12 @@ package com.example.backendautomoviles.controller
 import com.example.backendautomoviles.config.APIConfig
 import com.example.backendautomoviles.dto.TiendaCreateDto
 import com.example.backendautomoviles.dto.TiendaDto
+import com.example.backendautomoviles.dto.TiendaUpdateDto
 import com.example.backendautomoviles.mappers.toDto
 import com.example.backendautomoviles.mappers.toModel
+import com.example.backendautomoviles.models.Tienda
 import com.example.backendautomoviles.service.tienda.TiendaService
+import com.example.backendautomoviles.validators.validate
 import jakarta.validation.Valid
 import kotlinx.coroutines.flow.toList
 import mu.KotlinLogging
@@ -39,6 +42,28 @@ class TiendaController
         logger.info { "Creacion de tienda: ${entityDto}" }
         val entity = service.save(entityDto.toModel())
         return ResponseEntity.ok(entityDto)
+    }
+
+
+    @PreAuthorize("hasRole('ADMINISTRADOR')")
+    @PutMapping("/update")
+    suspend fun updateMe(@Valid @RequestBody tiendaDto: TiendaUpdateDto): Any {
+        logger.info { "Actualizando tienda con uuid: ${tiendaDto.uuid}" }
+
+        val tiendaExists : Tienda? = service.loadTiendasByUUID(tiendaDto.uuid!!)
+        if (tiendaExists != null) {
+
+            var tiendaUpdated = tiendaExists.copy(
+                nombre = tiendaDto.nombre,
+                idMapa = tiendaDto.idMapa
+            )
+            service.update(tiendaUpdated)
+            return ResponseEntity.ok(tiendaUpdated.toDto())
+
+        }else{
+            return ResponseEntity.badRequest()
+
+        }
     }
 
 

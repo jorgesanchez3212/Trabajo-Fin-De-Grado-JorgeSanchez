@@ -6,6 +6,8 @@ import com.example.backendautomoviles.dto.AutomovilDto
 import com.example.backendautomoviles.dto.AutomovilUpdateDto
 import com.example.backendautomoviles.mappers.toDto
 import com.example.backendautomoviles.mappers.toModel
+import com.example.backendautomoviles.models.Automovil
+import com.example.backendautomoviles.models.Usuario
 import com.example.backendautomoviles.service.automovil.AutomovilService
 import com.example.backendautomoviles.validators.validate
 import jakarta.validation.Valid
@@ -45,22 +47,29 @@ class AutomovilController
 
 
     @PreAuthorize("hasRole('ADMINISTRADOR')")
-    @PutMapping("/update/{numeroChasis}")
-    suspend fun updateMe(@Valid @RequestBody automovilDto: AutomovilUpdateDto): ResponseEntity<AutomovilDto> {
+    @PutMapping("/update")
+    suspend fun updateMe(@Valid @RequestBody automovilDto: AutomovilUpdateDto): Any {
         logger.info { "Actualizando automovil con numero de chasis: ${automovilDto.numeroChasis}" }
 
-        automovilDto.validate()
-        val automovil = service.loadAutomovilByNumeroChasis(automovilDto.numeroChasis )
-        var automovilUpdated = automovil.copy(
+        val automovilExist : Automovil? = service.loadAutomovilByNumeroChasis(automovilDto.numeroChasis!!)
+        if (automovilExist != null) {
+            automovilDto.validate()
+
+            var automovilUpdated = automovilExist.copy(
+                numeroChasis = automovilDto.numeroChasis,
                 marca = automovilDto.marca,
                 modelo = automovilDto.modelo,
                 color = automovilDto.color,
                 capacidad = automovilDto.capacidad.toInt(),
-                coste = automovilDto.coste.toDouble()
-        )
+                coste = automovilDto.coste.toDouble(),
+            )
+            service.update(automovilUpdated)
+            return ResponseEntity.ok(automovilUpdated.toDto())
 
-        automovilUpdated = service.update(automovilUpdated)
-        return ResponseEntity.ok(automovilUpdated.toDto())
+        }else{
+            return ResponseEntity.badRequest()
+
+        }
     }
 
 

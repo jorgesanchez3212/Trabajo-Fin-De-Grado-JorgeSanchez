@@ -17,6 +17,7 @@ data class MapaDto(
 
 
 data class MapaUpdateDto(
+    val uuid : String? = null,
     val latidud : String,
     val longitud : String
 ) {

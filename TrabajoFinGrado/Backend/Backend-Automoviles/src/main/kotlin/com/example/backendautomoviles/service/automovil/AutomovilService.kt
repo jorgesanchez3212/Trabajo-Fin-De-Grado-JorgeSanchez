@@ -54,15 +54,8 @@ class AutomovilService
     suspend fun update(automovil: Automovil): Automovil = withContext(Dispatchers.IO) {
         logger.info { "Actualizando automovil: $automovil" }
 
-        val automovilFind = repository.findByNumeroChasis(automovil.numeroChasis).firstOrNull()
-            ?: throw AutomovilesNotFoundException("Error al actualizar el automovil, el automovil a actualizar no existe")
-        val autoUpdate = automovilFind.copy(
-            updatedAt = LocalDateTime.now()
-        )
-
-        println(automovil)
         try {
-            return@withContext repository.save(autoUpdate)
+            return@withContext repository.save(automovil)
         } catch (e: Exception) {
             throw AutomovilesBadRequestException("Error al actualizar el automovil")
         }

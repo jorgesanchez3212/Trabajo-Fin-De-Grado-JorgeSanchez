@@ -7,6 +7,6 @@ import org.springframework.data.repository.kotlin.CoroutineCrudRepository
 import java.util.*
 
 interface ReservasRepository : CoroutineCrudRepository<Reserva, String> {
-    fun findByUuid(uuid: UUID): Flow<Automovil>
+    fun findByUuid(uuid: String): Flow<Reserva>
 
 }

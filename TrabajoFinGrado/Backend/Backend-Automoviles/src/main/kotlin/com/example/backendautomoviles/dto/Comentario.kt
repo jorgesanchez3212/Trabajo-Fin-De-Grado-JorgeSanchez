@@ -24,6 +24,7 @@ data class ComentarioDto(
 
 
 data class ComentarioUpdateDto(
+    val uuid : String? = null,
     val descripcion : String,
 ){}
 

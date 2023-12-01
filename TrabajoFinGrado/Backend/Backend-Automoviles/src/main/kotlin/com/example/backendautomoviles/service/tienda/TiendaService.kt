@@ -1,10 +1,9 @@
 package com.example.backendautomoviles.service.tienda
 
-import com.example.backendautomoviles.exceptions.MapasNotFoundException
+import com.example.backendautomoviles.exceptions.AutomovilesBadRequestException
 import com.example.backendautomoviles.exceptions.TiendasBadRequestException
 import com.example.backendautomoviles.exceptions.TiendasNotFoundException
 import com.example.backendautomoviles.models.Tienda
-import com.example.backendautomoviles.repositories.MapasRepository
 import com.example.backendautomoviles.repositories.TiendasRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.firstOrNull
@@ -53,19 +52,14 @@ class TiendaService
         }
     }
 
-//TODO: Arreglar
-//    suspend fun update(tienda: Tienda): Tienda = withContext(Dispatchers.IO) {
-//        logger.info { "Actualizando tienda: tienda" }
-//
-//        val comentarioFind = repository.findByUuid(comentario.uuid).firstOrNull()
-//            ?: throw ComentariosNotFoundException("Error al actualizar el comentario, el comentario a actualizar no existe")
-//
-//        try {
-//            return@withContext repository.save(comentarioFind)
-//        } catch (e: Exception) {
-//            throw TiendasBadRequestException("Error al actualizar el automovil")
-//        }
-//    }
+    suspend fun update(tienda: Tienda): Tienda = withContext(Dispatchers.IO) {
+
+        try {
+            return@withContext repository.save(tienda)
+        } catch (e: Exception) {
+            throw AutomovilesBadRequestException("Error al actualizar la tienda")
+        }
+    }
 
 
     suspend fun delete(uuid: String) = withContext(Dispatchers.IO) {

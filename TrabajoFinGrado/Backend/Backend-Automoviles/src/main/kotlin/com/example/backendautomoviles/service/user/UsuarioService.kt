@@ -95,29 +95,8 @@ class UsuarioService
 
     suspend fun update(user: Usuario) = withContext(Dispatchers.IO) {
         logger.info { "Actualizando usuario: $user" }
-
-        var userDB = repository.findByUsername(user.username)
-            .firstOrNull()
-        /*
-        if (userDB != null && userDB.id != user.id) {
-            throw UsuariosBadRequestException("El username ya existe")
-        }
-
-         */
-        userDB = repository.findByEmail(user.email)
-            .firstOrNull()
-        if (userDB != null && userDB.id != user.id) {
-            throw UsuariosBadRequestException("El email ya existe")
-        }
-
-        logger.info { "El usuario no existe, lo actualizamos" }
-
-        val updtatedUser = user.copy(
-            updatedAt = LocalDateTime.now()
-        )
-
         try {
-            return@withContext repository.save(updtatedUser)
+            return@withContext repository.save(user)
         } catch (e: Exception) {
             throw UsuariosBadRequestException("Error al actualizar el usuario: Nombre de usuario o email ya existen")
         }

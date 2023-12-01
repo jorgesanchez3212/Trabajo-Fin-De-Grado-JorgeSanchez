@@ -39,6 +39,7 @@ data class AutomovilDto(
 
 
 data class AutomovilUpdateDto(
+    val uuid : String? = null,
     @NotEmpty(message = "El numeroChasis no puede estar vacío")
     val numeroChasis: String,
     @Email(message = "El marca debe ser válido")

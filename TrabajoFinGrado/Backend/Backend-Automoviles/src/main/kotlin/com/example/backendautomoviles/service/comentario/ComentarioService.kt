@@ -1,8 +1,10 @@
 package com.example.backendautomoviles.service.comentario
 
 
+import com.example.backendautomoviles.exceptions.AutomovilesBadRequestException
 import com.example.backendautomoviles.exceptions.ComentariosBadRequestException
 import com.example.backendautomoviles.exceptions.ComentariosNotFoundException
+import com.example.backendautomoviles.models.Automovil
 import com.example.backendautomoviles.models.Comentario
 import com.example.backendautomoviles.repositories.ComentariosRepository
 import kotlinx.coroutines.Dispatchers
@@ -53,19 +55,13 @@ class ComentarioService
         }
     }
 
-    //TODO: Arreglar
-//    suspend fun update(comentario: Comentario): Comentario = withContext(Dispatchers.IO) {
-//        logger.info { "Actualizando comentario: $comentario" }
-//
-//        val comentarioFind = repository.findByUuid(comentario.uuid).firstOrNull()
-//            ?: throw ComentariosNotFoundException("Error al actualizar el comentario, el comentario a actualizar no existe")
-//
-//        try {
-//            return@withContext repository.save(comentarioFind)
-//        } catch (e: Exception) {
-//            throw ComentariosBadRequestException("Error al actualizar el automovil")
-//        }
-//    }
+    suspend fun update(comentario: Comentario): Comentario = withContext(Dispatchers.IO) {
+        try {
+            return@withContext repository.save(comentario)
+        } catch (e: Exception) {
+            throw ComentariosBadRequestException("Error al actualizar el comentario")
+        }
+    }
 
 
     suspend fun delete(uuid : String) = withContext(Dispatchers.IO){

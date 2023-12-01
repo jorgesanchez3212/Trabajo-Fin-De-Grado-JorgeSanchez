@@ -3,9 +3,12 @@ package com.example.backendautomoviles.controller
 import com.example.backendautomoviles.config.APIConfig
 import com.example.backendautomoviles.dto.ComentarioCreateDto
 import com.example.backendautomoviles.dto.ComentarioDto
+import com.example.backendautomoviles.dto.ComentarioUpdateDto
 import com.example.backendautomoviles.mappers.toDto
 import com.example.backendautomoviles.mappers.toModel
+import com.example.backendautomoviles.models.Comentario
 import com.example.backendautomoviles.service.comentario.ComentarioService
+import com.example.backendautomoviles.validators.validate
 import jakarta.validation.Valid
 import kotlinx.coroutines.flow.toList
 import mu.KotlinLogging
@@ -39,6 +42,31 @@ class ComentarioController
         val entity = service.save(entityDto.toModel())
         return ResponseEntity.ok(entityDto)
     }
+
+
+
+
+    @PreAuthorize("hasRole('ADMINISTRADOR')")
+    @PutMapping("/update")
+    suspend fun updateMe(@Valid @RequestBody comentarioDto: ComentarioUpdateDto): Any {
+        logger.info { "Actualizando comentario con uuid: ${comentarioDto.uuid}" }
+
+        val comentarioExists : Comentario? = service.loadComentarioByUUID(comentarioDto.uuid!!)
+        if (comentarioExists != null) {
+
+            var automovilUpdated = comentarioExists.copy(
+                descripcion = comentarioDto.descripcion
+            )
+            service.update(automovilUpdated)
+            return ResponseEntity.ok(automovilUpdated.toDto())
+
+        }else{
+            return ResponseEntity.badRequest()
+
+        }
+    }
+
+
 
 
     @PreAuthorize("hasRole('ADMINISTRADOR')")

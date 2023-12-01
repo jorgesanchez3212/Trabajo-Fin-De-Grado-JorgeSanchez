@@ -1,0 +1,13 @@
+{
+  "id": "507f191e810c19729de860eb",
+  "uuid": "123e4567-e89b-12d3-a456-426614174001",
+  "clienteId": "507f191e810c19729de860ea",
+  "automovilId": "507f191e810c19729de860ec",
+  "fechaInicio": "2023-12-10",
+  "fechaFinal": "2023-12-20",
+  "costo": 299.99,
+  "recogidoPorCliente": true,
+  "createdAt": "2023-12-01T10:15:30",
+  "updatedAt": "2023-12-01T10:15:30",
+  "deleted": false
+}

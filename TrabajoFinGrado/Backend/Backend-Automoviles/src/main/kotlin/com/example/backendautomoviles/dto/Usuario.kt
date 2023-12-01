@@ -49,6 +49,7 @@ data class UsuarioDto(
 }
 
 data class UsuarioUpdateDto(
+    val uuid : String? = null,
     @NotEmpty(message = "El nombre no puede estar vacío")
     val nombre: String,
     @Email(message = "El email debe ser válido")

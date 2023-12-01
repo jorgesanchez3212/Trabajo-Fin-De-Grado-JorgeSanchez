@@ -1,5 +1,6 @@
 package com.example.backendautomoviles.service.mapa
 
+import com.example.backendautomoviles.exceptions.AutomovilesBadRequestException
 import com.example.backendautomoviles.exceptions.MapasBadRequestException
 import com.example.backendautomoviles.exceptions.MapasNotFoundException
 import com.example.backendautomoviles.models.Mapa
@@ -51,20 +52,14 @@ class MapaService
         }
     }
 
-//TODO: Arreglar
-//    suspend fun update(mapa: Mapa): Mapa = withContext(Dispatchers.IO) {
-//        logger.info { "Actualizando mapa: $mapa" }
-//
-//        val comentarioFind = repository.findByUuid(comentario.uuid).firstOrNull()
-//            ?: throw ComentariosNotFoundException("Error al actualizar el comentario, el comentario a actualizar no existe")
-//
-//        try {
-//            return@withContext repository.save(comentarioFind)
-//        } catch (e: Exception) {
-//            throw MapasBadRequestException("Error al actualizar el automovil")
-//        }
-//    }
+    suspend fun update(mapa: Mapa): Mapa = withContext(Dispatchers.IO) {
 
+        try {
+            return@withContext repository.save(mapa)
+        } catch (e: Exception) {
+            throw AutomovilesBadRequestException("Error al actualizar el mapa")
+        }
+    }
 
     suspend fun delete(uuid: String) = withContext(Dispatchers.IO) {
         logger.info { "Borrando mapa con uuid: $uuid" }

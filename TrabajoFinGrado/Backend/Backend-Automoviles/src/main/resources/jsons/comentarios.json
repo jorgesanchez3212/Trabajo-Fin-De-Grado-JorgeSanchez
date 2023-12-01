@@ -1,0 +1,9 @@
+{
+  "id": "507f191e810c19729de860ed",
+  "uuid": "123e4567-e89b-12d3-a456-426614174003",
+  "descripcion": "El vehículo estaba en perfecto estado y el servicio fue excelente.",
+  "idUser": "507f191e810c19729de860ea",
+  "idAutomovil": "507f191e810c19729de860ec",
+  "createdAt": "2023-12-01T10:15:30",
+  "deleted": false
+}
