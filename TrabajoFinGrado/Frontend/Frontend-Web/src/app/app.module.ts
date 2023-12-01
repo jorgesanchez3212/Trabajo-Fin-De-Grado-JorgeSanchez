@@ -39,6 +39,8 @@ import { DetailUsuarioComponent } from './components/usuario/detail-usuario/deta
 import { GeneralNewUsuarioComponent } from './components/usuario/detail-usuario/general-new-usuario/general-new-usuario.component';
 import { NewUsuarioComponent } from './components/usuario/new-usuario/new-usuario.component';
 import { NewUsuarioGeneralComponent } from './components/usuario/new-usuario/new-usuario-general/new-usuario-general.component';
+import { MatExpansionModule } from '@angular/material/expansion';
+
 
 
 
@@ -77,7 +79,8 @@ import { NewUsuarioGeneralComponent } from './components/usuario/new-usuario/new
     MatMenuModule,
     MatDialogModule,
     MatTabsModule, 
-    MatSelectModule
+    MatSelectModule,
+    MatExpansionModule
 
   ],
   exports:[NavegacionComponent],

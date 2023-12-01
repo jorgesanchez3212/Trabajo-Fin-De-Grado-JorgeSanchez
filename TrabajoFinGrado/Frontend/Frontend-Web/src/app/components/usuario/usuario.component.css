@@ -6,6 +6,19 @@
   background-color: dark;
 }
 
+
+
+.expansion{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: rgb(232, 232, 236);  
+  border-radius: 10px;
+  width: 70%;
+  margin-right: auto;
+  margin-left: auto;
+}
+
 .example-card {
   width: auto; /* Esto hará que la tarjeta se extienda según el contenido */
   max-width: 90%; /* ajusta al ancho deseado, por ejemplo, el 90% del contenedor padre */
@@ -14,6 +27,10 @@
   text-align: right; 
   width: 100%;
   border-radius: 15px;
+}
+
+.form-control.form-line {
+  background-color: white; /* Esto establece el color de fondo a blanco */
 }
 
 .user-image {
@@ -27,7 +44,10 @@ margin-right: 2%;
 .botones{
   margin-left: auto;
   text-align: right;
-
+}
+.botonesFiltros{
+  margin: 15px;
+  text-align: center;
 }
 .example-card img {
   width: 100px; 

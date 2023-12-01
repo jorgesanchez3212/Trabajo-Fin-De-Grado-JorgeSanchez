@@ -16,11 +16,24 @@ export class UsuarioComponent implements OnInit{
 
   public usuarios : UserDto[]
   public user : UserDto;
+  panelOpenState = false;
+  filterUsername = '';
+
 
   constructor(private httpService: HttpClient, private utilsService : UtilsService, public dialog: MatDialog){
     this.usuarios = [];
     this.user = new UserDto();
    
+  }
+
+
+  applyFilter() {
+    // Implementa la lógica para filtrar los usuarios por username
+  }
+
+  clearFilter() {
+    this.filterUsername = '';
+    // Implementa la lógica para limpiar el filtro y mostrar todos los usuarios
   }
 
   openDialog(usuarioId : string, enterAnimationDuration: string, exitAnimationDuration: string): void {
