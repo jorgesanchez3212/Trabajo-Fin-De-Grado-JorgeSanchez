@@ -4,6 +4,8 @@ import com.example.backendautomoviles.config.APIConfig
 import com.example.backendautomoviles.dto.ReservaCreateDto
 import com.example.backendautomoviles.dto.ReservaDto
 import com.example.backendautomoviles.dto.ReservaUpdateDto
+import com.example.backendautomoviles.filters.ReservaFilter
+import com.example.backendautomoviles.filters.UsuarioFilter
 import com.example.backendautomoviles.mappers.toDto
 import com.example.backendautomoviles.mappers.toModel
 import com.example.backendautomoviles.models.Reserva
@@ -32,6 +34,13 @@ class ReservaController@Autowired constructor(
     suspend fun listaReservas() : ResponseEntity<List<ReservaDto>> {
         logger.info { "Obteniendo lista de todos las reservas"}
         return ResponseEntity.ok(reservasService.findAll().toList().map { it.toDto() })
+    }
+
+    @PreAuthorize("hasRole('ADMINISTRADOR')")
+    @PostMapping("/listaReservasFiltro")
+    suspend fun listaReservasFiltro(@Valid @RequestBody reservaFilter: ReservaFilter) : ResponseEntity<List<ReservaDto>> {
+        logger.info { "Obteniendo lista de todos las reservas con filtro"}
+        return ResponseEntity.ok(reservasService.findAllFiltros(reservaFilter).toList().map { it.toDto() })
     }
 
 

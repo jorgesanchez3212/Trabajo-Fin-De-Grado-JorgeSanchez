@@ -40,6 +40,10 @@ import { GeneralNewUsuarioComponent } from './components/usuario/detail-usuario/
 import { NewUsuarioComponent } from './components/usuario/new-usuario/new-usuario.component';
 import { NewUsuarioGeneralComponent } from './components/usuario/new-usuario/new-usuario-general/new-usuario-general.component';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { DialogAnimationsComponent } from './components/automoviles/dialog-animations/dialog-animations.component';
+import { NewAutomovilComponent } from './components/automoviles/new-automovil/new-automovil.component';
+import { DetailAutomovilComponent } from './components/automoviles/detail-automovil/detail-automovil.component';
+import { NewAutomovilGeneralComponent } from './components/automoviles/new-automovil/new-automovil-general/new-automovil-general.component';
 
 
 
@@ -56,7 +60,11 @@ import { MatExpansionModule } from '@angular/material/expansion';
     DetailUsuarioComponent,
     GeneralNewUsuarioComponent,
     NewUsuarioComponent,
-    NewUsuarioGeneralComponent
+    NewUsuarioGeneralComponent,
+    DialogAnimationsComponent,
+    NewAutomovilComponent,
+    DetailAutomovilComponent,
+    NewAutomovilGeneralComponent
   ],
   imports: [
     BrowserModule,

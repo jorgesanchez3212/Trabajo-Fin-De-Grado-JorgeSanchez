@@ -1,0 +1,147 @@
+[{
+  "_id": {
+    "$oid": "65084986683dcd63fac829bc"
+  },
+  "uuid": {
+    "$binary": {
+      "base64": "EETIzVvDn4w6ANgnITQfiw==",
+      "subType": "03"
+    }
+  },
+  "nombre": "Juan Pérez",
+  "rol": "ADMINISTRADOR",
+  "email": "juan.perez@example.com",
+  "password": "$2a$12$h6VeKg90QadO1myaMBfxKOSMCbrXsbeWFjPj/nmXhXEOIFKBI3NBa",
+  "username": "juanp",
+  "description": "Soy Juan Pérez, entusiasta de los coches y aficionado a la mecánica.",
+  "image": "https://example.com/path/to/juanp123.jpg",
+  "createdAt": {
+    "$date": "2023-09-18T12:58:46.984Z"
+  },
+  "updatedAt": {
+    "$date": "2023-09-18T12:58:46.984Z"
+  },
+  "deleted": false,
+  "_class": "com.example.backendautomoviles.models.Usuario"
+},
+{
+  "_id": {
+    "$oid": "650b24fade29c84f9d1368f9"
+  },
+  "uuid": {
+    "$binary": {
+      "base64": "10pnhoM/AysduubITsymow==",
+      "subType": "03"
+    }
+  },
+  "nombre": "Jorge",
+  "rol": "CLIENTE",
+  "email": "jorge@gmail.com",
+  "password": "$2a$10$v/.trZa/67CZByxqFwd/Iex.5Yw.RCLwbu9wcnmHuIXT9l0fuKpEi",
+  "username": "jorge",
+  "description": "Hola, soy Jorge el creador de esta pagina web",
+  "image": "https://upload.wikimedia.org/wikipedia/commons/f/f4/User_Avatar_2.png",
+  "createdAt": {
+    "$date": "2023-09-20T16:59:38.854Z"
+  },
+  "updatedAt": {
+    "$date": "2023-09-20T16:59:38.854Z"
+  },
+  "deleted": false,
+  "_class": "com.example.backendautomoviles.models.Usuario"
+},
+{
+  "_id": {
+    "$oid": "65283648957f0e65307c9144"
+  },
+  "uuid": {
+    "$binary": {
+      "base64": "00dH+Rj3eckS5yxnl556vA==",
+      "subType": "03"
+    }
+  },
+  "nombre": "juanito",
+  "rol": "CLIENTE",
+  "email": "juan.perez3@example.com",
+  "password": "$2a$10$Ttx6BfvyCUXMLAVtnoA/RuY/C2zTHO05s9ZMd2X3dx5SN71MhDNN.",
+  "username": "juanp125",
+  "description": "Hola soy Juanp124",
+  "image": "https://upload.wikimedia.org/wikipedia/commons/f/f4/User_Avatar_2.png",
+  "createdAt": {
+    "$date": "2023-10-12T18:09:12.896Z"
+  },
+  "updatedAt": {
+    "$date": "2023-11-06T20:06:18.168Z"
+  },
+  "deleted": false,
+  "_class": "com.example.backendautomoviles.models.Usuario"
+},
+{
+  "_id": {
+    "$oid": "65494be1475b537250732a2e"
+  },
+  "uuid": {
+    "$binary": {
+      "base64": "4EndPAmD543JZXqfxv7EqQ==",
+      "subType": "03"
+    }
+  },
+  "nombre": "Juan Pérez Benavente",
+  "rol": "CLIENTE",
+  "email": "juan.perez2@example.com",
+  "password": "$2a$10$l1VoQH.nzBucnh7eFayfeuqxNdxS9NCiKcLqyJQT8TD9.VH/TkN..",
+  "username": "juanp123",
+  "description": "Soy Juan Pérez, entusiasta de los coches y aficionado a la mecánica.",
+  "image": "https://upload.wikimedia.org/wikipedia/commons/f/f4/User_Avatar_2.png",
+  "createdAt": {
+    "$date": "2023-11-06T20:26:09.402Z"
+  },
+  "updatedAt": {
+    "$date": "2023-11-06T20:40:03.873Z"
+  },
+  "deleted": false,
+  "_class": "com.example.backendautomoviles.models.Usuario"
+},
+{
+  "_id": {
+    "$oid": "654cd3a5bdad55047ae77230"
+  },
+  "uuid": {
+    "$binary": {
+      "base64": "1EzYvwd2q8J/m81lyYjchQ==",
+      "subType": "03"
+    }
+  },
+  "nombre": "admin",
+  "rol": "ADMINISTRADOR",
+  "email": "admin@gmail.com",
+  "password": "$2a$12$h6VeKg90QadO1myaMBfxKOSMCbrXsbeWFjPj/nmXhXEOIFKBI3NBa",
+  "username": "admin",
+  "description": "",
+  "image": "https://upload.wikimedia.org/wikipedia/commons/f/f4/User_Avatar_2.png",
+  "createdAt": {
+    "$date": "2023-11-09T12:42:13.745Z"
+  },
+  "updatedAt": {
+    "$date": "2023-11-09T12:42:13.745Z"
+  },
+  "deleted": false,
+  "_class": "com.example.backendautomoviles.models.Usuario"
+},
+{
+  "_id": {
+    "$oid": "656b2d967abcb45990a8c7d2"
+  },
+  "id": "507f191e810c19729de860ea",
+  "uuid": "123e4567-e89b-12d3-a456-426614174000",
+  "nombre": "Juan Pérez",
+  "rol": "ADMINISTRADOR",
+  "email": "juan.perez@example.com",
+  "password": "$2a$12$h6VeKg90QadO1myaMBfxKOSMCbrXsbeWFjPj/nmXhXEOIFKBI3NBa",
+  "username": "juanp1",
+  "description": "Cliente asiduo de la tienda de autos.",
+  "image": null,
+  "createdAt": "2023-12-01T10:15:30",
+  "updatedAt": "2023-12-01T10:15:30",
+  "deleted": false
+}]

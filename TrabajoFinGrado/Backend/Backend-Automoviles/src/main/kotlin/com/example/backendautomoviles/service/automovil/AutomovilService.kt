@@ -3,16 +3,17 @@ package com.example.backendautomoviles.service.automovil
 
 import com.example.backendautomoviles.exceptions.AutomovilesBadRequestException
 import com.example.backendautomoviles.exceptions.AutomovilesNotFoundException
+import com.example.backendautomoviles.filters.AutomovilFilter
 import com.example.backendautomoviles.models.Automovil
 import com.example.backendautomoviles.repositories.AutomovilesRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.firstOrNull
+import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.withContext
 import mu.KotlinLogging
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.cache.annotation.Cacheable
 import org.springframework.stereotype.Service
-import java.time.LocalDateTime
 
 private val logger = KotlinLogging.logger {}
 
@@ -24,6 +25,52 @@ class AutomovilService
     suspend fun findAll() = withContext(Dispatchers.IO) {
         return@withContext repository.findAll()
     }
+
+
+
+
+
+    suspend fun findAllFiltros(automovilFilter: AutomovilFilter) = withContext(Dispatchers.IO) {
+        var listaFiltros = repository.findAll().toList()
+
+        automovilFilter.numeroChasis?.let {
+            listaFiltros = listaFiltros.filter { it.numeroChasis == automovilFilter.numeroChasis }
+        }
+
+        automovilFilter.marca?.let {
+            listaFiltros = listaFiltros.filter { it.marca == automovilFilter.marca }
+        }
+
+        automovilFilter.modelo?.let {
+            listaFiltros = listaFiltros.filter { it.modelo == automovilFilter.modelo }
+        }
+
+        automovilFilter.capacidad?.let {
+            listaFiltros = listaFiltros.filter { it.capacidad == automovilFilter.capacidad }
+        }
+
+        automovilFilter.coste?.let {
+            listaFiltros = listaFiltros.filter { it.coste == automovilFilter.coste }
+        }
+
+        automovilFilter.tipo?.let {
+            listaFiltros = listaFiltros.filter { it.tipo == automovilFilter.tipo }
+        }
+
+        return@withContext listaFiltros
+    }
+
+
+
+
+
+
+
+
+
+
+
+
 
     @Cacheable("automoviles")
     suspend fun loadAutomovilById(automovilId: String) = withContext(Dispatchers.IO) {

@@ -4,6 +4,9 @@ import com.example.backendautomoviles.config.APIConfig
 import com.example.backendautomoviles.dto.AutomovilCreateDto
 import com.example.backendautomoviles.dto.AutomovilDto
 import com.example.backendautomoviles.dto.AutomovilUpdateDto
+import com.example.backendautomoviles.dto.UsuarioDto
+import com.example.backendautomoviles.filters.AutomovilFilter
+import com.example.backendautomoviles.filters.UsuarioFilter
 import com.example.backendautomoviles.mappers.toDto
 import com.example.backendautomoviles.mappers.toModel
 import com.example.backendautomoviles.models.Automovil
@@ -16,6 +19,7 @@ import mu.KotlinLogging
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
 import org.springframework.security.access.prepost.PreAuthorize
+import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.web.bind.annotation.*
 
 private val logger = KotlinLogging.logger {}
@@ -28,19 +32,27 @@ class AutomovilController
     ){
 
 
-    @PreAuthorize("hasRole('CLIENTE')")
     @GetMapping("/listaAutomoviles")
     suspend fun listaAutomoviles() : ResponseEntity<List<AutomovilDto>>{
         logger.info { "Obteniendo lista de todos los automoviles"}
         return ResponseEntity.ok(service.findAll().toList().map { it.toDto() })
     }
 
+
+    @PostMapping("/listaAutomovilesFiltro")
+    suspend fun listaAutomovilesFiltro(automovilFilter: AutomovilFilter) : ResponseEntity<List<AutomovilDto>>{
+        logger.info { "Obteniendo lista de todos los automoviles"}
+        return ResponseEntity.ok(service.findAllFiltros(automovilFilter).toList().map { it.toDto() })
+    }
+
     @PreAuthorize("hasRole('ADMINISTRADOR')")
     @PostMapping("/newAutomovil")
     suspend fun new(@Valid @RequestBody automovilDto: AutomovilCreateDto): ResponseEntity<AutomovilCreateDto> {
         logger.info { "Creacion de automovil: ${automovilDto.numeroChasis}" }
-        val automovil = automovilDto.validate().toModel()
-        val automovilSaved = service.save(automovil)
+        //val automovil = automovilDto.validate().toModel()
+        println(automovilDto)
+        println(automovilDto.toModel())
+        val automovilSaved = service.save(automovilDto.toModel())
         return ResponseEntity.ok(automovilDto)
     }
 
@@ -70,6 +82,14 @@ class AutomovilController
             return ResponseEntity.badRequest()
 
         }
+    }
+
+    @PreAuthorize("hasRole('ADMINISTRADOR')")
+    @GetMapping("/find/{id}")
+    suspend fun findById(@PathVariable id : String) : ResponseEntity<AutomovilDto>{
+        logger.info { "Buscando usuario con id ${id}"}
+        val auto = service.loadAutomovilById(id)
+        return ResponseEntity.ok(auto?.toDto())
     }
 
 

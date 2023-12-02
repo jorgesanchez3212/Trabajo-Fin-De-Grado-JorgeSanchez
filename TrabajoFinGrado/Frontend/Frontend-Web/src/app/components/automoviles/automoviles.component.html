@@ -1,4 +1,51 @@
+<br>
+<mat-expansion-panel hideToggle class="expansion">
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      Filtros
+    </mat-panel-title>
+  </mat-expansion-panel-header>
 
-<p>automoviles works!</p>
-<button class="btn btn-primary">Mi Botón</button>
+    <br>
+    <div class="col-md-3">
+    <label class="txt-default-color form-label-asset txt-fz-12">Marca </label>
+    <input class="form-control form-line" name="usernameUserFilter" type="text" [(ngModel)]="automovilFilter.marca" #marcaAutomovilFilter="ngModel">
+  </div> 
+  <div class="col-md-3">
+    <label class="txt-default-color form-label-asset txt-fz-12">ID Automovil </label>
+    <input class="form-control form-line" name="idUserFilter" type="text" [(ngModel)]="automovilFilter.id" #idAutomovilFilter="ngModel">
+  </div> 
+  <div class="botonesFiltros">
+    <button mat-flat-button color="primary" (click)="onContextFiltrarClick()"><mat-icon>edit</mat-icon>Filtrar</button>
+    <button mat-flat-button color="warn" (click)="clearFilters()" ><mat-icon>delete</mat-icon> Limpiar</button><br><br>
+  </div>
+</mat-expansion-panel>
+
+  
+
+  <button mat-fab class="add-button" (click)="onContextNewClick()">
+    <mat-icon>add</mat-icon>
+  </button>
+
+<div class="card-container">
+  <mat-card class="example-card" *ngFor="let automovil of automoviles">
+    <mat-card-header>
+      <div class="user-image">
+        <img mat-card-lg-image [src]="automovil.image ? automovil.image : 'assets/img/perfil2.png'" alt="{{automovil.marca}}">
+      </div>
+      <div class="user-datos">
+        <mat-card-title>{{ automovil.marca }} </mat-card-title>
+        <mat-card-subtitle>{{ automovil.modelo }}    <br>   {{ automovil.color }}   
+        </mat-card-subtitle>
+      </div>
+      <div class="botones">
+        <button mat-flat-button color="primary" (click)="onContextModificarClick(automovil)"><mat-icon>edit</mat-icon>Modificar</button><br><br>
+        <button mat-flat-button color="warn" (click)="openDialog(automovil.numeroChasis,'0ms', '0ms')"><mat-icon>delete</mat-icon> Borrar</button>
+      </div>
+    </mat-card-header>
+    <mat-card-content>
+    </mat-card-content>
+  </mat-card>
+</div>
+
 

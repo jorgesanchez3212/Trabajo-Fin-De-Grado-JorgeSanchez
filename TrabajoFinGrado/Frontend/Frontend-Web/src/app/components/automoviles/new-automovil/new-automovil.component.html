@@ -3,7 +3,7 @@
     <mat-toolbar class="mat-dialog-sz-lg">
         <div class="mat-toolbar-tools" style="width: 98%;">
             <span class="" style="white-space: normal;">
-                <fa-icon [icon]="faFilePdf"></fa-icon>&nbsp;&nbsp;Usuario: {{usuario.username}}
+                <fa-icon [icon]="faFilePdf"></fa-icon>&nbsp;&nbsp;Automovil: {{automovil.marca}}
             </span>
         </div>
         <button mat-mini-fab mat-dialog-close class="bg-color-app md-icon-button" style="background-color: #2C3E50; border-style: solid; border-width: thin; border-color: rgb(255 255 255 / 30%);" aria-label="Cerrar" access="ROLE_ADMIN, ROLE_SUPERADMIN" matTooltip="Cerrar">
@@ -24,7 +24,7 @@
             <div class="row button-section">
                 <div class="col-md-1" style="left:80%">
                     <span flex></span>
-                    <button type="button" class="btn btn-app fs-12" (click)="saveUsuario()" style="margin-right: 27px;margin-top:15%">
+                    <button type="button" class="btn btn-app fs-12" (click)="saveAutomovil()" style="margin-right: 27px;margin-top:15%">
 		                <fa-icon [icon]="faFloppy"></fa-icon>&nbsp;&nbsp;Guardar
 	                </button>
                 </div>

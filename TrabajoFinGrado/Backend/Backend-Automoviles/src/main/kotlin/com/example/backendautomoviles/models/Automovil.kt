@@ -20,9 +20,8 @@ data class Automovil(
     val capacidad : Int,
     val coste : Double,
     val tipo : String = TipoAutomovil.COCHE.name,
-    val reservas : List<LocalDateTime>,
-    val createdAt: LocalDateTime = LocalDateTime.now(),
-    val updatedAt: LocalDateTime = LocalDateTime.now(),
+    val image: String?,
+    val reservas : List<String>?,
     val deleted: Boolean = false,
 ) {
     enum class TipoAutomovil{
