@@ -26,7 +26,7 @@ export class GeneralNewUsuarioComponent implements OnInit {
     this.listenUsuario()
   }
 
-  private  listenUsuario(){
+  private listenUsuario(){
     this.newUsuarioPropertyService.getUsuarioPropertyObservable().subscribe((usuario:UserDto) => {
       this.usuario = usuario;
     })

@@ -1,0 +1,107 @@
+
+<div class="col-md-12">
+    <div class="row">
+        <!-- <div class="col-md-3">
+            <div class="form-group fg-asset">
+                <label class="txt-default-color form-label-asset txt-fz-12">Username <span class="txt-color-red">*</span>
+				</label> <input class="form-control form-line" name="usernameUsuario" type="text" (focusout)="focusOutUsuario()" [(ngModel)]="usuario.username" #usernameUsuario="ngModel" minlength="3" maxlength="200" required>
+            </div>
+            <div *ngIf="(usernameUsuario.invalid && (usernameUsuario.dirty || usernameUsuario.touched)) ||(usernameUsuario.errors?.['minlength']) || (usernameUsuario.errors?.['maxlength'])">
+                <div class="error-message">
+                    <fa-icon class="fa red" [icon]="faWarning"></fa-icon>&nbsp;&nbsp;Campo obligatorio (min.3, m&aacute;x 200 carac.)
+                </div>
+            </div>
+        </div> -->
+
+        <div class="col-md-3">
+            <div class="form-group fg-asset">
+                <label class="txt-default-color form-label-asset txt-fz-12">Numero de chasis del 
+					Automovil <span class="txt-color-red">*</span>
+				</label> <input class="form-control form-line" name="marcaAutomovil" type="text" (focusout)="focusOutAutomovil()" [(ngModel)]="automovil.numeroChasis" #numerChasisAutomovil="ngModel" minlength="3" maxlength="200" required>
+            </div>
+            <div *ngIf="(numerChasisAutomovil.invalid && (numerChasisAutomovil.dirty || numerChasisAutomovil.touched)) ||(numerChasisAutomovil.errors?.['minlength']) || (numerChasisAutomovil.errors?.['maxlength'])">
+                <div class="error-message">
+                    <fa-icon class="fa red" [icon]="faWarning"></fa-icon>&nbsp;&nbsp;Campo obligatorio (min.3, m&aacute;x 200 carac.)
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="form-group fg-asset">
+                <label class="txt-default-color form-label-asset txt-fz-12">Marca del 
+					Automovil <span class="txt-color-red">*</span>
+				</label> <input class="form-control form-line" name="marcaAutomovil" type="text" (focusout)="focusOutAutomovil()" [(ngModel)]="automovil.marca" #marcaAutomovil="ngModel" minlength="3" maxlength="200" required>
+            </div>
+            <div *ngIf="(marcaAutomovil.invalid && (marcaAutomovil.dirty || marcaAutomovil.touched)) ||(marcaAutomovil.errors?.['minlength']) || (marcaAutomovil.errors?.['maxlength'])">
+                <div class="error-message">
+                    <fa-icon class="fa red" [icon]="faWarning"></fa-icon>&nbsp;&nbsp;Campo obligatorio (min.3, m&aacute;x 200 carac.)
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="form-group fg-asset">
+                <label class="txt-default-color form-label-asset txt-fz-12">Modelo del 
+					Automovil <span class="txt-color-red">*</span>
+				</label> <input class="form-control form-line" name="marcaAutomovil" type="text" (focusout)="focusOutAutomovil()" [(ngModel)]="automovil.modelo" #modeloAutomovil="ngModel"  required>
+            </div>
+            <div *ngIf="(modeloAutomovil.invalid && (modeloAutomovil.dirty || modeloAutomovil.touched))">
+                <div class="error-message">
+                    <fa-icon class="fa red" [icon]="faWarning"></fa-icon>&nbsp;&nbsp;Campo obligatorio (min.3, m&aacute;x 200 carac.)
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-3">
+            <div class="form-group fg-asset">
+                <label class="txt-default-color form-label-asset txt-fz-12">Color del 
+					Automovil <span class="txt-color-red">*</span>
+				</label> <input class="form-control form-line" name="usernameUsuario" type="text" (focusout)="focusOutAutomovil()" [(ngModel)]="automovil.color" #colorAutomovil="ngModel" minlength="3" maxlength="200" required>
+            </div>
+            <div *ngIf="(colorAutomovil.invalid && (colorAutomovil.dirty || colorAutomovil.touched)) ||(colorAutomovil.errors?.['minlength']) || (colorAutomovil.errors?.['maxlength'])">
+                <div class="error-message">
+                    <fa-icon class="fa red" [icon]="faWarning"></fa-icon>&nbsp;&nbsp;Campo obligatorio (min.3, m&aacute;x 200 carac.)
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group fg-asset">
+                <label class="txt-default-color form-label-asset txt-fz-12">Capacidad del 
+					Automovil <span class="txt-color-red">*</span>
+				</label> <input class="form-control form-line" name="passwordUsuario" type="text" (focusout)="focusOutAutomovil()" [(ngModel)]="automovil.capacidad" #capacidadAutomovil="ngModel"  required>
+            </div>
+            <div *ngIf="(capacidadAutomovil.invalid && (capacidadAutomovil.dirty || capacidadAutomovil.touched))">
+                <div class="error-message">
+                    <fa-icon class="fa red" [icon]="faWarning"></fa-icon>&nbsp;&nbsp;Campo obligatorio (min.3, m&aacute;x 200 carac.)
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="form-group fg-asset">
+                <label class="txt-default-color form-label-asset txt-fz-12">Coste del 
+					Automovil <span class="txt-color-red">*</span>
+				</label> <input class="form-control form-line" name="descriptionUsuario" type="text" (focusout)="focusOutAutomovil()" [(ngModel)]="automovil.coste" #costeAutomovil="ngModel"  required>
+            </div>
+            <div *ngIf="(costeAutomovil.invalid && (costeAutomovil.dirty || costeAutomovil.touched))">
+                <div class="error-message">
+                    <fa-icon class="fa red" [icon]="faWarning"></fa-icon>&nbsp;&nbsp;Campo obligatorio (min.3, m&aacute;x 200 carac.)
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group fg-asset">
+                <label class="txt-default-color form-label-asset txt-fz-12">Tipo
+					de Automovil</label> 
+                    <mat-form-field appearance="fill">
+                        <mat-label>Selecciona un Tipo de Automovil</mat-label>
+                        <mat-select [(ngModel)]="automovil.tipo" (selectionChange)="focusOutTipos()">
+                          <mat-option *ngFor="let tipo of tipos" [value]="tipo">
+                            {{ tipo }}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+            </div>
+        </div>
+    </div>
+</div>

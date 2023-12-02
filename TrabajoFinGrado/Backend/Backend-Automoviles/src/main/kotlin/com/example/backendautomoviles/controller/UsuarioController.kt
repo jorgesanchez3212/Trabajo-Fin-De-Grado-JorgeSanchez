@@ -68,7 +68,7 @@ class UsuarioController
         return ResponseEntity.ok(UserWithTokenDto(userSaved.toDto(), jwtToken))
     }
 
-    @PreAuthorize("hasRole('ADMINISTRADOR')")
+    //@PreAuthorize("hasRole('ADMINISTRADOR')")
     @PostMapping("/añadir")
     suspend fun añadirUsuario(@AuthenticationPrincipal usuario : Usuario, @Valid @RequestBody usuarioDto: UsuarioCreateDto ): ResponseEntity<UsuarioDto> {
         logger.info { "Añadir usuario por parte del administrador: ${usuarioDto.username}" }
@@ -88,14 +88,14 @@ class UsuarioController
     }
 
 
-    @PreAuthorize("hasRole('ADMINISTRADOR')")
+    //@PreAuthorize("hasRole('ADMINISTRADOR')")
     @GetMapping("/listaUsuarios")
     suspend fun listaUsuarios(@AuthenticationPrincipal usuario : Usuario) : ResponseEntity<List<UsuarioDto>>{
         logger.info { "Obteniendo lista de todos los usuarios"}
         return ResponseEntity.ok(usuariosService.findAll().toList().map { it.toDto() })
     }
 
-    @PreAuthorize("hasRole('ADMINISTRADOR')")
+    //@PreAuthorize("hasRole('ADMINISTRADOR')")
     @PostMapping("/listaUsuariosFiltro")
     suspend fun listaUsuariosFiltro(@AuthenticationPrincipal usuario : Usuario,@Valid @RequestBody usuarioFiltro: UsuarioFilter ) : ResponseEntity<List<UsuarioDto>>{
         logger.info { "Obteniendo lista de todos los usuarios"}

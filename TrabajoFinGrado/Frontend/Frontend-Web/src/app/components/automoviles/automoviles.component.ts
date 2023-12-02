@@ -106,7 +106,7 @@ export class AutomovilesComponent {
       this.automovil = data as AutomovilDto;
       this.dialog.open(DetailAutomovilComponent, {
         width: '70%', height: '70%', data: {
-          automov: this.automovil,
+          automovil: this.automovil,
         }
       }).afterClosed().subscribe(() => {
         this.getAutomovilesAll();

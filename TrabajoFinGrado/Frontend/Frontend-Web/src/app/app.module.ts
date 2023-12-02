@@ -44,6 +44,7 @@ import { DialogAnimationsComponent } from './components/automoviles/dialog-anima
 import { NewAutomovilComponent } from './components/automoviles/new-automovil/new-automovil.component';
 import { DetailAutomovilComponent } from './components/automoviles/detail-automovil/detail-automovil.component';
 import { NewAutomovilGeneralComponent } from './components/automoviles/new-automovil/new-automovil-general/new-automovil-general.component';
+import { GeneralNewAutomovilComponent } from './components/automoviles/detail-automovil/general-new-automovil/general-new-automovil.component';
 
 
 
@@ -64,8 +65,9 @@ import { NewAutomovilGeneralComponent } from './components/automoviles/new-autom
     DialogAnimationsComponent,
     NewAutomovilComponent,
     DetailAutomovilComponent,
-    NewAutomovilGeneralComponent
-  ],
+    NewAutomovilGeneralComponent,
+    GeneralNewAutomovilComponent,
+    ],
   imports: [
     BrowserModule,
     AppRoutingModule,

@@ -45,7 +45,7 @@ class AutomovilController
         return ResponseEntity.ok(service.findAllFiltros(automovilFilter).toList().map { it.toDto() })
     }
 
-    @PreAuthorize("hasRole('ADMINISTRADOR')")
+    //@PreAuthorize("hasRole('ADMINISTRADOR')")
     @PostMapping("/newAutomovil")
     suspend fun new(@Valid @RequestBody automovilDto: AutomovilCreateDto): ResponseEntity<AutomovilCreateDto> {
         logger.info { "Creacion de automovil: ${automovilDto.numeroChasis}" }
@@ -58,14 +58,14 @@ class AutomovilController
 
 
 
-    @PreAuthorize("hasRole('ADMINISTRADOR')")
+    //@PreAuthorize("hasRole('ADMINISTRADOR')")
     @PutMapping("/update")
     suspend fun updateMe(@Valid @RequestBody automovilDto: AutomovilUpdateDto): Any {
         logger.info { "Actualizando automovil con numero de chasis: ${automovilDto.numeroChasis}" }
 
         val automovilExist : Automovil? = service.loadAutomovilByNumeroChasis(automovilDto.numeroChasis!!)
         if (automovilExist != null) {
-            automovilDto.validate()
+            //automovilDto.validate()
 
             var automovilUpdated = automovilExist.copy(
                 numeroChasis = automovilDto.numeroChasis,
@@ -84,10 +84,10 @@ class AutomovilController
         }
     }
 
-    @PreAuthorize("hasRole('ADMINISTRADOR')")
+    //@PreAuthorize("hasRole('ADMINISTRADOR')")
     @GetMapping("/find/{id}")
     suspend fun findById(@PathVariable id : String) : ResponseEntity<AutomovilDto>{
-        logger.info { "Buscando usuario con id ${id}"}
+        logger.info { "Buscando automovil con id ${id}"}
         val auto = service.loadAutomovilById(id)
         return ResponseEntity.ok(auto?.toDto())
     }

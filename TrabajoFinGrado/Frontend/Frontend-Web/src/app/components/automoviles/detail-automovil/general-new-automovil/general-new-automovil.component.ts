@@ -3,20 +3,18 @@ import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import { AutomovilDto } from 'src/app/models/automovil/automovil-dto/automovil-dto';
 import { NewAutomovilPropertyService } from 'src/app/services/new-automovil-property.service';
 
+
 @Component({
-  selector: 'app-new-automovil-general',
-  templateUrl: './new-automovil-general.component.html',
-  styleUrls: ['./new-automovil-general.component.css']
+  selector: 'app-general-new-automovil',
+  templateUrl: './general-new-automovil.component.html',
+  styleUrls: ['./general-new-automovil.component.css']
 })
-export class NewAutomovilGeneralComponent {
-
-
+export class GeneralNewAutomovilComponent {
   public faWarning = faExclamationTriangle;
   public automovil : AutomovilDto;
   public tipos : string[];
   selectedFile: File | null = null;
   private fileContentBase64: string | null = null;
-
 
   constructor(private newAutomovilPropertyService : NewAutomovilPropertyService){
 
@@ -24,28 +22,17 @@ export class NewAutomovilGeneralComponent {
     this.tipos = ['COCHE', 'CAMION'];
     this.automovil = new AutomovilDto();
   }
-  
+
+
   ngOnInit(): void {
+    this.listenAutomovil()
   }
 
-  onFileSelected(event: any): void {
-    this.selectedFile = event.target.files[0];
-    if (this.selectedFile) {
-      this.convertFileToBase64(this.selectedFile);
-    }
+  private listenAutomovil(){
+    this.newAutomovilPropertyService.getAutomovilPropertyObservable().subscribe((automovil:AutomovilDto) => {
+      this.automovil = automovil;
+    })
   }
-
-private convertFileToBase64(file: File) {
-  const reader = new FileReader();
-  reader.readAsDataURL(file);
-  reader.onload = () => {
-    this.fileContentBase64 = reader.result as string;
-    this.automovil.image = this.fileContentBase64;
-  };
-  reader.onerror = error => {
-    console.error('Error al leer el archivo:', error);
-  };
-}
 
   public focusOutAutomovil(){
     this.newAutomovilPropertyService.emitAutomovilProperty(this.automovil);
@@ -55,6 +42,5 @@ private convertFileToBase64(file: File) {
     this.newAutomovilPropertyService.emitAutomovilProperty(this.automovil);
   }
 
+  
 }
-
-
