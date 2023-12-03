@@ -3,6 +3,7 @@ import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Login } from 'src/app/models/login/login';
 import { UserToken } from 'src/app/models/user/user-token/user-token';
+import { RolPropertyService } from 'src/app/services/rol-property.service';
 import { UserRestService } from 'src/app/services/user-rest.service';
 import { UtilsService } from 'src/app/services/utils.service';
 
@@ -28,7 +29,9 @@ export class LoginComponent implements OnInit {
 
   private loginF:Login = new Login(this.loginForm.value.username!,this.loginForm.value.password!);
 
-  constructor(private formBuilder: FormBuilder, private utilsService : UtilsService, private userService: UserRestService, private router:Router){}
+  constructor(private formBuilder: FormBuilder, private utilsService : UtilsService, private userService: UserRestService, private router:Router,
+    private rolPropertyService: RolPropertyService
+    ){}
   ngOnInit(): void {
     localStorage.clear;
   }
@@ -49,6 +52,7 @@ export class LoginComponent implements OnInit {
       (response: UserToken) => {
         console.log('Usuario autenticado!', response);
         localStorage.setItem('access_token', response.token);
+        this.rolPropertyService.emitRolProperty(response.user.rol);
         this.router.navigateByUrl('/automovil');
       },
       (error) => {

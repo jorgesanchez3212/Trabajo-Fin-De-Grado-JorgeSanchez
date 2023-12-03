@@ -4,6 +4,7 @@ import { Location } from '@angular/common';
 import { faUser, faUsers, faCar,faLeaf,faBuilding } from '@fortawesome/free-solid-svg-icons';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { ChangeDetectorRef } from '@angular/core';
+import { RolPropertyService } from 'src/app/services/rol-property.service';
 
 
 @Component({
@@ -16,15 +17,17 @@ export class NavegacionComponent implements OnInit, OnDestroy {
 
   mobileQuery: MediaQueryList;
   isNavbarVisible: boolean = false;
+  isAdminVisible : boolean = false;
 
 
 
   fillerNav = [
-    {name:"Iniciar sesion", route : "login", icon:"home"},
+    {name:"Iniciar sesion", route : "automovil", icon:"home"},
     {name:"Catalogo", route : "", icon:"home"},
     {name:"Mi Perfil", route : "", icon:"account_circle"},
     {name:"Usuarios", route : "usuarios", icon:"group"},
     {name:"Automoviles", route : "automovil", icon:"directions_car"},
+    {name:"Comentarios", route : "comentarios", icon:"group"},
     {name:"Contacto", route : "", icon:"perm_contact_calendar"},
   ]
 
@@ -35,10 +38,12 @@ export class NavegacionComponent implements OnInit, OnDestroy {
 
   private _mobileQueryListener: () => void;
 
-  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, private router: Router, private location: Location) {
+  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, private router: Router, private location: Location, private rolPropertyService: RolPropertyService) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
+   
+
     
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
@@ -48,7 +53,13 @@ export class NavegacionComponent implements OnInit, OnDestroy {
     });
   }
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
+    this.rolPropertyService.getRolPropertyObservable().subscribe(rol => {
+      if(rol.includes('ADMINISTRADOR') ){
+        this.isAdminVisible = true
+      }else{
+        this.isAdminVisible = false
+      }
+    });
   }
 
   ngOnDestroy(): void {

@@ -28,10 +28,12 @@ class ComentarioController
     private val service: ComentarioService,
 ){
 
-    @PreAuthorize("hasRole('CLIENTE')")
+    //@PreAuthorize("hasRole('CLIENTE')")
     @GetMapping("/listaComentarios")
     suspend fun listaComentarios() : ResponseEntity<List<ComentarioDto>> {
         logger.info { "Obteniendo lista de todos los comentarios"}
+        val lista = service.findAll().toList().map { it.toDto() }
+        println(lista)
         return ResponseEntity.ok(service.findAll().toList().map { it.toDto() })
     }
 
@@ -49,9 +51,9 @@ class ComentarioController
     @PreAuthorize("hasRole('ADMINISTRADOR')")
     @PutMapping("/update")
     suspend fun updateMe(@Valid @RequestBody comentarioDto: ComentarioUpdateDto): Any {
-        logger.info { "Actualizando comentario con uuid: ${comentarioDto.uuid}" }
+        logger.info { "Actualizando comentario con uuid: ${comentarioDto}" }
 
-        val comentarioExists : Comentario? = service.loadComentarioByUUID(comentarioDto.uuid!!)
+        val comentarioExists : Comentario? = service.loadComentarioById(comentarioDto.id!!)
         if (comentarioExists != null) {
 
             var automovilUpdated = comentarioExists.copy(

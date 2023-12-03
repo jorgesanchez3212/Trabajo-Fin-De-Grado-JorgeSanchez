@@ -7,24 +7,22 @@ data class ComentarioCreateDto(
     val descripcion : String,
     val idUser : String,
     val idAutomovil : String,
-    val createdAt : LocalDateTime,
-    val deleted : Boolean = false
 ) {
 }
 
 
 data class ComentarioDto(
-    val uuid: String,
+    val id: String,
     val descripcion : String,
     val idUser : String,
     val idAutomovil : String,
-    val createdAt : LocalDateTime,
+    val createdAt : String,
     val deleted : Boolean = false
 ){}
 
 
 data class ComentarioUpdateDto(
-    val uuid : String? = null,
+    val id : String? = null,
     val descripcion : String,
 ){}
 

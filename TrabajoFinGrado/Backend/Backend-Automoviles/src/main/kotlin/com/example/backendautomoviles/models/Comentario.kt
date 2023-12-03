@@ -15,7 +15,7 @@ data class Comentario (
     val descripcion : String,
     val idUser : String,
     val idAutomovil : String,
-    val createdAt : LocalDateTime,
+    val createdAt : String,
     val deleted : Boolean = false
 ){
 }

@@ -13,7 +13,7 @@ import java.util.UUID
 fun Comentario.toDto() : ComentarioDto {
 
     return ComentarioDto(
-        uuid =this.uuid,
+        id =this.id,
         descripcion = this.descripcion,
         idUser = this.idUser,
         idAutomovil = this.idAutomovil,
@@ -31,8 +31,8 @@ fun ComentarioCreateDto.toModel() : Comentario {
         descripcion = this.descripcion,
         idUser = this.idUser,
         idAutomovil = this.idAutomovil,
-        createdAt = this.createdAt,
-        deleted = this.deleted,
+        createdAt = LocalDateTime.now().toString(),
+        deleted = false,
     )
 
 }

@@ -1,0 +1,55 @@
+[{
+  "_id": {
+    "$oid": "650b24fade29c84f9d1368f1"
+  },
+  "uuid": "2c5ea4c0-4067-11e9-8bad-9b1deb4d3b7d",
+  "descripcion": "Gran servicio, muy satisfecho con la compra.",
+  "idUser": "usuario123",
+  "idAutomovil": "auto456",
+  "createdAt": "2023-01-01T00:00:00Z",
+  "deleted": false
+},
+{
+  "_id": {
+    "$oid": "650b24fade29c84f9d1368f4"
+  },
+  "uuid": "2c5ea4c0-4067-11e9-8bad-9b1deb4d3b7e",
+  "descripcion": "El proceso de compra fue complicado, pero el auto vale la pena.",
+  "idUser": "usuario234",
+  "idAutomovil": "auto789",
+  "createdAt": "2023-01-02T00:00:00Z",
+  "deleted": false
+},
+{
+  "_id": {
+    "$oid": "650b24fade29c84f9d1368f7"
+  },
+  "uuid": "2c5ea4c0-4067-11e9-8bad-9b1deb4d3b7f",
+  "descripcion": "No estoy contento con el servicio posventa.",
+  "idUser": "usuario345",
+  "idAutomovil": "auto101",
+  "createdAt": "2023-01-03T00:00:00Z",
+  "deleted": false
+},
+{
+  "_id": {
+    "$oid": "650b24fade29c84f9d1368f9"
+  },
+  "uuid": "2c5ea4c0-4067-11e9-8bad-9b1deb4d3b80",
+  "descripcion": "Respuestas rápidas a mis preguntas, muy informativo.",
+  "idUser": "usuario456",
+  "idAutomovil": "auto202",
+  "createdAt": "2023-01-04T00:00:00Z",
+  "deleted": false
+},
+{
+  "_id": {
+    "$oid": "650b24fade29c84f9d1368f8"
+  },
+  "uuid": "2c5ea4c0-4067-11e9-8bad-9b1deb4d3b81",
+  "descripcion": "El automóvil llegó más tarde de lo prometido.",
+  "idUser": "usuario567",
+  "idAutomovil": "auto303",
+  "createdAt": "2023-01-05T00:00:00Z",
+  "deleted": false
+}]

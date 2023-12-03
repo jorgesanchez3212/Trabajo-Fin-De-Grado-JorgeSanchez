@@ -16,6 +16,8 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatSelectModule } from '@angular/material/select';
+import { TableModule } from 'primeng/table';
+
 
 
 
@@ -45,6 +47,7 @@ import { NewAutomovilComponent } from './components/automoviles/new-automovil/ne
 import { DetailAutomovilComponent } from './components/automoviles/detail-automovil/detail-automovil.component';
 import { NewAutomovilGeneralComponent } from './components/automoviles/new-automovil/new-automovil-general/new-automovil-general.component';
 import { GeneralNewAutomovilComponent } from './components/automoviles/detail-automovil/general-new-automovil/general-new-automovil.component';
+import { ComentarioComponent } from './components/comentario/comentario.component';
 
 
 
@@ -67,6 +70,7 @@ import { GeneralNewAutomovilComponent } from './components/automoviles/detail-au
     DetailAutomovilComponent,
     NewAutomovilGeneralComponent,
     GeneralNewAutomovilComponent,
+    ComentarioComponent,
     ],
   imports: [
     BrowserModule,
@@ -90,7 +94,8 @@ import { GeneralNewAutomovilComponent } from './components/automoviles/detail-au
     MatDialogModule,
     MatTabsModule, 
     MatSelectModule,
-    MatExpansionModule
+    MatExpansionModule,
+    TableModule
 
   ],
   exports:[NavegacionComponent],
