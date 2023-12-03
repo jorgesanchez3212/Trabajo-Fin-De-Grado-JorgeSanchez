@@ -43,6 +43,13 @@ export class NavegacionComponent implements OnInit, OnDestroy {
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
    
+    const rol = localStorage.getItem('access_rol');
+      if(rol === 'ADMINISTRADOR'){
+        this.isAdminVisible = true
+      }else{
+        this.isAdminVisible = false
+      }
+  
 
     
     this.router.events.subscribe(event => {
@@ -56,9 +63,17 @@ export class NavegacionComponent implements OnInit, OnDestroy {
     this.rolPropertyService.getRolPropertyObservable().subscribe(rol => {
       if(rol.includes('ADMINISTRADOR') ){
         this.isAdminVisible = true
-      }else{
+      }else if(rol.includes('CLIENTE')){
         this.isAdminVisible = false
+      }else{
+        const rol = localStorage.getItem('access_rol');
+        if(rol === 'ADMINISTRADOR'){
+          this.isAdminVisible = true
+        }else{
+          this.isAdminVisible = false
+        }
       }
+      
     });
   }
 
