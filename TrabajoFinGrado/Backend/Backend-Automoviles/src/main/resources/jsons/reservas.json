@@ -1,0 +1,14 @@
+{
+  "_id": {
+    "$oid": "653d3326bfde850cdbb28155"
+  },
+  "uuid": "123e4567-e89b-12d3-a456-426614174000",
+  "clienteId": "65084986683dcd63fac829bc",
+  "automovilId": "653d3326bfde850cdbb28115",
+  "fechaInicio": "2023-10-15",
+  "fechaFinal": "2023-10-20",
+  "costo": 150.0,
+  "recogidoPorCliente": false,
+  "createdAt": "2023-10-10T10:00:00",
+  "deleted": false
+}
