@@ -14,6 +14,7 @@ import mu.KotlinLogging
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.cache.annotation.Cacheable
 import org.springframework.stereotype.Service
+import java.time.LocalDate
 import java.time.LocalDateTime
 
 private val logger = KotlinLogging.logger {}
@@ -32,46 +33,23 @@ class ReservaService @Autowired constructor(
     suspend fun findAllFiltros(reservaFilter: ReservaFilter) = withContext(Dispatchers.IO) {
         var listaFiltros = repository.findAll().toList()
 
-        reservaFilter.id?.let {
-            listaFiltros = listaFiltros.filter { it.id == reservaFilter.id }
+
+        if (reservaFilter.fechaInicio != null){
+            if (reservaFilter.fechaFinal != null){
+                return@withContext repository.findAllByFechaInicioAfterAndFechaFinalBefore(LocalDate.parse(reservaFilter.fechaInicio), LocalDate.parse(reservaFilter.fechaFinal))
+            }else{
+                return@withContext repository.findAllByFechaInicioAfter(LocalDate.parse(reservaFilter.fechaInicio))
+            }
+
+        }else{
+            if(reservaFilter.fechaFinal != null){
+                return@withContext repository.findAllByFechaFinalBefore(LocalDate.parse(reservaFilter.fechaFinal))
+            } else {
+                return@withContext repository.findAll().toList()
+            }
+
         }
-
-        reservaFilter.clienteId?.let {
-            listaFiltros = listaFiltros.filter { it.clienteId == reservaFilter.clienteId }
-        }
-
-
-        reservaFilter.automovilId?.let {
-            listaFiltros = listaFiltros.filter { it.automovilId == reservaFilter.automovilId }
-        }
-        //TODO Arregar estos filtros no van a funcionar
-
-        reservaFilter.fechaInicio?.let {
-            listaFiltros = listaFiltros.filter { it.fechaInicio == reservaFilter.fechaInicio }
-        }
-        reservaFilter.fechaInicio?.let {
-            listaFiltros = listaFiltros.filter { it.fechaFinal == reservaFilter.fechaFinal }
-        }
-
-        reservaFilter.costo?.let {
-            listaFiltros = listaFiltros.filter { it.costo == reservaFilter.costo }
-        }
-
-        reservaFilter.recogidoPorCliente?.let {
-            listaFiltros = listaFiltros.filter { it.recogidoPorCliente == reservaFilter.recogidoPorCliente }
-        }
-
-
-        return@withContext listaFiltros
     }
-
-
-
-
-
-
-
-
 
     @Cacheable("reservas")
     suspend fun loadReservaById(reservaId: String) = withContext(Dispatchers.IO) {
@@ -103,13 +81,10 @@ class ReservaService @Autowired constructor(
 
         val reservaFind = repository.findById(reserva.id)
                 ?: throw ReservasNotFoundException("Error al actualizar la reserva, la reserva a actualizar no existe")
-        val reservaUpdate = reservaFind.copy(
-                updatedAt = LocalDateTime.now()
-        )
 
         println(reserva)
         try {
-            return@withContext repository.save(reservaUpdate)
+            return@withContext repository.save(reservaFind)
         } catch (e: Exception) {
             throw AutomovilesBadRequestException("Error al actualizar la reserva")
         }

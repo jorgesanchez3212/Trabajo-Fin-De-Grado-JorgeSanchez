@@ -18,8 +18,7 @@ data class Reserva(
         val fechaFinal : LocalDate,
         val costo : Double,
         val recogidoPorCliente : Boolean,
-        val createdAt: LocalDateTime = LocalDateTime.now(),
-        val updatedAt: LocalDateTime = LocalDateTime.now(),
+        val createdAt: LocalDateTime,
         val deleted: Boolean = false,
 ) {
 }

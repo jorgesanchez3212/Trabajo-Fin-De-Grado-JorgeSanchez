@@ -1,0 +1,77 @@
+.card-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* esto alinea al centro los elementos hijos, si quieres que las tarjetas ocupen todo el ancho, puedes remover esta línea */
+    justify-content: center;
+    background-color: dark;
+  }
+  
+  
+  
+  .expansion{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: rgb(235, 236, 238);  
+    border-radius: 10px;
+    width: 70%;
+    margin-right: auto;
+    margin-left: auto;
+  }
+  
+  .example-card {
+    width: auto; /* Esto hará que la tarjeta se extienda según el contenido */
+    max-width: 90%; /* ajusta al ancho deseado, por ejemplo, el 90% del contenedor padre */
+    margin-bottom: 20px; /* espacio entre cartas */
+    /* Alinea el contenido de la tarjeta (incluida la imagen) a la derecha */
+    text-align: right; 
+    width: 100%;
+    border-radius: 15px;
+  }
+  
+  .form-control.form-line {
+    background-color: white; /* Esto establece el color de fondo a blanco */
+  }
+  
+  .user-image {
+  text-align: left;
+  margin-right: 2%;
+  
+  }
+  .user-datos {
+    text-align: left;
+  }
+  .botones{
+    margin-left: auto;
+    text-align: right;
+  }
+  .botonesFiltros{
+    margin: 15px;
+    text-align: center;
+  }
+  .example-card img {
+    width: 100px; 
+    height: 100px; 
+    object-fit: cover; 
+  }
+  
+  
+  .example-button-container {
+    position: relative;
+  }
+  .modificar{
+    border-radius: 5px;
+  }
+  
+  .add-button {
+    top: 0;
+    right: 0;
+    margin-left: 90%;
+    margin-top:   1%;
+    margin-bottom: 1%;
+    background-color: blue;
+  
+  }
+  
+  
+  

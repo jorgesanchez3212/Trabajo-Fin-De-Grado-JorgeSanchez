@@ -29,22 +29,25 @@ class ReservaController@Autowired constructor(
         private val reservasService: ReservaService,
 ){
 
-    @PreAuthorize("hasRole('ADMINISTRADOR')")
+    //@PreAuthorize("hasRole('ADMINISTRADOR')")
     @GetMapping("/listaReservas")
     suspend fun listaReservas() : ResponseEntity<List<ReservaDto>> {
         logger.info { "Obteniendo lista de todos las reservas"}
         return ResponseEntity.ok(reservasService.findAll().toList().map { it.toDto() })
     }
 
-    @PreAuthorize("hasRole('ADMINISTRADOR')")
+
+
+    //@PreAuthorize("hasRole('ADMINISTRADOR')")
     @PostMapping("/listaReservasFiltro")
     suspend fun listaReservasFiltro(@Valid @RequestBody reservaFilter: ReservaFilter) : ResponseEntity<List<ReservaDto>> {
         logger.info { "Obteniendo lista de todos las reservas con filtro"}
         return ResponseEntity.ok(reservasService.findAllFiltros(reservaFilter).toList().map { it.toDto() })
+
     }
 
 
-    @PreAuthorize("hasRole('ADMINISTRADOR')")
+    //@PreAuthorize("hasRole('ADMINISTRADOR')")
     @PostMapping("/newReserva")
     suspend fun new(@Valid @RequestBody reservaDto: ReservaCreateDto): ResponseEntity<ReservaCreateDto> {
         logger.info { "Creacion de  la reserva con uuid: ${reservaDto}" }
@@ -54,13 +57,13 @@ class ReservaController@Autowired constructor(
     }
 
 
-    @PreAuthorize("hasRole('ADMINISTRADOR')")
+    //@PreAuthorize("hasRole('ADMINISTRADOR')")
     @PutMapping("/update")
     suspend fun updateReserva(
         @Valid @RequestBody reservaDto: ReservaUpdateDto
     ): Any {
-        logger.info { "Actualizando reserva: ${reservaDto.uuid}" }
-        val reservaExist : Reserva? = reservasService.loadReservaByUUID(reservaDto.uuid!!).firstOrNull()
+        logger.info { "Actualizando reserva: ${reservaDto.id}" }
+        val reservaExist : Reserva? = reservasService.loadReservaById(reservaDto.id!!)
         if (reservaExist != null) {
             reservaDto.validate()
 
@@ -81,7 +84,7 @@ class ReservaController@Autowired constructor(
     }
 
 
-    @PreAuthorize("hasRole('ADMINISTRADOR')")
+    //@PreAuthorize("hasRole('ADMINISTRADOR')")
     @PostMapping("/delete/{id}")
     suspend fun delete(@PathVariable id : String): ResponseEntity<ReservaDto> {
         logger.info { "Borrar reserva con uuid: $id" }

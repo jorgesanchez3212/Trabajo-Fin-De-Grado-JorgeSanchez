@@ -48,6 +48,7 @@ import { DetailAutomovilComponent } from './components/automoviles/detail-automo
 import { NewAutomovilGeneralComponent } from './components/automoviles/new-automovil/new-automovil-general/new-automovil-general.component';
 import { GeneralNewAutomovilComponent } from './components/automoviles/detail-automovil/general-new-automovil/general-new-automovil.component';
 import { ComentarioComponent } from './components/comentario/comentario.component';
+import { ReservasComponent } from './components/reservas/reservas.component';
 
 
 
@@ -71,6 +72,7 @@ import { ComentarioComponent } from './components/comentario/comentario.componen
     NewAutomovilGeneralComponent,
     GeneralNewAutomovilComponent,
     ComentarioComponent,
+    ReservasComponent,
     ],
   imports: [
     BrowserModule,

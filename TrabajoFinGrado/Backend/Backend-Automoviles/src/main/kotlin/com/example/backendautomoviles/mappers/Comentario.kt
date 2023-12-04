@@ -1,13 +1,10 @@
 package com.example.backendautomoviles.mappers
 
-import com.example.backendautomoviles.dto.AutomovilCreateDto
-import com.example.backendautomoviles.dto.AutomovilDto
 import com.example.backendautomoviles.dto.ComentarioCreateDto
 import com.example.backendautomoviles.dto.ComentarioDto
-import com.example.backendautomoviles.models.Automovil
 import com.example.backendautomoviles.models.Comentario
 import java.time.LocalDateTime
-import java.util.UUID
+import java.util.*
 
 
 fun Comentario.toDto() : ComentarioDto {

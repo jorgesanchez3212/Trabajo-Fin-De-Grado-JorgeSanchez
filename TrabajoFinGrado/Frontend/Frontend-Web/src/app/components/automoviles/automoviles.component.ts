@@ -113,7 +113,7 @@ export class AutomovilesComponent {
         //this.clearEmit();
       });
     }).catch(() => {
-      console.log('Se ha producido un error al obtener el usuario');
+      console.log('Se ha producido un error al obtener la reserva');
     })
 
   }

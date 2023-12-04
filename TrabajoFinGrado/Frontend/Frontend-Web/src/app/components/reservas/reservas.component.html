@@ -1,0 +1,44 @@
+<br>
+<mat-expansion-panel hideToggle class="expansion">
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      Filtros
+    </mat-panel-title>
+  </mat-expansion-panel-header>
+
+    <br>
+    <div class="col-md-3">
+    <label class="txt-default-color form-label-asset txt-fz-12">Fecha de Inicio de la Reserva </label>
+    <input class="form-control form-line" name="fechaInicioReservaFilter" type="text" [(ngModel)]="reservaFilter.fechaInicio" #fechaInicioReservaFilter="ngModel">
+  </div> 
+  <div class="col-md-3">
+    <label class="txt-default-color form-label-asset txt-fz-12">Fecha de Final de la Reserva </label>
+    <input class="form-control form-line" name="fechaFinReservaFilter" type="text" [(ngModel)]="reservaFilter.fechaFin" #fechaFinReservaFilter="ngModel">
+  </div> 
+  <div class="botonesFiltros">
+    <button mat-flat-button color="primary" (click)="onContextFiltrarClick()"><mat-icon>edit</mat-icon>Filtrar</button>
+    <button mat-flat-button color="warn" (click)="clearFilters()" ><mat-icon>delete</mat-icon> Limpiar</button><br><br>
+  </div>
+</mat-expansion-panel>
+
+<div class="card-container">
+  <mat-card class="example-card" *ngFor="let reserva of reservas">
+    <mat-card-header>
+      <div class="user-datos">
+        <mat-card-title>{{ reserva.costo }} </mat-card-title>
+        <mat-card-subtitle>{{ reserva.fechaInicio }}    <br>   {{ reserva.fechaFin }}</mat-card-subtitle>
+        <mat-card-subtitle>{{ reserva.clienteId }}    <br>   {{ reserva.automovilId }}   
+
+        </mat-card-subtitle>
+      </div>
+      <div class="botones">
+        <button mat-flat-button color="primary" (click)="onContextModificarClick(reserva)"><mat-icon>edit</mat-icon>Modificar</button><br><br>
+        <button mat-flat-button color="warn" (click)="openDialog(reserva.id,'0ms', '0ms')"><mat-icon>delete</mat-icon> Borrar</button>
+      </div>
+    </mat-card-header>
+    <mat-card-content>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+

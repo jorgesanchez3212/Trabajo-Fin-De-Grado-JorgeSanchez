@@ -17,24 +17,20 @@ data class ReservaCreateDto(
 
 
 data class ReservaDto(
-        val uuid: String? = null,
+        val id: String? = null,
         val automovilId:String,
         val clienteId: String,
         val fechaInicio : String,
         val fechaFin : String,
         val costo : String,
         val recogidoPorCliente : Boolean,
-        val metadata: MetaData? = null,
+
+
 ) {
-    data class MetaData(
-            val createdAt: LocalDateTime? = LocalDateTime.now(),
-            val updatedAt: LocalDateTime? = LocalDateTime.now(),
-            val deleted: Boolean = false
-    )
 }
 
 data class ReservaUpdateDto(
-        val uuid: String? = null,
+        val id: String? = null,
         @NotEmpty(message = "El clienteId no puede estar vacío")
         val clienteId: String,
         @Email(message = "El cocheId debe ser válido")
@@ -43,6 +39,7 @@ data class ReservaUpdateDto(
         val fechaInicio: String,
         @NotEmpty(message = "La fechaFin no puede estar vacío")
         val fechaFin : String,
+        val recogidoPorCliente : Boolean,
         @NotEmpty(message = "El costo no puede estar vacío")
         val costo : String,
         )
