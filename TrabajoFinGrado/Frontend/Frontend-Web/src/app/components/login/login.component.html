@@ -16,12 +16,12 @@
                     </div>
                     <div >
                         <mat-form-field style="border-radius: 10px;">
-                            <input matInput mdinput type="text" autofocus class="form-control form-line" id="username" [(ngModel)]="username" name="username" placeholder=" Usuario" formControlName="username" />
+                            <input mdinput type="text" autofocus class="form-control form-line" id="username" [(ngModel)]="username" name="username" placeholder=" Usuario" formControlName="username" />
                         </mat-form-field>
                     </div>
                     <div [attr.disabled]="showSpinner" >
                         <mat-form-field>
-                            <input matInput mdInput type="password" placeholder=" Contraseña" class="form-control form-line" id="password" [(ngModel)]="password" name="password" formControlName="password" />
+                            <input mdInput type="password" placeholder=" Contraseña" class="form-control form-line" id="password" [(ngModel)]="password" name="password" formControlName="password" />
                         </mat-form-field>
                     </div>
                     <button  type="submit" id="submit" class="btn btn-custom pull-right fs-12">Iniciar Sesión</button>

@@ -17,6 +17,9 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatSelectModule } from '@angular/material/select';
 import { TableModule } from 'primeng/table';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatInputModule} from '@angular/material/input';
+import {MatNativeDateModule} from '@angular/material/core';
 
 
 
@@ -97,7 +100,10 @@ import { ReservasComponent } from './components/reservas/reservas.component';
     MatTabsModule, 
     MatSelectModule,
     MatExpansionModule,
-    TableModule
+    TableModule,
+    MatDatepickerModule,
+    MatInputModule,
+    MatNativeDateModule
 
   ],
   exports:[NavegacionComponent],

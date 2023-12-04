@@ -7,20 +7,36 @@
   </mat-expansion-panel-header>
 
     <br>
-    <div class="col-md-3">
-    <label class="txt-default-color form-label-asset txt-fz-12">Fecha de Inicio de la Reserva </label>
-    <input class="form-control form-line" name="fechaInicioReservaFilter" type="text" [(ngModel)]="reservaFilter.fechaInicio" #fechaInicioReservaFilter="ngModel">
-  </div> 
-  <div class="col-md-3">
-    <label class="txt-default-color form-label-asset txt-fz-12">Fecha de Final de la Reserva </label>
-    <input class="form-control form-line" name="fechaFinReservaFilter" type="text" [(ngModel)]="reservaFilter.fechaFin" #fechaFinReservaFilter="ngModel">
-  </div> 
-  <div class="botonesFiltros">
-    <button mat-flat-button color="primary" (click)="onContextFiltrarClick()"><mat-icon>edit</mat-icon>Filtrar</button>
-    <button mat-flat-button color="warn" (click)="clearFilters()" ><mat-icon>delete</mat-icon> Limpiar</button><br><br>
-  </div>
+    
+    <div class="row">
+      <div class="col-md-6">
+        <label class="txt-default-color form-label-asset txt-fz-12">Fecha de Inicio de la Reserva</label>
+        <mat-form-field class="example-full-width">
+          <mat-label>Elige una fecha</mat-label>
+          <input matInput [matDatepickerFilter]="myFilter" [matDatepicker]="pickerInicio" [(ngModel)]="reservaFilterInicio"  >
+          <mat-datepicker-toggle matIconSuffix [for]="pickerInicio"></mat-datepicker-toggle>
+          <mat-datepicker #pickerInicio></mat-datepicker>
+        </mat-form-field>
+      </div> 
+      <div class="col-md-6">
+        <label class="txt-default-color form-label-asset txt-fz-12">Fecha de Final de la Reserva</label>
+        <mat-form-field class="example-full-width">
+          <mat-label>Elige una fecha</mat-label>
+          <input matInput [matDatepickerFilter]="myFilter" [matDatepicker]="pickerFin" [(ngModel)]="reservaFilterFin">
+          <mat-datepicker-toggle matIconSuffix [for]="pickerFin"></mat-datepicker-toggle>
+          <mat-datepicker #pickerFin></mat-datepicker>
+        </mat-form-field>
+      </div> 
+    </div>
+    <div class="row">
+      <div class="col-md-12 botonesFiltros">
+        <button mat-flat-button color="primary" (click)="onContextFiltrarClick()"><mat-icon>edit</mat-icon>Filtrar</button>
+        <button mat-flat-button color="warn" (click)="clearFilters()"><mat-icon>delete</mat-icon> Limpiar</button>
+      </div>
+    </div>
 </mat-expansion-panel>
 
+<br>
 <div class="card-container">
   <mat-card class="example-card" *ngFor="let reserva of reservas">
     <mat-card-header>

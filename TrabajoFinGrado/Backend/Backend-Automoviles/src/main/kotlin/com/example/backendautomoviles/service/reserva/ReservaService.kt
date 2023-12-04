@@ -31,21 +31,32 @@ class ReservaService @Autowired constructor(
 
 
     suspend fun findAllFiltros(reservaFilter: ReservaFilter) = withContext(Dispatchers.IO) {
-        var listaFiltros = repository.findAll().toList()
+        var listaFiltros = repository.findAll()
+
+        println(reservaFilter)
+        println(reservaFilter.fechaInicio)
+        println(reservaFilter.fechaFin)
 
 
         if (reservaFilter.fechaInicio != null){
-            if (reservaFilter.fechaFinal != null){
-                return@withContext repository.findAllByFechaInicioAfterAndFechaFinalBefore(LocalDate.parse(reservaFilter.fechaInicio), LocalDate.parse(reservaFilter.fechaFinal))
+            if (reservaFilter.fechaFin != null){
+                println("Entra aqui 1")
+                return@withContext repository.findAllByFechaInicioBeforeAndFechaFinalAfter(LocalDate.parse(reservaFilter.fechaInicio), LocalDate.parse(reservaFilter.fechaFin))
             }else{
-                return@withContext repository.findAllByFechaInicioAfter(LocalDate.parse(reservaFilter.fechaInicio))
+                println("Entra aqui 2")
+                return@withContext repository.findAllByFechaInicioBefore(LocalDate.parse(reservaFilter.fechaInicio))
+
             }
 
         }else{
-            if(reservaFilter.fechaFinal != null){
-                return@withContext repository.findAllByFechaFinalBefore(LocalDate.parse(reservaFilter.fechaFinal))
+            if(reservaFilter.fechaFin != null){
+                println("Entra aqui 3")
+                return@withContext repository.findAllByFechaFinalAfter(LocalDate.parse(reservaFilter.fechaFin))
+
             } else {
-                return@withContext repository.findAll().toList()
+                println("Entra aqui 4")
+                return@withContext repository.findAll()
+
             }
 
         }

@@ -3,9 +3,11 @@ import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ReservaDto } from 'src/app/models/reserva/reserva-dto';
 import { UtilsService } from 'src/app/services/utils.service';
-import { DialogAnimationsComponent } from './dialog-animations/dialog-animations.component';
 import { ReservaFilter } from 'src/app/models/reserva/reserva-filter';
 import { DetailAutomovilComponent } from '../automoviles/detail-automovil/detail-automovil.component';
+import { DialogAnimationsComponent } from '../automoviles/dialog-animations/dialog-animations.component';
+import { formatDate } from '@angular/common';
+
 
 @Component({
   selector: 'app-reservas',
@@ -16,8 +18,23 @@ export class ReservasComponent {
   public reservas : ReservaDto[]
   public reserva : ReservaDto;
   panelOpenState = false;
+  public reservaFilterFin: Date | null = null;
+  public reservaFilterInicio: Date | null = null;
   public reservaFilter : ReservaFilter = new ReservaFilter();
 
+  myFilter = (d: Date | null): boolean => {
+    const today = new Date();
+    // Restablece la hora de hoy a la medianoche para la comparación
+    today.setHours(0, 0, 0, 0);
+    
+    const selectedDate = (d || new Date());
+    // Restablece la hora de la fecha seleccionada a la medianoche para la comparación
+    selectedDate.setHours(0, 0, 0, 0);
+  
+    // Verifica si la fecha seleccionada es anterior a hoy
+    return selectedDate >= today;
+  };
+  
 
 
   constructor(private httpService: HttpClient, private utilsService : UtilsService, public dialog: MatDialog){
@@ -136,6 +153,20 @@ export class ReservasComponent {
   onContextFiltrarClick(){
     const url : string = 'http://localhost:6969/api/reservas/listaReservasFiltro'
   
+    // Para fechaFin
+if (this.reservaFilterFin) {
+  this.reservaFilter.fechaFin = formatDate(this.reservaFilterFin, 'yyyy-MM-dd', 'en-US');
+} else {
+  this.reservaFilter.fechaFin = null;
+}
+
+// Para fechaInicio
+if (this.reservaFilterInicio) {
+  this.reservaFilter.fechaInicio = formatDate(this.reservaFilterInicio, 'yyyy-MM-dd', 'en-US');
+} else {
+  this.reservaFilter.fechaInicio = null;
+}
+
     const token = localStorage.getItem('access_token');
   
     if (token) {

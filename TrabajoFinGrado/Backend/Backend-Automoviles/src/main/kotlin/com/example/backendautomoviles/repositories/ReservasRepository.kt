@@ -9,9 +9,10 @@ import java.util.*
 
 interface ReservasRepository : CoroutineCrudRepository<Reserva, String> {
     fun findByUuid(uuid: String): Flow<Reserva>
-    fun findAllByFechaInicioAfterAndFechaFinalBefore(fechaInicio : LocalDate, fechaFinal : LocalDate): List<Reserva>
-    fun findAllByFechaInicioAfter(fechaInicio: LocalDate) : List<Reserva>
-    fun findAllByFechaFinalBefore(fechaFinal: LocalDate) : List<Reserva>
+    fun findAllByFechaInicioBeforeAndFechaFinalAfter(fechaInicio : LocalDate, fechaFin : LocalDate): Flow<Reserva>
+    fun findAllByFechaInicioBefore(fechaInicio: LocalDate) : Flow<Reserva>
+    fun findAllByFechaFinalAfter(fechaFin: LocalDate) : Flow<Reserva>
+
 
 
 }
