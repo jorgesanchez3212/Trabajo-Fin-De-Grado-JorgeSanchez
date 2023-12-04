@@ -86,10 +86,11 @@ class ReservaController@Autowired constructor(
 
     //@PreAuthorize("hasRole('ADMINISTRADOR')")
     @PostMapping("/delete/{id}")
-    suspend fun delete(@PathVariable id : String): ResponseEntity<ReservaDto> {
-        logger.info { "Borrar reserva con uuid: $id" }
-        val reservas = reservasService.loadReservaById(id)
+    suspend fun delete(@PathVariable id : String): ResponseEntity<String> {
+        logger.info { "Borrar reserva con id: $id" }
+        //val reservas = reservasService.loadReservaById(id)
+        //println(reservas)
         reservasService.delete(id)
-        return ResponseEntity.ok(reservas.toDto())
+        return ResponseEntity.ok("reserva borrada")
     }
 }

@@ -103,10 +103,12 @@ export class ReservasComponent {
   
       this.httpService.post(url, { headers }).toPromise().then((response: any) => {
         console.log('Reserva eliminada correctamente');
+        this.getReservasAll();
       }).catch((error) => {
         console.error('Se ha producido un error al eliminar la reserva:', error);
       });
     }
+    this.getReservasAll();
   }
 
 

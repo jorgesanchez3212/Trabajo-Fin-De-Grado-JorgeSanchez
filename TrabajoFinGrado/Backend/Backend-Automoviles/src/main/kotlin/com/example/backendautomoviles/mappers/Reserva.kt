@@ -8,7 +8,7 @@ import java.time.LocalDateTime
 
 fun Reserva.toDto() : ReservaDto {
     return ReservaDto(
-            id = this.uuid,
+            id = this.id,
             automovilId = this.automovilId,
             clienteId = this.clienteId,
             fechaInicio = this.fechaInicio.toString(),
