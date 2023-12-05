@@ -26,6 +26,7 @@ export class NavegacionComponent implements OnInit, OnDestroy {
     {name:"Catalogo", route : "", icon:"home"},
     {name:"Mi Perfil", route : "perfil", icon:"account_circle"},
     {name:"Mis Reservas", route : "misreservas", icon:"perm_contact_calendar"},
+    {name:"Mis Reservas", route : "misvaloraciones", icon:"perm_contact_calendar"},
     {name:"Usuarios", route : "usuarios", icon:"group"},
     {name:"Automoviles", route : "automovil", icon:"directions_car"},
     {name:"Comentarios", route : "comentarios", icon:"group"},

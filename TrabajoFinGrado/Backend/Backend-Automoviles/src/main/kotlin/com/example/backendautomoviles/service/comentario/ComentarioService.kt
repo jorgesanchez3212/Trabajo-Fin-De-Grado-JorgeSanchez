@@ -36,6 +36,10 @@ class ComentarioService
 
     }
 
+    suspend fun findAllByCliente(id: String) = withContext(Dispatchers.IO) {
+        return@withContext repository.findAllByIdUser(id)
+    }
+
     @Cacheable("comentarios")
     suspend fun loadComentarioByUUID(uuid: String) = withContext(Dispatchers.IO) {
         return@withContext repository.findByUuid(uuid).firstOrNull()

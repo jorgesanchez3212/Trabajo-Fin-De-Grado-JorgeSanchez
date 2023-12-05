@@ -71,7 +71,7 @@ export class MisreservasComponent {
         if (result === 'Si') {
           this.deleteReservaById(id);
         } else {
-          console.log("Automovil borrado")
+          console.log("Reserva borrado")
         }
       }
     });

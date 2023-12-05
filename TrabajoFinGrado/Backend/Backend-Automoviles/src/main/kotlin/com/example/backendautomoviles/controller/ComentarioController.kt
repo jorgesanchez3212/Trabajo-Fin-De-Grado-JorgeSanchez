@@ -4,6 +4,7 @@ import com.example.backendautomoviles.config.APIConfig
 import com.example.backendautomoviles.dto.ComentarioCreateDto
 import com.example.backendautomoviles.dto.ComentarioDto
 import com.example.backendautomoviles.dto.ComentarioUpdateDto
+import com.example.backendautomoviles.dto.ReservaDto
 import com.example.backendautomoviles.mappers.toDto
 import com.example.backendautomoviles.mappers.toModel
 import com.example.backendautomoviles.models.Comentario
@@ -36,6 +37,14 @@ class ComentarioController
         println(lista)
         return ResponseEntity.ok(service.findAll().toList().map { it.toDto() })
     }
+
+    @GetMapping("/listaComentariosByClienteId/{id}")
+    suspend fun findReservasByClienteId(@PathVariable id : String) : ResponseEntity<List<ComentarioDto>>{
+        logger.info { "Buscando comentario con el  id del cliente ${id}"}
+        return ResponseEntity.ok(service.findAllByCliente(id).toList().map { it.toDto() })
+
+    }
+
 
     @PreAuthorize("hasRole('ADMINISTRADOR')")
     @PostMapping("/newComentarios")
