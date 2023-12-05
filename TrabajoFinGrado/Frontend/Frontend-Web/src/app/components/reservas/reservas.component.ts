@@ -7,6 +7,7 @@ import { ReservaFilter } from 'src/app/models/reserva/reserva-filter';
 import { DetailAutomovilComponent } from '../automoviles/detail-automovil/detail-automovil.component';
 import { DialogAnimationsComponent } from '../automoviles/dialog-animations/dialog-animations.component';
 import { formatDate } from '@angular/common';
+import { DetailReservaComponent } from './detail-reserva/detail-reserva.component';
 
 
 @Component({
@@ -121,7 +122,7 @@ export class ReservasComponent {
     this.httpService.get(url).toPromise().then((data: any) => {
       console.log(data);
       this.reserva = data as ReservaDto;
-      this.dialog.open(DetailAutomovilComponent, {
+      this.dialog.open(DetailReservaComponent, {
         width: '70%', height: '70%', data: {
           reserva: this.reserva,
         }

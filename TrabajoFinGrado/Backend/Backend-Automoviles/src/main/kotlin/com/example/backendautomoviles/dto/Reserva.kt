@@ -34,7 +34,7 @@ data class ReservaUpdateDto(
         @NotEmpty(message = "El clienteId no puede estar vacío")
         val clienteId: String,
         @Email(message = "El cocheId debe ser válido")
-        val cocheId : String,
+        val automovilId : String,
         @NotEmpty(message = "La fechaInicio no puede estar vacío")
         val fechaInicio: String,
         @NotEmpty(message = "La fechaFin no puede estar vacío")

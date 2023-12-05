@@ -2,8 +2,8 @@ export class ReservaDto {
     public id: string;
     public automovilId: string;
     public clienteId: string;
-    public fechaInicio: string;
-    public fechaFin : string;
+    public fechaInicio: string | null;
+    public fechaFin : string | null;
     public costo : string;
     public recogidoPorCliente : boolean;
   

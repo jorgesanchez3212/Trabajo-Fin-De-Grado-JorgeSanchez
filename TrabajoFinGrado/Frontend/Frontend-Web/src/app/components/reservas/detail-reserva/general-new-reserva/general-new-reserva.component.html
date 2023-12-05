@@ -1,0 +1,101 @@
+
+<div class="col-md-12">
+    <div class="row">
+        <!-- <div class="col-md-3">
+            <div class="form-group fg-asset">
+                <label class="txt-default-color form-label-asset txt-fz-12">Username <span class="txt-color-red">*</span>
+				</label> <input class="form-control form-line" name="usernameUsuario" type="text" (focusout)="focusOutUsuario()" [(ngModel)]="usuario.username" #usernameUsuario="ngModel" minlength="3" maxlength="200" required>
+            </div>
+            <div *ngIf="(usernameUsuario.invalid && (usernameUsuario.dirty || usernameUsuario.touched)) ||(usernameUsuario.errors?.['minlength']) || (usernameUsuario.errors?.['maxlength'])">
+                <div class="error-message">
+                    <fa-icon class="fa red" [icon]="faWarning"></fa-icon>&nbsp;&nbsp;Campo obligatorio (min.3, m&aacute;x 200 carac.)
+                </div>
+            </div>
+        </div> -->
+
+        <div class="col-md-3">
+            <div class="form-group fg-asset">
+                <label class="txt-default-color form-label-asset txt-fz-12">Numero de Cliente de la
+					Reserva <span class="txt-color-red">*</span>
+				</label> <input class="form-control form-line" name="marcaAutomovil" type="text" (focusout)="focusOutAutomovil()" [(ngModel)]="reserva.clienteId" #clienteIdReserva="ngModel" minlength="3" maxlength="200" required>
+            </div>
+            <div *ngIf="(clienteIdReserva.invalid && (clienteIdReserva.dirty || clienteIdReserva.touched)) ||(clienteIdReserva.errors?.['minlength']) || (clienteIdReserva.errors?.['maxlength'])">
+                <div class="error-message">
+                    <fa-icon class="fa red" [icon]="faWarning"></fa-icon>&nbsp;&nbsp;Campo obligatorio (min.3, m&aacute;x 200 carac.)
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="form-group fg-asset">
+                <label class="txt-default-color form-label-asset txt-fz-12">Numero del automovil de la Reserva 
+					 <span class="txt-color-red">*</span>
+				</label> <input class="form-control form-line" name="marcaAutomovil" type="text" (focusout)="focusOutAutomovil()" [(ngModel)]="reserva.automovilId" #automovilIdReserva="ngModel" minlength="3" maxlength="200" required>
+            </div>
+            <div *ngIf="(automovilIdReserva.invalid && (automovilIdReserva.dirty || automovilIdReserva.touched)) ||(automovilIdReserva.errors?.['minlength']) || (automovilIdReserva.errors?.['maxlength'])">
+                <div class="error-message">
+                    <fa-icon class="fa red" [icon]="faWarning"></fa-icon>&nbsp;&nbsp;Campo obligatorio (min.3, m&aacute;x 200 carac.)
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="form-group fg-asset">
+                <label class="txt-default-color form-label-asset txt-fz-12">Costo <span class="txt-color-red">*</span>
+				</label> <input class="form-control form-line" name="marcaAutomovil" type="text" (focusout)="focusOutAutomovil()" [(ngModel)]="reserva.costo" #costoReserva="ngModel"  required>
+            </div>
+            <div *ngIf="(costoReserva.invalid && (costoReserva.dirty || costoReserva.touched))">
+                <div class="error-message">
+                    <fa-icon class="fa red" [icon]="faWarning"></fa-icon>&nbsp;&nbsp;Campo obligatorio (min.3, m&aacute;x 200 carac.)
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-3">
+            <div class="form-group fg-asset">
+                <label class="txt-default-color form-label-asset txt-fz-12">Recogido por cliente <span class="txt-color-red">*</span>
+				</label> <input class="form-control form-line" name="usernameUsuario" type="text" (focusout)="focusOutAutomovil()" [(ngModel)]="reserva.recogidoPorCliente" #recogidoPorClienteReserva="ngModel" minlength="3" maxlength="200" required>
+            </div>
+            <div *ngIf="(recogidoPorClienteReserva.invalid && (recogidoPorClienteReserva.dirty || recogidoPorClienteReserva.touched)) ||(recogidoPorClienteReserva.errors?.['minlength']) || (recogidoPorClienteReserva.errors?.['maxlength'])">
+                <div class="error-message">
+                    <fa-icon class="fa red" [icon]="faWarning"></fa-icon>&nbsp;&nbsp;Campo obligatorio (min.3, m&aacute;x 200 carac.)
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group fg-asset">
+                <label class="txt-default-color form-label-asset txt-fz-12">Fecha de Inicio de la Reserva <span class="txt-color-red">*</span>
+				</label>  
+                <mat-form-field class="example-full-width">
+                  <mat-label>Elige una fecha</mat-label>
+                  <input matInput [matDatepickerFilter]="myFilter" (focusout)="focusOutAutomovil()" [matDatepicker]="pickerInicio" [(ngModel)]="reservaFilterInicio" #fechaInicioReserva="ngModel"  >
+                  <mat-datepicker-toggle matIconSuffix [for]="pickerInicio" (focusout)="focusOutAutomovil()"></mat-datepicker-toggle>
+                  <mat-datepicker #pickerInicio></mat-datepicker>
+                </mat-form-field>
+            </div>
+            <div *ngIf="(fechaInicioReserva.invalid && (fechaInicioReserva.dirty || fechaInicioReserva.touched))">
+                <div class="error-message">
+                    <fa-icon class="fa red" [icon]="faWarning"></fa-icon>&nbsp;&nbsp;Campo obligatorio (min.3, m&aacute;x 200 carac.)
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="form-group fg-asset">
+                <label class="txt-default-color form-label-asset txt-fz-12">Fecha Fin de la Reserva <span class="txt-color-red">*</span>
+				</label> <mat-form-field class="example-full-width">
+                    <mat-label>Elige una fecha</mat-label>
+                    <input matInput [matDatepickerFilter]="myFilter" (focusout)="focusOutAutomovil()" [matDatepicker]="pickerFin" [(ngModel)]="reservaFilterFin"  #fechaFinReserva="ngModel" >
+                    <mat-datepicker-toggle matIconSuffix [for]="pickerFin" (focusout)="focusOutAutomovil()"></mat-datepicker-toggle>
+                    <mat-datepicker #pickerFin></mat-datepicker>
+                  </mat-form-field>
+            </div>
+            <div *ngIf="(fechaFinReserva.invalid && (fechaFinReserva.dirty || fechaFinReserva.touched))">
+                <div class="error-message">
+                    <fa-icon class="fa red" [icon]="faWarning"></fa-icon>&nbsp;&nbsp;Campo obligatorio (min.3, m&aacute;x 200 carac.)
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</div>

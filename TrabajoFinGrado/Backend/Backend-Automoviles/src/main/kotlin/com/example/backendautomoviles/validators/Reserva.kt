@@ -22,7 +22,7 @@ fun ReservaCreateDto.validate(): ReservaCreateDto {
 fun ReservaUpdateDto.validate(): ReservaUpdateDto {
     if (this.clienteId.isBlank()) {
         throw ReservasBadRequestException("EL cliente id no puede estar vacío")
-    } else if (this.cocheId.isBlank())
+    } else if (this.automovilId.isBlank())
         throw ReservasBadRequestException("El automovil id no puede estar vacío")
     else if (this.fechaInicio.isBlank())
         throw ReservasBadRequestException("La fecha de inicio no puede estar vacío")

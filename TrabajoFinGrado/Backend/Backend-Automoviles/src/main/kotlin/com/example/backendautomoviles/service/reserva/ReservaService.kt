@@ -90,12 +90,8 @@ class ReservaService @Autowired constructor(
     suspend fun update(reserva: Reserva): Reserva = withContext(Dispatchers.IO) {
         logger.info { "Actualizando reserva: $reserva" }
 
-        val reservaFind = repository.findById(reserva.id)
-                ?: throw ReservasNotFoundException("Error al actualizar la reserva, la reserva a actualizar no existe")
-
-        println(reserva)
         try {
-            return@withContext repository.save(reservaFind)
+            return@withContext repository.save(reserva)
         } catch (e: Exception) {
             throw AutomovilesBadRequestException("Error al actualizar la reserva")
         }

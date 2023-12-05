@@ -1,6 +1,7 @@
 package com.example.backendautomoviles.controller
 
 import com.example.backendautomoviles.config.APIConfig
+import com.example.backendautomoviles.dto.AutomovilDto
 import com.example.backendautomoviles.dto.ReservaCreateDto
 import com.example.backendautomoviles.dto.ReservaDto
 import com.example.backendautomoviles.dto.ReservaUpdateDto
@@ -63,17 +64,20 @@ class ReservaController@Autowired constructor(
         @Valid @RequestBody reservaDto: ReservaUpdateDto
     ): Any {
         logger.info { "Actualizando reserva: ${reservaDto.id}" }
+        println(reservaDto)
         val reservaExist : Reserva? = reservasService.loadReservaById(reservaDto.id!!)
         if (reservaExist != null) {
             reservaDto.validate()
 
             var reservaUpdate = reservaExist.copy(
                 clienteId = reservaDto.clienteId,
-                automovilId = reservaDto.cocheId,
+                automovilId = reservaDto.automovilId,
                 fechaInicio = LocalDate.parse(reservaDto.fechaInicio),
                 fechaFinal = LocalDate.parse(reservaDto.fechaFin),
+                recogidoPorCliente = reservaDto.recogidoPorCliente,
                 costo = reservaDto.costo.toDouble()
             )
+            println("Update Controlador $reservaUpdate")
             reservasService.update(reservaUpdate)
             return ResponseEntity.ok(reservaUpdate.toDto())
 
@@ -81,6 +85,14 @@ class ReservaController@Autowired constructor(
             return ResponseEntity.badRequest()
 
         }
+    }
+
+
+    @GetMapping("/find/{id}")
+    suspend fun findById(@PathVariable id : String) : ResponseEntity<ReservaDto>{
+        logger.info { "Buscando reserva con id ${id}"}
+        val reserva = reservasService.loadReservaById(id)
+        return ResponseEntity.ok(reserva?.toDto())
     }
 
 
