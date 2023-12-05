@@ -1,0 +1,34 @@
+<form name="newSolicitudForm">
+
+    <mat-toolbar class="mat-dialog-sz-lg">
+        <div class="mat-toolbar-tools" style="width: 98%;">
+            <span class="" style="white-space: normal;">
+                <fa-icon [icon]="faFilePdf"></fa-icon>&nbsp;&nbsp;Valoracion
+            </span>
+        </div>
+        <button mat-mini-fab mat-dialog-close class="bg-color-app md-icon-button" style="background-color: #2C3E50; border-style: solid; border-width: thin; border-color: rgb(255 255 255 / 30%);" aria-label="Cerrar" access="ROLE_ADMIN, ROLE_SUPERADMIN" matTooltip="Cerrar">
+            <fa-icon class="fa color-app close-icon" [icon]="faTimes" style="color:#FFFFFF;"></fa-icon>
+        </button>
+    </mat-toolbar>
+
+    <mat-dialog-content>
+        <mat-tab-group>
+            <mat-tab label="DATOS GENERALES" md-on-select="ctrl.tabActive='Datos Generales'">
+                <app-general-misvaloraciones></app-general-misvaloraciones>
+            </mat-tab>
+        </mat-tab-group>
+    </mat-dialog-content>
+
+    <mat-dialog-actions layout="row" style="border-top: 1px solid #ddd;">
+        <div class="col-md-12">
+            <div class="row button-section">
+                <div class="col-md-1" style="left:80%">
+                    <span flex></span>
+                    <button type="button" class="btn btn-app fs-12" (click)="saveValoracion()" style="margin-right: 27px;margin-top:15%">
+		                <fa-icon [icon]="faFloppy"></fa-icon>&nbsp;&nbsp;Guardar
+	                </button>
+                </div>
+            </div>
+        </div>
+    </mat-dialog-actions>
+</form>

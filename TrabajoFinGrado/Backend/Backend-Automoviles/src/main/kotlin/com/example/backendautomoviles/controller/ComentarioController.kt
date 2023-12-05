@@ -1,10 +1,7 @@
 package com.example.backendautomoviles.controller
 
 import com.example.backendautomoviles.config.APIConfig
-import com.example.backendautomoviles.dto.ComentarioCreateDto
-import com.example.backendautomoviles.dto.ComentarioDto
-import com.example.backendautomoviles.dto.ComentarioUpdateDto
-import com.example.backendautomoviles.dto.ReservaDto
+import com.example.backendautomoviles.dto.*
 import com.example.backendautomoviles.mappers.toDto
 import com.example.backendautomoviles.mappers.toModel
 import com.example.backendautomoviles.models.Comentario
@@ -55,12 +52,17 @@ class ComentarioController
     }
 
 
+    @GetMapping("/find/{id}")
+    suspend fun findById(@PathVariable id : String) : ResponseEntity<ComentarioDto>{
+        logger.info { "Buscando comentario con id ${id}"}
+        val comentario = service.loadComentarioById(id)
+        return ResponseEntity.ok(comentario?.toDto())
+    }
 
-
-    @PreAuthorize("hasRole('ADMINISTRADOR')")
+    //@PreAuthorize("hasRole('ADMINISTRADOR')")
     @PutMapping("/update")
     suspend fun updateMe(@Valid @RequestBody comentarioDto: ComentarioUpdateDto): Any {
-        logger.info { "Actualizando comentario con uuid: ${comentarioDto}" }
+        logger.info { "Actualizando comentario con id: ${comentarioDto.id}" }
 
         val comentarioExists : Comentario? = service.loadComentarioById(comentarioDto.id!!)
         if (comentarioExists != null) {
@@ -80,13 +82,13 @@ class ComentarioController
 
 
 
-    @PreAuthorize("hasRole('ADMINISTRADOR')")
-    @PostMapping("/delete/{uuid}")
-    suspend fun delete(@PathVariable uuid : String): ResponseEntity<ComentarioDto> {
-        logger.info { "Borrar automovil con uuid: $uuid" }
-        val entity = service.loadComentarioByUUID(uuid)
-        service.delete(entity.uuid)
-        return ResponseEntity.ok(entity.toDto())
+    //@PreAuthorize("hasRole('ADMINISTRADOR')")
+    @PostMapping("/delete/{id}")
+    suspend fun delete(@PathVariable id : String): ResponseEntity<String> {
+        logger.info { "Borrar automovil con id: $id" }
+        //val entity = service.loadComentarioById(id)
+        service.delete(id)
+        return ResponseEntity.ok("Borrado")
     }
 
 

@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ComentarioDto } from 'src/app/models/comentario/comentario-dto/comentario-dto';
 import { UtilsService } from 'src/app/services/utils.service';
 import { DialogAnimationsComponent } from '../automoviles/dialog-animations/dialog-animations.component';
+import { DetailMisvaloracionesComponent } from './detail-misvaloraciones/detail-misvaloraciones.component';
 
 @Component({
   selector: 'app-misvaloraciones',
@@ -81,6 +82,7 @@ export class MisvaloracionesComponent {
   
   private deleteComentarioById(id: string) {
     const url: string = `http://localhost:6969/api/comentarios/delete/${id}`; 
+    let idd = localStorage.getItem('access_id');
 
     const token = localStorage.getItem('access_token');
   
@@ -91,13 +93,51 @@ export class MisvaloracionesComponent {
   
       this.httpService.post(url, { headers }).toPromise().then((response: any) => {
         console.log('Comentario eliminado correctamente');
-        this.getComentariosAllByClienteId(id);
+        if(idd === null){
+          idd = '0'
+        }
+        this.getComentariosAllByClienteId(idd);
       }).catch((error) => {
         console.error('Se ha producido un error al eliminar el comentario:', error);
       });
     }
-    this.getComentariosAllByClienteId(id);
+    if(idd === null){
+      idd = '0'
+    }
+    this.getComentariosAllByClienteId(idd);
   }
 
+
+  openModal(id:string){
+    const url: string = `http://localhost:6969/api/comentarios/find/${id}`;
+    //const url: string = `http://128.140.34.184:8080/api/reservas/find/${id}`; 
+    let idd = localStorage.getItem('access_id');
+
+
+    this.httpService.get(url).toPromise().then((data: any) => {
+      console.log(data);
+      this.comentario = data as ComentarioDto;
+      this.dialog.open(DetailMisvaloracionesComponent, {
+        width: '70%', height: '70%', data: {
+          comentario: this.comentario,
+        }
+      }).afterClosed().subscribe(() => {
+        if(idd === null){
+          idd = '0'
+        }
+        this.getComentariosAllByClienteId(idd);
+        //this.clearEmit();
+      });
+    }).catch(() => {
+      console.log('Se ha producido un error al obtener el comentario');
+    })
+
+  }
+  
+
+  onContextModificarClick(comentario : ComentarioDto){
+    this.openModal( comentario.id as string);
+
+  }
 
 }

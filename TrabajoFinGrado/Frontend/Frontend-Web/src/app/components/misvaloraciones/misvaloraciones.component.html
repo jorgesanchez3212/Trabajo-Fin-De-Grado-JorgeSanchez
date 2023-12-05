@@ -8,7 +8,7 @@
         <mat-card-title>Automovil -> {{ comentario.id }}$ </mat-card-title>
       </div>
       <div class="botones">
-        <button mat-flat-button color="primary">Modificar</button> <br><br>
+        <button mat-flat-button color="primary" (click)="onContextModificarClick(comentario)"><mat-icon>edit</mat-icon>Modificar</button> <br><br>
         <button mat-flat-button color="warn" (click)="openDialog(comentario.id,'0ms', '0ms')"><mat-icon>delete</mat-icon>Borrar</button>
       </div>
     </mat-card-header>

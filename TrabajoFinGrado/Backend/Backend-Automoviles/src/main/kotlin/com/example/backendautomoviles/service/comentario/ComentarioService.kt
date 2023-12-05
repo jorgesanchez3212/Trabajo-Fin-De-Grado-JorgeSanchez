@@ -68,11 +68,11 @@ class ComentarioService
     }
 
 
-    suspend fun delete(uuid : String) = withContext(Dispatchers.IO){
-        logger.info { "Borrando comentario con uuid: $uuid" }
+    suspend fun delete(id : String) = withContext(Dispatchers.IO){
+        logger.info { "Borrando comentario con id: $id" }
 
-        val comentarioDelete = repository.findByUuid(uuid).firstOrNull()
-            ?: throw ComentariosNotFoundException("Error al borrar el comentario, el comentario con uuid : $uuid no existe")
+        val comentarioDelete = repository.findById(id)
+            ?: throw ComentariosNotFoundException("Error al borrar el comentario, el comentario con id : $id no existe")
 
         try {
             repository.delete(comentarioDelete)
