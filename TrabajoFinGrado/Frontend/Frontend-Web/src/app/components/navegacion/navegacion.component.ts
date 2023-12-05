@@ -31,6 +31,7 @@ export class NavegacionComponent implements OnInit, OnDestroy {
     {name:"Automoviles", route : "automovil", icon:"directions_car"},
     {name:"Comentarios", route : "comentarios", icon:"group"},
     {name:"Reservas", route : "reservas", icon:"group"},
+    {name:"Tiendas", route : "mapas", icon:"home"},
     {name:"Contacto", route : "", icon:"perm_contact_calendar"},
   ]
 

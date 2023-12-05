@@ -47,6 +47,10 @@
           <mat-icon>group</mat-icon>
           Reservas
         </a>
+        <a mat-list-item [routerLink]="['mapas']" *ngIf="isAdminVisible">
+          <mat-icon>home</mat-icon>
+          Tiendas
+        </a>
         <a mat-list-item [routerLink]="">
           <mat-icon>perm_contact_calendar</mat-icon>
           Contacto

@@ -10,7 +10,8 @@ import java.util.*
 fun Mapa.toDto() : MapaDto {
 
     return MapaDto(
-        latidud =this.latidud,
+        id = this.id,
+        latitud =this.latitud,
         longitud = this.longitud,
 
     )
@@ -21,8 +22,7 @@ fun Mapa.toDto() : MapaDto {
 fun MapaCreateDto.toModel() : Mapa {
 
     return Mapa(
-        uuid = UUID.randomUUID().toString(),
-        latidud =this.latidud,
+        latitud =this.latitud,
         longitud = this.longitud,
     )
 

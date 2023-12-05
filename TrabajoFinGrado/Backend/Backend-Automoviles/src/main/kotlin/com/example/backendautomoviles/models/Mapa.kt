@@ -11,7 +11,7 @@ data class Mapa(
     @Id
     val id : String = ObjectId.get().toString(),
     val uuid: String = UUID.randomUUID().toString(),
-    val latidud : String,
+    val latitud : String,
     val longitud : String
 ) {
 }

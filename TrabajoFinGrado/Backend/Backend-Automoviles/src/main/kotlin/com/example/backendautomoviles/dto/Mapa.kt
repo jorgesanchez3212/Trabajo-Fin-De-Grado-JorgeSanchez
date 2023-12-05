@@ -3,22 +3,23 @@ package com.example.backendautomoviles.dto
 import java.util.*
 
 data class MapaCreateDto(
-    val latidud : String,
+    val id: String,
+    val latitud : String,
     val longitud : String
 ) {
 }
 
 data class MapaDto(
-    val uuid: String = UUID.randomUUID().toString(),
-    val latidud : String,
+    val id: String,
+    val latitud : String,
     val longitud : String
 ) {
 }
 
 
 data class MapaUpdateDto(
-    val uuid : String? = null,
-    val latidud : String,
+    val id : String,
+    val latitud : String,
     val longitud : String
 ) {
 }

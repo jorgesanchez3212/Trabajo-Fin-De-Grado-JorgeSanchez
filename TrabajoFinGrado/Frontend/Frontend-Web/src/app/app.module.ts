@@ -57,6 +57,11 @@ import { GeneralNewReservaComponent } from './components/reservas/detail-reserva
 import { PerfilComponent } from './components/perfil/perfil.component';
 import { MisreservasComponent } from './components/misreservas/misreservas.component';
 import { MisvaloracionesComponent } from './components/misvaloraciones/misvaloraciones.component';
+import { MapaComponent } from './components/mapa/mapa.component';
+import { DetailMapaComponentComponent } from './components/mapa/detail-mapa-component/detail-mapa-component.component';
+import { NewMapaComponent } from './components/mapa/new-mapa/new-mapa.component';
+import { GeneralMapaComponent } from './components/mapa/detail-mapa-component/general-mapa/general-mapa.component';
+import { NewGeneralMapaComponent } from './components/mapa/new-mapa/new-general-mapa/new-general-mapa.component';
 
 
 
@@ -86,6 +91,11 @@ import { MisvaloracionesComponent } from './components/misvaloraciones/misvalora
     PerfilComponent,
     MisreservasComponent,
     MisvaloracionesComponent,
+    MapaComponent,
+    DetailMapaComponentComponent,
+    NewMapaComponent,
+    GeneralMapaComponent,
+    NewGeneralMapaComponent,
     ],
   imports: [
     BrowserModule,

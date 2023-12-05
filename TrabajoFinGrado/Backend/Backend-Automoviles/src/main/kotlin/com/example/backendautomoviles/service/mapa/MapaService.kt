@@ -61,11 +61,11 @@ class MapaService
         }
     }
 
-    suspend fun delete(uuid: String) = withContext(Dispatchers.IO) {
-        logger.info { "Borrando mapa con uuid: $uuid" }
+    suspend fun delete(id: String) = withContext(Dispatchers.IO) {
+        logger.info { "Borrando mapa con uuid: $id" }
 
-        val mapaDelete = repository.findByUuid(uuid).firstOrNull()
-            ?: throw MapasNotFoundException("Error al borrar el mapa, el mapa con uuid : $uuid no existe")
+        val mapaDelete = repository.findById(id)
+            ?: throw MapasNotFoundException("Error al borrar el mapa, el mapa con id : $id no existe")
 
         try {
             repository.delete(mapaDelete)

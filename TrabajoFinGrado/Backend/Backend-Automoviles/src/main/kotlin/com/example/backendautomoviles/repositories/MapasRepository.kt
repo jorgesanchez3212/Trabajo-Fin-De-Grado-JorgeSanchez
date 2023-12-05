@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository
 @Repository
 interface MapasRepository : CoroutineCrudRepository<Mapa, String>{
     fun findByUuid(uuid: String): Flow<Mapa>
-    fun findByLatidudAndLongitud(latitud: String, longitud:String): Flow<Mapa>
+    fun findByLatitudAndLongitud(latitud: String, longitud:String): Flow<Mapa>
 }

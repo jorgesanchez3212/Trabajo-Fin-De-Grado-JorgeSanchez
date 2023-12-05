@@ -31,7 +31,6 @@ fun Automovil.toDto() : AutomovilDto{
 
 fun AutomovilCreateDto.toModel() : Automovil{
 
-
     return Automovil(
         numeroChasis = this.numeroChasis,
         marca = this.marca,

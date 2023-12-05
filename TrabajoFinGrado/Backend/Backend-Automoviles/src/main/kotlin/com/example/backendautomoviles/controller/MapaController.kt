@@ -27,57 +27,50 @@ class MapaController
 
 
 
-    @PreAuthorize("hasRole('CLIENTE')")
+    //@PreAuthorize("hasRole('ADMINISTRADOR')")
     @GetMapping("/listaMapas")
     suspend fun listaComentarios() : ResponseEntity<List<MapaDto>> {
         logger.info { "Obteniendo lista de todos las mapas"}
         return ResponseEntity.ok(service.findAll().toList().map { it.toDto() })
     }
 
-    @PreAuthorize("hasRole('ADMINISTRADOR')")
+    //@PreAuthorize("hasRole('ADMINISTRADOR')")
     @PostMapping("/newMapas")
-    suspend fun new(@Valid @RequestBody entityDto: MapaCreateDto): ResponseEntity<MapaCreateDto> {
+    suspend fun new(@Valid @RequestBody entityDto : MapaCreateDto): ResponseEntity<MapaCreateDto> {
         logger.info { "Creacion de mapa: ${entityDto}" }
         val entity = service.save(entityDto.toModel())
         return ResponseEntity.ok(entityDto)
     }
 
 
+    @GetMapping("/find/{id}")
+    suspend fun findById(@PathVariable id : String) : ResponseEntity<MapaDto>{
+        logger.info { "Buscando mapa con id ${id}"}
+        val reserva = service.loadMapasById(id)
+        return ResponseEntity.ok(reserva?.toDto())
+    }
 
-    @PreAuthorize("hasRole('ADMINISTRADOR')")
+    //@PreAuthorize("hasRole('ADMINISTRADOR')")
     @PutMapping("/update")
     suspend fun updateMe(@Valid @RequestBody mapaDto: MapaUpdateDto): Any {
-        logger.info { "Actualizando mapa con uuid: ${mapaDto.uuid}" }
+        logger.info { "Actualizando mapa con uuid: ${mapaDto.id}" }
 
-        val mapaExists : Mapa? = service.loadMapaByUUID(mapaDto.uuid!!)
-        if (mapaExists != null) {
+        val mapaExists : Mapa = service.loadMapasById(mapaDto.id)
 
             var mapaUpdated = mapaExists.copy(
-                latidud = mapaDto.latidud,
+                latitud = mapaDto.latitud,
                 longitud = mapaDto.longitud
             )
             service.update(mapaUpdated)
             return ResponseEntity.ok(mapaUpdated.toDto())
 
-        }else{
-            return ResponseEntity.badRequest()
-
-        }
     }
 
-
-
-
-
-
-
-
-    @PreAuthorize("hasRole('ADMINISTRADOR')")
-    @PostMapping("/delete/{uuid}")
-    suspend fun delete(@PathVariable uuid : String): ResponseEntity<MapaDto> {
-        logger.info { "Borrar mapa con uuid: $uuid" }
-        val entity = service.loadMapaByUUID(uuid)
-        service.delete(entity.uuid)
-        return ResponseEntity.ok(entity.toDto())
+    //@PreAuthorize("hasRole('ADMINISTRADOR')")
+    @PostMapping("/delete/{id}")
+    suspend fun delete(@PathVariable id : String): ResponseEntity<String> {
+        logger.info { "Borrar mapa con id: $id" }
+        service.delete(id)
+        return ResponseEntity.ok("Borrado")
     }
 }
