@@ -1,0 +1,25 @@
+<br>
+<div class="card-container">
+  <mat-card class="example-card" *ngFor="let reserva of reservas">
+    <mat-card-header>
+      <div class="user-datos">
+        <mat-card-title>Reserva -> {{ reserva.id }} </mat-card-title>
+        <mat-card-subtitle>Fecha Inicio ->{{ reserva.fechaInicio }}    <br>  Fecha Fin -> {{ reserva.fechaFin }}</mat-card-subtitle>
+        <mat-card-subtitle> Cliente -> {{ reserva.clienteId }}    <br>   Automovil -> {{ reserva.automovilId }}   
+        </mat-card-subtitle>
+        <mat-card-title>Coste -> {{ reserva.costo }}$ </mat-card-title>
+      </div>
+      <div class="botones">
+        <button mat-flat-button color="primary">Descargar</button> <br><br>
+        <button mat-flat-button color="warn" (click)="openDialog(reserva.id,'0ms', '0ms')"><mat-icon>delete</mat-icon>Anular</button>
+      </div>
+    </mat-card-header>
+    <mat-card-content>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+
+<div class="card-container" *ngIf="isReservasIsNull" style="font-size: 20px; text-align: center;">
+    <label>No tienes reservas.</label>
+</div>

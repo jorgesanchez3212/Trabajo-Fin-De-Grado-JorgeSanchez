@@ -37,6 +37,12 @@ class ReservaController@Autowired constructor(
         return ResponseEntity.ok(reservasService.findAll().toList().map { it.toDto() })
     }
 
+    @GetMapping("/listaReservasByClienteId/{id}")
+    suspend fun findReservasByClienteId(@PathVariable id : String) : ResponseEntity<List<ReservaDto>>{
+        logger.info { "Buscando reserva con el  id del cliente ${id}"}
+        return ResponseEntity.ok(reservasService.findAllByCliente(id).toList().map { it.toDto() })
+
+    }
 
 
     //@PreAuthorize("hasRole('ADMINISTRADOR')")

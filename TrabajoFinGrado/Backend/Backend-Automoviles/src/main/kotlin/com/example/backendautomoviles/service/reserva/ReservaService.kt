@@ -28,6 +28,10 @@ class ReservaService @Autowired constructor(
         return@withContext repository.findAll()
     }
 
+    suspend fun findAllByCliente(id: String) = withContext(Dispatchers.IO) {
+        return@withContext repository.findAllByClienteId(id)
+    }
+
 
 
     suspend fun findAllFiltros(reservaFilter: ReservaFilter) = withContext(Dispatchers.IO) {

@@ -55,6 +55,8 @@ import { ReservasComponent } from './components/reservas/reservas.component';
 import { DetailReservaComponent } from './components/reservas/detail-reserva/detail-reserva.component';
 import { GeneralNewReservaComponent } from './components/reservas/detail-reserva/general-new-reserva/general-new-reserva.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
+import { MisreservasComponent } from './components/misreservas/misreservas.component';
+import { MisvaloracionesComponent } from './components/misvaloraciones/misvaloraciones.component';
 
 
 
@@ -82,6 +84,8 @@ import { PerfilComponent } from './components/perfil/perfil.component';
     DetailReservaComponent,
     GeneralNewReservaComponent,
     PerfilComponent,
+    MisreservasComponent,
+    MisvaloracionesComponent,
     ],
   imports: [
     BrowserModule,

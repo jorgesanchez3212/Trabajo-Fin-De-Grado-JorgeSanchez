@@ -23,6 +23,10 @@
           <mat-icon>account_circle</mat-icon>
           Mi Perfil
         </a>
+        <a mat-list-item [routerLink]="'misreservas'">
+          <mat-icon>account_circle</mat-icon>
+          Mis Reservas
+        </a>
         <a mat-list-item [routerLink]="'usuarios'" *ngIf="isAdminVisible">
           <mat-icon>group</mat-icon>
           Usuarios

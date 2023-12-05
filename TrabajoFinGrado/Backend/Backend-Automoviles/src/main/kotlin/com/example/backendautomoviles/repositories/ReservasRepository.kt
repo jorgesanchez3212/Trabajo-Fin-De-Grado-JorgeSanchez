@@ -12,6 +12,7 @@ interface ReservasRepository : CoroutineCrudRepository<Reserva, String> {
     fun findAllByFechaInicioBeforeAndFechaFinalAfter(fechaInicio : LocalDate, fechaFin : LocalDate): Flow<Reserva>
     fun findAllByFechaInicioBefore(fechaInicio: LocalDate) : Flow<Reserva>
     fun findAllByFechaFinalAfter(fechaFin: LocalDate) : Flow<Reserva>
+    fun findAllByClienteId(clienteId : String): Flow<Reserva>
 
 
 
