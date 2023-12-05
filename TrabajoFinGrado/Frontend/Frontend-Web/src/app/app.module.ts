@@ -54,6 +54,7 @@ import { ComentarioComponent } from './components/comentario/comentario.componen
 import { ReservasComponent } from './components/reservas/reservas.component';
 import { DetailReservaComponent } from './components/reservas/detail-reserva/detail-reserva.component';
 import { GeneralNewReservaComponent } from './components/reservas/detail-reserva/general-new-reserva/general-new-reserva.component';
+import { PerfilComponent } from './components/perfil/perfil.component';
 
 
 
@@ -80,6 +81,7 @@ import { GeneralNewReservaComponent } from './components/reservas/detail-reserva
     ReservasComponent,
     DetailReservaComponent,
     GeneralNewReservaComponent,
+    PerfilComponent,
     ],
   imports: [
     BrowserModule,

@@ -53,6 +53,7 @@ export class LoginComponent implements OnInit {
         console.log('Usuario autenticado!', response);
         localStorage.setItem('access_token', response.token);
         localStorage.setItem('access_rol', response.user.rol);
+        localStorage.setItem('access_id', response.user.id);
         this.rolPropertyService.emitRolProperty(response.user.rol);
         this.router.navigateByUrl('/automovil');
       },

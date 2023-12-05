@@ -6,6 +6,7 @@ import { AutomovilesComponent } from './components/automoviles/automoviles.compo
 import { UsuarioComponent } from './components/usuario/usuario.component';
 import { ComentarioComponent } from './components/comentario/comentario.component';
 import { ReservasComponent } from './components/reservas/reservas.component';
+import { PerfilComponent } from './components/perfil/perfil.component';
 
 const routes: Routes = [
   {path: '',redirectTo: 'login',pathMatch: 'full'},
@@ -15,6 +16,8 @@ const routes: Routes = [
   {path:'usuarios',component: UsuarioComponent},
   {path:'comentarios',component: ComentarioComponent},
   {path:'reservas',component: ReservasComponent},
+  {path:'perfil',component: PerfilComponent},
+
 
 
 

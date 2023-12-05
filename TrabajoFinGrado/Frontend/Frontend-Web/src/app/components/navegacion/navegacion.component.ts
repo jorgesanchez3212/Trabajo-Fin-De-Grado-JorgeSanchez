@@ -24,7 +24,7 @@ export class NavegacionComponent implements OnInit, OnDestroy {
   fillerNav = [
     {name:"Iniciar sesion", route : "automovil", icon:"home"},
     {name:"Catalogo", route : "", icon:"home"},
-    {name:"Mi Perfil", route : "", icon:"account_circle"},
+    {name:"Mi Perfil", route : "perfil", icon:"account_circle"},
     {name:"Usuarios", route : "usuarios", icon:"group"},
     {name:"Automoviles", route : "automovil", icon:"directions_car"},
     {name:"Comentarios", route : "comentarios", icon:"group"},

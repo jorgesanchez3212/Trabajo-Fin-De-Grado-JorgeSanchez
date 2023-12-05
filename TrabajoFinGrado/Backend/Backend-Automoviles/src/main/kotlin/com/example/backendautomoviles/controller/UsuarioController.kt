@@ -127,7 +127,7 @@ class UsuarioController
     ): ResponseEntity<UsuarioDto> {
         logger.info { "Actualizando usuario: ${user.username}" }
 
-        usuarioDto.validate()
+        //usuarioDto.validate()
         var userUpdated = user.copy(
             nombre = usuarioDto.nombre,
             username = usuarioDto.username,
@@ -139,7 +139,7 @@ class UsuarioController
         return ResponseEntity.ok(userUpdated.toDto())
     }
 
-    @PreAuthorize("hasRole('ADMINISTRADOR')")
+    //@PreAuthorize("hasRole('ADMINISTRADOR')")
     @PutMapping("/update")
     suspend fun updateUsuario(
         @AuthenticationPrincipal user: Usuario,

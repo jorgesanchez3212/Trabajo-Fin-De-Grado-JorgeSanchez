@@ -1,0 +1,68 @@
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-4 text-center">
+            <div class="user-image my-3">
+                <img [src]="usuario.image ? usuario.image : 'assets/img/perfil2.png'" alt="{{usuario.username}}" class="img-responsive" style="width: 100%; border-radius: 50%;">
+            </div>
+        </div>
+    </div>
+
+        
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="form-group fg-asset">
+                <label class="txt-default-color form-label-asset txt-fz-12">Nombre del 
+					Usuario <span class="txt-color-red">*</span>
+				</label> <input class="form-control form-line" name="nameUsuario" type="text" (focusout)="focusOutPerfil()"  [(ngModel)]="usuario.nombre" #nombreUsuario="ngModel" minlength="3" maxlength="200" required>
+            </div>
+            <div *ngIf="(nombreUsuario.invalid && (nombreUsuario.dirty || nombreUsuario.touched)) ||(nombreUsuario.errors?.['minlength']) || (nombreUsuario.errors?.['maxlength'])">
+                <div class="error-message">
+                    <fa-icon class="fa red" [icon]="faWarning"></fa-icon>&nbsp;&nbsp;Campo obligatorio (min.3, m&aacute;x 200 carac.)
+                </div>
+            </div>
+        </div>
+        </div>
+        <br>
+        <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="form-group fg-asset">
+                <label class="txt-default-color form-label-asset txt-fz-12">Email del 
+					Usuario <span class="txt-color-red">*</span>
+				</label> <input class="form-control form-line" name="emailUsuario" type="text" (focusout)="focusOutPerfil()"  [(ngModel)]="usuario.email" #emailUsuario="ngModel" minlength="3" maxlength="200" required>
+            </div>
+            <div *ngIf="(emailUsuario.invalid && (emailUsuario.dirty || emailUsuario.touched)) ||(emailUsuario.errors?.['minlength']) || (emailUsuario.errors?.['maxlength'])">
+                <div class="error-message">
+                    <fa-icon class="fa red" [icon]="faWarning"></fa-icon>&nbsp;&nbsp;Campo obligatorio (min.3, m&aacute;x 200 carac.)
+                </div>
+            </div>
+        </div>
+        </div>
+        <br>
+        <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="form-group fg-asset">
+                <label class="txt-default-color form-label-asset txt-fz-12">Descripcion del 
+					Usuario <span class="txt-color-red">*</span>
+				</label> <input class="form-control form-line" name="descriptionUsuario" type="text" (focusout)="focusOutPerfil()" [(ngModel)]="usuario.descripcion" #descripcionUsuario="ngModel" minlength="3" maxlength="200" required>
+            </div>
+            <div *ngIf="(descripcionUsuario.invalid && (descripcionUsuario.dirty || descripcionUsuario.touched)) ||(descripcionUsuario.errors?.['minlength']) || (descripcionUsuario.errors?.['maxlength'])">
+                <div class="error-message">
+                    <fa-icon class="fa red" [icon]="faWarning"></fa-icon>&nbsp;&nbsp;Campo obligatorio (min.3, m&aacute;x 200 carac.)
+                </div>
+            </div>
+        </div>
+        </div>
+        <br>
+        <div class="row justify-content-center">
+            <div class="col-md-6 text-center">
+                
+                <div class="btn-group" role="group" aria-label="Basic example">
+                    <button mat-flat-button color="primary" class="me-2" *ngIf="actualizar" (click)="actualizarPerfil()">Actualizar</button>
+                    <button mat-flat-button color="warn" *ngIf="actualizar" (click)="cancelar()">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
