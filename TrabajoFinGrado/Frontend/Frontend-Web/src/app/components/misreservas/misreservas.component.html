@@ -10,7 +10,7 @@
         <mat-card-title>Coste -> {{ reserva.costo }}$ </mat-card-title>
       </div>
       <div class="botones">
-        <button mat-flat-button color="primary">Descargar</button> <br><br>
+        <button mat-flat-button color="primary" (click)="generarPDF(reserva)">Descargar</button> <br><br>
         <button mat-flat-button color="warn" (click)="openDialog(reserva.id,'0ms', '0ms')"><mat-icon>delete</mat-icon>Anular</button>
       </div>
     </mat-card-header>
