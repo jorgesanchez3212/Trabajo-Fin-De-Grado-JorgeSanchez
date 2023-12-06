@@ -1,0 +1,12 @@
+.titulo-incidencia {
+    font-weight: bold; /* Negrita */
+    font-size: 24px; /* Tamaño de fuente más grande */
+    text-align: center; /* Centrado */
+  }
+
+  textarea {
+    min-height: 100px;
+    overflow: hidden;
+    resize: none;
+  }
+  

@@ -4,6 +4,7 @@ import com.example.backendautomoviles.config.APIConfig
 import com.example.backendautomoviles.dto.ComentarioUpdateDto
 import com.example.backendautomoviles.dto.ContactoCreateDto
 import com.example.backendautomoviles.dto.ContactoDto
+import com.example.backendautomoviles.dto.ContactoUpdateDto
 import com.example.backendautomoviles.mappers.toDto
 import com.example.backendautomoviles.mappers.toModel
 import com.example.backendautomoviles.models.Comentario
@@ -63,7 +64,7 @@ class ContactoController
 
     //@PreAuthorize("hasRole('ADMINISTRADOR')")
     @PutMapping("/update")
-    suspend fun updateMe(@Valid @RequestBody contactoDto: ComentarioUpdateDto): Any {
+    suspend fun updateMe(@Valid @RequestBody contactoDto: ContactoUpdateDto): Any {
         logger.info { "Actualizando contacto con id: ${contactoDto.id}" }
 
         val comentarioExists : Contacto? = service.loadContactoById(contactoDto.id!!)

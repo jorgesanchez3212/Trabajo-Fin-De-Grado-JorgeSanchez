@@ -64,6 +64,7 @@ import { GeneralMapaComponent } from './components/mapa/detail-mapa-component/ge
 import { NewGeneralMapaComponent } from './components/mapa/new-mapa/new-general-mapa/new-general-mapa.component';
 import { DetailMisvaloracionesComponent } from './components/misvaloraciones/detail-misvaloraciones/detail-misvaloraciones.component';
 import { GeneralMisvaloracionesComponent } from './components/misvaloraciones/detail-misvaloraciones/general-misvaloraciones/general-misvaloraciones.component';
+import { ContactoComponent } from './components/contacto/contacto.component';
 
 
 
@@ -100,6 +101,7 @@ import { GeneralMisvaloracionesComponent } from './components/misvaloraciones/de
     NewGeneralMapaComponent,
     DetailMisvaloracionesComponent,
     GeneralMisvaloracionesComponent,
+    ContactoComponent,
     ],
   imports: [
     BrowserModule,

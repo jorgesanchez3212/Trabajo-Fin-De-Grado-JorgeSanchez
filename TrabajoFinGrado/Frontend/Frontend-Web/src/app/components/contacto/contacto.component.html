@@ -1,0 +1,58 @@
+
+<div class="container">
+    <br>
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="form-group fg-asset">
+                <label class="titulo-incidencia txt-default-color form-label-asset txt-fz-12">Detalle de su Incidencia<span class="txt-color-red">*</span></label> 
+
+            </div>
+        </div>
+        </div>
+        <br>
+        <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="form-group fg-asset">
+                <label class="txt-default-color form-label-asset txt-fz-12">Para brindarle un servicio más eficiente y personalizado, le agradecemos proporcionar una descripción detallada de su incidencia. Por favor, incluya toda información relevante que nos pueda ayudar a entender mejor su situación y encontrar una solución efectiva. Esto puede incluir, pero no se limita a:
+
+                    Descripción detallada del problema: Explique claramente qué está sucediendo, incluyendo mensajes de error específicos, si los hubiera.
+                    Pasos para reproducir el problema: Si es aplicable, descríbanos los pasos que llevó a cabo cuando se encontró con el problema.
+                    Fecha y hora de la incidencia: Información sobre cuándo ocurrió el problema puede ser crucial para nuestra investigación.
+                    Impacto de la incidencia: Indíquenos cómo este problema está afectando su experiencia o sus operaciones.
+                    Capturas de pantalla o archivos relevantes: Si es posible, adjunte cualquier archivo o captura de pantalla que pueda ilustrar mejor el problema.
+                    Su retroalimentación es vital para nosotros y cada detalle que pueda proporcionar es invaluable. Nuestro equipo se compromete a revisar su incidencia con la mayor brevedad posible y le contactaremos con una actualización o para solicitar información adicional si fuera necesario.
+                    
+                    Gracias por tomarse el tiempo para ayudarnos a mejorar nuestro servicio. <span class="txt-color-red">*</span>
+				</label> 
+            </div>
+            
+        </div>
+        </div>
+        <br>
+        <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="form-group fg-asset">
+                <label class="txt-default-color form-label-asset txt-fz-12">Descripcion del 
+					Usuario <span class="txt-color-red">*</span>
+				</label> <textarea class="form-control form-line" name="descriptionUsuario" (focusout)="focusOutContacto()" [(ngModel)]="contactoNew.descripcion" #descripcionContacto="ngModel" minlength="3" maxlength="200" required></textarea>
+            </div>
+            <div *ngIf="(descripcionContacto.invalid && (descripcionContacto.dirty || descripcionContacto.touched)) ||(descripcionContacto.errors?.['minlength']) || (descripcionContacto.errors?.['maxlength'])">
+                <div class="error-message">
+                    <fa-icon class="fa red" [icon]="faWarning"></fa-icon>&nbsp;&nbsp;Campo obligatorio (min.3, m&aacute;x 200 carac.)
+                </div>
+            </div>
+        </div>
+        </div>
+        <br>
+        <div class="row justify-content-center">
+            <div class="col-md-6 text-center">
+                
+                <div class="btn-group" role="group" aria-label="Basic example">
+                    <button mat-flat-button color="primary" class="me-2" *ngIf="actualizar" (click)="saveIncidencia()">Enviar</button>
+                    <button mat-flat-button color="warn" *ngIf="actualizar" (click)="cancelar()">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+

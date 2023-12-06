@@ -32,7 +32,7 @@ export class NavegacionComponent implements OnInit, OnDestroy {
     {name:"Comentarios", route : "comentarios", icon:"group"},
     {name:"Reservas", route : "reservas", icon:"group"},
     {name:"Tiendas", route : "mapas", icon:"home"},
-    {name:"Contacto", route : "", icon:"perm_contact_calendar"},
+    {name:"Contacto", route : "contacto", icon:"perm_contact_calendar"},
   ]
 
 

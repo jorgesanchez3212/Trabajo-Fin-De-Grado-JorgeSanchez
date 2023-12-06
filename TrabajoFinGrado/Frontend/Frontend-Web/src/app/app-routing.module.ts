@@ -10,6 +10,7 @@ import { PerfilComponent } from './components/perfil/perfil.component';
 import { MisreservasComponent } from './components/misreservas/misreservas.component';
 import { MisvaloracionesComponent } from './components/misvaloraciones/misvaloraciones.component';
 import { MapaComponent } from './components/mapa/mapa.component';
+import { ContactoComponent } from './components/contacto/contacto.component';
 
 const routes: Routes = [
   {path: '',redirectTo: 'login',pathMatch: 'full'},
@@ -23,6 +24,8 @@ const routes: Routes = [
   {path:'misreservas',component: MisreservasComponent},
   {path:'misvaloraciones',component: MisvaloracionesComponent},
   {path:'mapas',component: MapaComponent},
+  {path:'contacto',component: ContactoComponent},
+
 
 ];
 
