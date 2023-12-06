@@ -1,8 +1,5 @@
 package com.example.backendautomoviles.dto
 
-import java.time.LocalDateTime
-import java.util.*
-
 data class ComentarioCreateDto(
     val descripcion : String,
     val idUser : String,

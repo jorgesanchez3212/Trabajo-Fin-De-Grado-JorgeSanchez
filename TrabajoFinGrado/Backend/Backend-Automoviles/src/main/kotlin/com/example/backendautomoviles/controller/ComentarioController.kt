@@ -85,7 +85,7 @@ class ComentarioController
     //@PreAuthorize("hasRole('ADMINISTRADOR')")
     @PostMapping("/delete/{id}")
     suspend fun delete(@PathVariable id : String): ResponseEntity<String> {
-        logger.info { "Borrar automovil con id: $id" }
+        logger.info { "Borrar comentario con id: $id" }
         //val entity = service.loadComentarioById(id)
         service.delete(id)
         return ResponseEntity.ok("Borrado")
