@@ -26,6 +26,7 @@ import {MatNativeDateModule} from '@angular/material/core';
 
 
 
+
 // Componentes
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
@@ -131,7 +132,9 @@ import { CatalogoComponent } from './components/catalogo/catalogo.component';
     TableModule,
     MatDatepickerModule,
     MatInputModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+
+    
 
   ],
   exports:[NavegacionComponent],
