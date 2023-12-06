@@ -1,0 +1,91 @@
+<br>
+<div class="toolbar">
+<mat-toolbar color="primary" class="toolbar2">
+    <div class="colocar">
+    <span class="toolbar-content">
+        <mat-form-field appearance="fill" class="example-full-width">
+            <mat-label>Tipo</mat-label>
+            <mat-select>
+              <mat-option value="1">Coche</mat-option>
+              <mat-option value="2">Camion</mat-option>
+              <mat-option value="3">Furgoneta</mat-option>
+              <mat-option value="4">Moto</mat-option>
+            </mat-select>
+          </mat-form-field>
+  
+      <mat-form-field appearance="fill" class="example-full-width">
+        <mat-label>Check in</mat-label>
+        <input matInput [matDatepicker]="checkInDatepicker">
+        <mat-datepicker-toggle matSuffix [for]="checkInDatepicker"></mat-datepicker-toggle>
+        <mat-datepicker #checkInDatepicker></mat-datepicker>
+      </mat-form-field>
+  
+      <mat-form-field appearance="fill" class="example-full-width">
+        <mat-label>Check out</mat-label>
+        <input matInput [matDatepicker]="checkOutDatepicker">
+        <mat-datepicker-toggle matSuffix [for]="checkOutDatepicker"></mat-datepicker-toggle>
+        <mat-datepicker #checkOutDatepicker></mat-datepicker>
+      </mat-form-field>
+  
+   
+  
+      <button mat-raised-button color="warn">Search</button>
+    </span>
+</div>
+  </mat-toolbar>
+</div>
+<br>
+<div class="main-container">
+
+    <div class="expansion2">
+    <mat-expansion-panel hideToggle class="expansion">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Filtros
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+      
+          <br>
+          <div class="col-md-3">
+          <label class="txt-default-color form-label-asset txt-fz-12">Marca </label>
+          <input class="form-control form-line" name="usernameUserFilter" type="text" [(ngModel)]="automovilFilter.marca" #marcaAutomovilFilter="ngModel">
+        </div> 
+        <div class="col-md-3">
+          <label class="txt-default-color form-label-asset txt-fz-12">Color </label>
+          <input class="form-control form-line" name="idUserFilter" type="text" [(ngModel)]="automovilFilter.id" #idAutomovilFilter="ngModel">
+        </div> 
+        <div class="col-md-3">
+            <label class="txt-default-color form-label-asset txt-fz-12">Coste </label>
+            <input class="form-control form-line" name="idUserFilter" type="text" [(ngModel)]="automovilFilter.id" #idAutomovilFilter="ngModel">
+          </div> 
+          
+        <div class="botonesFiltros">
+          <button mat-flat-button color="primary" (click)="onContextFiltrarClick()"><mat-icon>edit</mat-icon>Filtrar</button>
+          <button mat-flat-button color="warn" (click)="clearFilters()" ><mat-icon>delete</mat-icon> Limpiar</button><br><br>
+        </div>
+      </mat-expansion-panel>
+    </div> 
+        
+
+<div class="card-container">
+    <mat-card class="example-card" *ngFor="let automovil of automoviles">
+      <mat-card-header>
+        <div class="user-image">
+          <img mat-card-lg-image [src]="automovil.image ? automovil.image : 'assets/img/perfil2.png'" alt="{{automovil.marca}}">
+        </div>
+        <div class="user-datos">
+          <mat-card-title>{{ automovil.marca }} </mat-card-title>
+          <mat-card-subtitle>{{ automovil.modelo }}    <br>   {{ automovil.color }}   
+          </mat-card-subtitle>
+        </div>
+        <div class="botones">
+          <button mat-flat-button color="primary"><mat-icon>bookmark</mat-icon>Reservar</button><br><br>
+          <button mat-flat-button color="warn" ><mat-icon>chat_bubble</mat-icon> Comentarios</button>
+        </div>
+      </mat-card-header>
+      <mat-card-content>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+  

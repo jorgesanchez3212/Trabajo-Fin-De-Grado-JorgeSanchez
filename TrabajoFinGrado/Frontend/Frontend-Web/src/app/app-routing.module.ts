@@ -11,6 +11,7 @@ import { MisreservasComponent } from './components/misreservas/misreservas.compo
 import { MisvaloracionesComponent } from './components/misvaloraciones/misvaloraciones.component';
 import { MapaComponent } from './components/mapa/mapa.component';
 import { ContactoComponent } from './components/contacto/contacto.component';
+import { CatalogoComponent } from './components/catalogo/catalogo.component';
 
 const routes: Routes = [
   {path: '',redirectTo: 'login',pathMatch: 'full'},
@@ -25,6 +26,8 @@ const routes: Routes = [
   {path:'misvaloraciones',component: MisvaloracionesComponent},
   {path:'mapas',component: MapaComponent},
   {path:'contacto',component: ContactoComponent},
+  {path:'catalogo',component: CatalogoComponent},
+
 
 
 ];

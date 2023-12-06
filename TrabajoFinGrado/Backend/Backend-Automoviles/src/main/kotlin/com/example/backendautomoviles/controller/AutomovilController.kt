@@ -94,13 +94,13 @@ class AutomovilController
 
 
 
-    @PreAuthorize("hasRole('ADMINISTRADOR')")
+    //@PreAuthorize("hasRole('ADMINISTRADOR')")
     @PostMapping("/delete/{numeroChasis}")
-    suspend fun delete(@PathVariable numeroChasis : String): ResponseEntity<AutomovilDto> {
+    suspend fun delete(@PathVariable numeroChasis : String): ResponseEntity<String> {
         logger.info { "Borrar automovil con numeroChasis: $numeroChasis" }
-        val automovil = service.loadAutomovilByNumeroChasis(numeroChasis)
+        //val automovil = service.loadAutomovilByNumeroChasis(numeroChasis)
         service.delete(numeroChasis)
-        return ResponseEntity.ok(automovil.toDto())
+        return ResponseEntity.ok("Borrado")
     }
 
 
