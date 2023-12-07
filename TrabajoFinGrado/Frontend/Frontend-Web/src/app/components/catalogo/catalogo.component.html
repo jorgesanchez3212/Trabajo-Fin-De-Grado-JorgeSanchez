@@ -3,37 +3,40 @@
 <mat-toolbar color="primary" class="toolbar2">
     <div class="colocar">
     <span class="toolbar-content">
-        <mat-form-field appearance="fill" class="example-full-width">
-            <mat-label>Tipo</mat-label>
-            <mat-select>
-              <mat-option value="1">Coche</mat-option>
-              <mat-option value="2">Camion</mat-option>
-              <mat-option value="3">Furgoneta</mat-option>
-              <mat-option value="4">Moto</mat-option>
-            </mat-select>
-          </mat-form-field>
-  
+        
       <mat-form-field appearance="fill" class="example-full-width">
-        <mat-label>Check in</mat-label>
-        <input matInput [matDatepicker]="checkInDatepicker">
-        <mat-datepicker-toggle matSuffix [for]="checkInDatepicker"></mat-datepicker-toggle>
-        <mat-datepicker #checkInDatepicker></mat-datepicker>
+        <mat-label>Selecciona un Tipo de Automovil</mat-label>
+        <mat-select [(ngModel)]="catalogoDto.tipoAutomovil">
+          <mat-option *ngFor="let tipo of tipos" [value]="tipo">
+            {{ tipo }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <mat-label>Elige una fecha</mat-label>
+        <input matInput [matDatepickerFilter]="myFilter" [matDatepicker]="pickerInicio" [(ngModel)]="reservaFilterInicio"  >
+        <mat-datepicker-toggle matIconSuffix [for]="pickerInicio"></mat-datepicker-toggle>
+        <mat-datepicker #pickerInicio></mat-datepicker>
       </mat-form-field>
   
-      <mat-form-field appearance="fill" class="example-full-width">
-        <mat-label>Check out</mat-label>
-        <input matInput [matDatepicker]="checkOutDatepicker">
-        <mat-datepicker-toggle matSuffix [for]="checkOutDatepicker"></mat-datepicker-toggle>
-        <mat-datepicker #checkOutDatepicker></mat-datepicker>
+      <mat-form-field class="example-full-width">
+        <mat-label>Elige una fecha</mat-label>
+        <input matInput [matDatepickerFilter]="myFilter" [matDatepicker]="pickerFin" [(ngModel)]="reservaFilterFin">
+        <mat-datepicker-toggle matIconSuffix [for]="pickerFin"></mat-datepicker-toggle>
+        <mat-datepicker #pickerFin></mat-datepicker>
       </mat-form-field>
   
    
   
-      <button mat-raised-button color="warn">Search</button>
+      <button mat-raised-button color="warn" (click)="buscar()">Search</button>
     </span>
 </div>
   </mat-toolbar>
 </div>
+<br>
+<label class="label">{{titulo}}</label>
+<br>
 <br>
 <div class="main-container">
 
@@ -48,16 +51,38 @@
           <br>
           <div class="col-md-3">
           <label class="txt-default-color form-label-asset txt-fz-12">Marca </label>
-          <input class="form-control form-line" name="usernameUserFilter" type="text" [(ngModel)]="automovilFilter.marca" #marcaAutomovilFilter="ngModel">
+          <mat-form-field appearance="fill" class="example-full-width">
+            <mat-label>Selecciona una Marca</mat-label>
+            <mat-select [(ngModel)]="catalogoDto.marca">
+              <mat-option *ngFor="let tipo of marcas" [value]="tipo">
+                {{ tipo }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>        
         </div> 
         <div class="col-md-3">
           <label class="txt-default-color form-label-asset txt-fz-12">Color </label>
-          <input class="form-control form-line" name="idUserFilter" type="text" [(ngModel)]="automovilFilter.id" #idAutomovilFilter="ngModel">
+          <mat-form-field appearance="fill" class="example-full-width">
+            <mat-label>Selecciona un Color</mat-label>
+            <mat-select [(ngModel)]="catalogoDto.tipoAutomovil">
+              <mat-option *ngFor="let tipo of colores" [value]="tipo">
+                {{ tipo }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>        
         </div> 
+
         <div class="col-md-3">
-            <label class="txt-default-color form-label-asset txt-fz-12">Coste </label>
-            <input class="form-control form-line" name="idUserFilter" type="text" [(ngModel)]="automovilFilter.id" #idAutomovilFilter="ngModel">
-          </div> 
+          <label class="txt-default-color form-label-asset txt-fz-12">Capacidad </label>
+          <mat-form-field appearance="fill" class="example-full-width">
+            <mat-label>Selecciona una Capacidad</mat-label>
+            <mat-select [(ngModel)]="catalogoDto.capacidad">
+              <mat-option *ngFor="let tipo of capacidades" [value]="tipo">
+                {{ tipo }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>        
+        </div> 
           
         <div class="botonesFiltros">
           <button mat-flat-button color="primary" (click)="onContextFiltrarClick()"><mat-icon>edit</mat-icon>Filtrar</button>

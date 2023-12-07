@@ -23,6 +23,9 @@ interface ReservasRepository : CoroutineCrudRepository<Reserva, String> {
         @Param("fechaFin") fechaFin: LocalDate
     ): Flow<Reserva>
 
+    fun findByFechaInicioLessThanEqualAndFechaFinalGreaterThanEqual(fechaFinal: LocalDate, fechaInicio: LocalDate): Flow<Reserva>
+
+
 
 
 }

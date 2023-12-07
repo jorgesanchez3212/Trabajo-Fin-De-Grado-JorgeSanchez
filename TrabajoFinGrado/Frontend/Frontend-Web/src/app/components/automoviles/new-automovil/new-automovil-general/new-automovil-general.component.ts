@@ -21,7 +21,7 @@ export class NewAutomovilGeneralComponent {
   constructor(private newAutomovilPropertyService : NewAutomovilPropertyService){
 
     
-    this.tipos = ['COCHE', 'CAMION'];
+    this.tipos = ['COCHE', 'CAMION', 'FURGONETA', 'MOTO'];
     this.automovil = new AutomovilDto();
   }
   

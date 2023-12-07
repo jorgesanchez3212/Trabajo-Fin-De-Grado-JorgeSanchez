@@ -8,6 +8,7 @@ import com.example.backendautomoviles.models.Automovil
 import com.example.backendautomoviles.repositories.AutomovilesRepository
 import com.example.backendautomoviles.repositories.ReservasRepository
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.filterNot
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.toList
@@ -31,15 +32,17 @@ class AutomovilService
     }
 
 
-    suspend fun buscarAutomovilesDisponibles(fechaInicio: LocalDate, fechaFinal: LocalDate): List<Automovil> {
+    suspend fun buscarAutomovilesDisponibles(fechaInicio: LocalDate, fechaFinal: LocalDate, tipoAutomovil : String): List<Automovil> {
         // Buscar reservas que están dentro del rango de fechas
-        val reservas = reservasRepository.findAllByFechaInicioBetweenAndFechaFinalAfter(fechaInicio, fechaFinal).toList()
+        val reservas = reservasRepository.findByFechaInicioLessThanEqualAndFechaFinalGreaterThanEqual(fechaInicio, fechaFinal).toList()
 
         // Extraer IDs de los automóviles reservados
         val automovilesReservadosIds = reservas.map { it.automovilId }.toSet()
 
         // Buscar automóviles que no están reservados
-        return repository.findAll().filterNot { automovilesReservadosIds.contains(it.id) }.toList()
+        return repository.findAll().filterNot { automovilesReservadosIds.contains(it.id) }
+            .filter { it.tipo.equals(tipoAutomovil, ignoreCase = true) }
+            .toList()
     }
 
 

@@ -9,6 +9,8 @@ import { NewUsuarioComponent } from '../usuario/new-usuario/new-usuario.componen
 import { DialogAnimationsComponent } from '../automoviles/dialog-animations/dialog-animations.component';
 import { Map, marker, tileLayer } from 'leaflet';
 import { MapaDto } from 'src/app/models/mapa/mapa-dto';
+import { CatalogoDto } from 'src/app/models/catalogo/catalogo-dto';
+import { formatDate } from '@angular/common';
 
 
 @Component({
@@ -23,6 +25,30 @@ export class CatalogoComponent {
   panelOpenState = false;
   public automovilFilter : AutomovilFilter = new AutomovilFilter();
   public ubicaciones : MapaDto[] = [];
+  public titulo : string ='';
+  public reservaFilterFin: Date | null = null;
+  public reservaFilterInicio: Date | null = null;
+  public tipos : string[];
+  public colores : string[];
+  public marcas : string[];
+  public capacidades : string[];
+
+
+
+  public catalogoDto : CatalogoDto =new CatalogoDto();
+
+  myFilter = (d: Date | null): boolean => {
+    const today = new Date();
+    // Restablece la hora de hoy a la medianoche para la comparación
+    today.setHours(0, 0, 0, 0);
+    
+    const selectedDate = (d || new Date());
+    // Restablece la hora de la fecha seleccionada a la medianoche para la comparación
+    selectedDate.setHours(0, 0, 0, 0);
+  
+    // Verifica si la fecha seleccionada es anterior a hoy
+    return selectedDate >= today;
+  };
 
   ngAfterViewInit(){
     // const map = new Map('map').setView([40.42517,-3.68718], 13);
@@ -40,7 +66,12 @@ export class CatalogoComponent {
   constructor(private httpService: HttpClient, private utilsService : UtilsService, public dialog: MatDialog){
     this.automoviles = [];
     this.automovil = new AutomovilDto();
-   
+    this.tipos = ['COCHE', 'CAMION', 'FURGONETA', 'MOTO'];
+    this.capacidades = ['1', '2', '3', '4', '5'];
+    this.colores = ['Blanco', 'Negro', 'Naranja', 'Rojo', 'Verde'];
+    this.marcas = ['Audi', 'Mercedes', 'Porsche', 'BMW'];
+
+
   }
 
 
@@ -116,6 +147,8 @@ export class CatalogoComponent {
 
     this.httpService.get(url, { headers }).toPromise().then((value: any) => {
       this.automoviles = value as AutomovilDto[];
+      this.titulo = `Resultados totales: ${this.automoviles.length} Automoviles`
+
       console.log(this.automoviles)
     }).catch((error) => {
       
@@ -131,7 +164,7 @@ export class CatalogoComponent {
 
 
 onContextFiltrarClick(){
-  const url : string = 'http://localhost:6969/api/automoviles/listaAutomovilesFiltro'
+  const url : string = 'http://localhost:6969/api/automoviles/catalogoFiltro'
 
   const token = localStorage.getItem('access_token');
 
@@ -140,9 +173,10 @@ onContextFiltrarClick(){
       Authorization: `Bearer ${token}`
     });
 
-  this.httpService.post(url, this.automovilFilter , { headers }).toPromise().then((value: any) => {
+  this.httpService.post(url, this.catalogoDto , { headers }).toPromise().then((value: any) => {
     this.automoviles = value as AutomovilDto[];
     console.log(this.automoviles)
+    this.titulo = `Resultados totales: ${this.automoviles.length} Automoviles`
   }).catch((error) => {
     
     console.log('Se ha producido un error al obtener los automoviles');
@@ -155,6 +189,39 @@ clearFilters() {
 this.automovilFilter.marca = '';
 this.automovilFilter.id = '';
 this.getAutomovilesAll();
+}
+
+
+buscar(){
+ //const url : string = 'http://128.140.34.184:8080/api/automoviles/catalogo'
+ const url : string = 'http://localhost:6969/api/automoviles/catalogo'
+
+    // Para fechaFin
+if (this.reservaFilterFin) {
+  this.catalogoDto.fechaFinal = formatDate(this.reservaFilterFin, 'yyyy-MM-dd', 'en-US');
+}
+
+// Para fechaInicio
+if (this.reservaFilterInicio) {
+  this.catalogoDto.fechaInicio = formatDate(this.reservaFilterInicio, 'yyyy-MM-dd', 'en-US');
+} 
+ const token = localStorage.getItem('access_token');
+if(this.catalogoDto.fechaFinal != null && this.catalogoDto.fechaFinal != null)
+ if (token) {
+   const headers = new HttpHeaders({
+     Authorization: `Bearer ${token}`
+   });
+
+ this.httpService.post(url,this.catalogoDto, { headers }).toPromise().then((value: any) => {
+   this.automoviles = value as AutomovilDto[];
+   this.titulo = `Resultados disponibles: ${this.automoviles.length} Automoviles`
+
+   console.log(this.automoviles)
+ }).catch((error) => {
+   
+   console.log('Se ha producido un error al obtener los automoviles');
+ });
+}
 }
 
 }

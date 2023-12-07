@@ -1,26 +1,19 @@
 package com.example.backendautomoviles.controller
 
 import com.example.backendautomoviles.config.APIConfig
-import com.example.backendautomoviles.dto.AutomovilCreateDto
-import com.example.backendautomoviles.dto.AutomovilDto
-import com.example.backendautomoviles.dto.AutomovilUpdateDto
-import com.example.backendautomoviles.dto.UsuarioDto
+import com.example.backendautomoviles.dto.*
 import com.example.backendautomoviles.filters.AutomovilFilter
-import com.example.backendautomoviles.filters.UsuarioFilter
 import com.example.backendautomoviles.mappers.toDto
 import com.example.backendautomoviles.mappers.toModel
 import com.example.backendautomoviles.models.Automovil
-import com.example.backendautomoviles.models.Usuario
 import com.example.backendautomoviles.service.automovil.AutomovilService
-import com.example.backendautomoviles.validators.validate
 import jakarta.validation.Valid
 import kotlinx.coroutines.flow.toList
 import mu.KotlinLogging
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
-import org.springframework.security.access.prepost.PreAuthorize
-import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.web.bind.annotation.*
+import java.time.LocalDate
 
 private val logger = KotlinLogging.logger {}
 
@@ -31,6 +24,12 @@ class AutomovilController
     private val service: AutomovilService,
     ){
 
+
+    @PostMapping("/catalogo")
+    suspend fun listaAutomovilesCatalogo(@Valid @RequestBody catalogoDto: CatalogoDto) : ResponseEntity<List<AutomovilDto>>{
+        logger.info { "Obteniendo lista de todos los automoviles $catalogoDto"}
+        return ResponseEntity.ok(service.buscarAutomovilesDisponibles(LocalDate.parse(catalogoDto.fechaInicio), LocalDate.parse(catalogoDto.fechaFinal), catalogoDto.tipoAutomovil).map { it.toDto() })
+    }
 
     @GetMapping("/listaAutomoviles")
     suspend fun listaAutomoviles() : ResponseEntity<List<AutomovilDto>>{
