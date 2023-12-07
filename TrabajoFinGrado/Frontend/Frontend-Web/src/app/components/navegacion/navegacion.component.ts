@@ -18,11 +18,14 @@ export class NavegacionComponent implements OnInit, OnDestroy {
   mobileQuery: MediaQueryList;
   isNavbarVisible: boolean = false;
   isAdminVisible : boolean = false;
+  isClienteVisible : boolean = false;
+  inicarSesion = false;
+  cerrarSesion = false;
+  perfil = false;
 
 
 
   fillerNav = [
-    {name:"Iniciar sesion", route : "automovil", icon:"home"},
     {name:"Catalogo", route : "catalogo", icon:"home"},
     {name:"Mi Perfil", route : "perfil", icon:"account_circle"},
     {name:"Mis Reservas", route : "misreservas", icon:"perm_contact_calendar"},
@@ -50,8 +53,16 @@ export class NavegacionComponent implements OnInit, OnDestroy {
     const rol = localStorage.getItem('access_rol');
       if(rol === 'ADMINISTRADOR'){
         this.isAdminVisible = true
-      }else{
+        this.isClienteVisible = false
+        this.perfil = true
+      }else if(rol === 'CLIENTE'){
+        this.isClienteVisible = true;
         this.isAdminVisible = false
+        this.perfil = true
+      }else{
+        this.isClienteVisible = false;
+        this.isAdminVisible = false
+        this.perfil = false
       }
   
 
@@ -59,7 +70,7 @@ export class NavegacionComponent implements OnInit, OnDestroy {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         console.log('Ruta actual:', event.url);
-        this.isNavbarVisible = event.url !== '/login' && event.url !== '/register' && event.url !== '/';
+        this.isNavbarVisible = event.url !== '/login' && event.url !== '/register' ;
       }
     });
   }
@@ -67,18 +78,66 @@ export class NavegacionComponent implements OnInit, OnDestroy {
     this.rolPropertyService.getRolPropertyObservable().subscribe(rol => {
       if(rol.includes('ADMINISTRADOR') ){
         this.isAdminVisible = true
+        this.isClienteVisible = false;
+        this.perfil = true
       }else if(rol.includes('CLIENTE')){
         this.isAdminVisible = false
+        this.isClienteVisible = true
+        this.perfil = true
       }else{
         const rol = localStorage.getItem('access_rol');
         if(rol === 'ADMINISTRADOR'){
           this.isAdminVisible = true
-        }else{
+          this.isClienteVisible = false
+          this.perfil = true
+        }else if(rol === 'CLIENTE'){
+          this.isClienteVisible = true
           this.isAdminVisible = false
+          this.perfil = true
+        }else{
+          this.isClienteVisible = false;
+          this.isAdminVisible = false
+          this.perfil = false
         }
       }
       
     });
+
+
+
+    this.rolPropertyService.getRolPropertyObservable().subscribe(rol => {
+      if(rol.includes('ADMINISTRADOR') ){
+        this.cerrarSesion = true
+        this.inicarSesion = false
+      }else if(rol.includes('CLIENTE')){
+        this.cerrarSesion = true
+        this.inicarSesion = false
+      }else{
+        const rol = localStorage.getItem('access_rol');
+        if(rol === 'ADMINISTRADOR'){
+          this.cerrarSesion = false
+        this.inicarSesion = true
+        }else{
+          this.cerrarSesion = false
+          this.inicarSesion = true        }
+      }
+      
+    });
+
+    const token = localStorage.getItem('access_token');
+    if(token !=null){
+      this.inicarSesion = false
+      this.cerrarSesion = true
+    }else{
+      this.cerrarSesion = false
+      this.inicarSesion = true
+    }
+  
+  }
+
+  sesion(){  
+      localStorage.clear()
+    
   }
 
   ngOnDestroy(): void {

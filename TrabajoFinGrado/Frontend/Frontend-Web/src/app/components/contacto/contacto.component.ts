@@ -48,7 +48,6 @@ export class ContactoComponent {
       this.httpClient.get(url).toPromise().then((data: any) => {
         console.log(data);
         this.usuario = data as UserDto;
-        this.utilsService.alert('success','Se ha añadido correctamente');
       }).catch((error) => {
         console.error('Se ha producido un error al recuperar el usuario:', error);
       });

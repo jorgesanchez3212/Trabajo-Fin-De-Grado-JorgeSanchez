@@ -55,7 +55,12 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('access_rol', response.user.rol);
         localStorage.setItem('access_id', response.user.id);
         this.rolPropertyService.emitRolProperty(response.user.rol);
+        if(localStorage.getItem("access_rol")=== "ADMINISTRADOR"){
         this.router.navigateByUrl('/automovil');
+        }else{
+          this.router.navigateByUrl('/catalogo');
+
+        }
       },
       (error) => {
         console.error('Error de autenticación.', error);

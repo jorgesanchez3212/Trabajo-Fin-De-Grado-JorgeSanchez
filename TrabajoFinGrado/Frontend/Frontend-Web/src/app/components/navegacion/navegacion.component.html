@@ -6,28 +6,34 @@
     </a>
     <!-- Este div vacío actúa como un espacio para centrar el logo. -->
     <div></div>
-  </mat-toolbar>
+    <button mat-button  style="position: absolute; right: 10px; color: white;" [routerLink]="'login'" *ngIf="inicarSesion">
+      <mat-icon [style.color]="'white'" class="icono-grande" >exit_to_app</mat-icon>
+      Iniciar Sesión
+    </button>
+
+  <button mat-button  style="position: absolute; right: 10px; color: white;" (click)="sesion()" [routerLink]="'login'" *ngIf="cerrarSesion">
+    <mat-icon [style.color]="'white'" class="icono-grande" >exit_to_app</mat-icon>
+    Cerrar Sesión
+  </button>
+</mat-toolbar>
 
   <mat-sidenav-container class="example-sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
     <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
       <mat-nav-list>
-        <a mat-list-item [routerLink]="['login']">
-          <mat-icon>home</mat-icon>
-          Iniciar sesion
-        </a>
-        <a mat-list-item [routerLink]="'catalogo'">
+        
+        <a mat-list-item [routerLink]="'catalogo'" *ngIf="isClienteVisible">
           <mat-icon>home</mat-icon>
           Catalogo
         </a>
-        <a mat-list-item [routerLink]="'perfil'">
+        <a mat-list-item [routerLink]="'perfil'" *ngIf="perfil">
           <mat-icon>account_circle</mat-icon>
           Mi Perfil
         </a>
-        <a mat-list-item [routerLink]="'misreservas'">
+        <a mat-list-item [routerLink]="'misreservas'" *ngIf="isClienteVisible">
           <mat-icon>account_circle</mat-icon>
           Mis Reservas
         </a>
-        <a mat-list-item [routerLink]="'misvaloraciones'">
+        <a mat-list-item [routerLink]="'misvaloraciones'" *ngIf="isClienteVisible">
           <mat-icon>account_circle</mat-icon>
           Mis Valoraciones
         </a>
@@ -51,7 +57,7 @@
           <mat-icon>home</mat-icon>
           Tiendas
         </a>
-        <a mat-list-item [routerLink]="'contacto'">
+        <a mat-list-item [routerLink]="'contacto'" *ngIf="isClienteVisible">
           <mat-icon>perm_contact_calendar</mat-icon>
           Contacto
         </a>

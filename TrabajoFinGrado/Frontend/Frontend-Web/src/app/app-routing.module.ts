@@ -14,7 +14,7 @@ import { ContactoComponent } from './components/contacto/contacto.component';
 import { CatalogoComponent } from './components/catalogo/catalogo.component';
 
 const routes: Routes = [
-  {path: '',redirectTo: 'login',pathMatch: 'full'},
+  {path: '',redirectTo: 'catalogo',pathMatch: 'full'},
   {path:'login',component: LoginComponent},
   {path:'register',component: RegisterComponent},
   {path:'automovil',component: AutomovilesComponent},

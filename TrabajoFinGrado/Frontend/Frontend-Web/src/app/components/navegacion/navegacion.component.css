@@ -50,3 +50,8 @@ h1.example-app-name {
 .example-is-mobile .example-sidenav-container {
     flex: 1 0 auto;
 }
+
+.icono-grande {
+    font-size: 20px !important;
+  }
+

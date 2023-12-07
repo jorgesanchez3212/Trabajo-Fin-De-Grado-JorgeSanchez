@@ -50,6 +50,7 @@ export class AutomovilesComponent {
           console.log("Automovil borrado")
         }
       }
+      this.getAutomovilesAll()
     });
   }
 
