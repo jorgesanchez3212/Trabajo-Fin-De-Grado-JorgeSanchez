@@ -22,7 +22,7 @@ export class RegisterComponent {
   email: string = '';
   username: string = '';
   password: string = '';
-  description: string = '';
+  descripcion: string = '';
 
   constructor(
     private formBuilder: FormBuilder,
@@ -53,7 +53,7 @@ export class RegisterComponent {
         image: null,
         rol: 'CLIENTE',
         password: this.registroForm.value.password,
-        description: this.registroForm.value.description,
+        descripcion: this.registroForm.value.description,
       };
 
       this.userService.userRegister(userData).subscribe(

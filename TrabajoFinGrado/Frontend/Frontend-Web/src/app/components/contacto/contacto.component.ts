@@ -4,6 +4,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ContactoDto } from 'src/app/models/contacto/contact-dto';
 import { ContactoCreateDto } from 'src/app/models/contacto/contacto-create';
 import { UserDto } from 'src/app/models/user/user-dto/user-dto';
+import { WebSocketService } from 'src/app/services/web-socket.service';
+import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
   selector: 'app-contacto',
@@ -17,7 +19,7 @@ export class ContactoComponent {
   public contactoNew : ContactoCreateDto;
   public actualizar : boolean = false;
   
-  constructor(private httpClient: HttpClient){
+  constructor(private httpClient: HttpClient, private utilsService : UtilsService){
 
     this.contactoNew = new ContactoCreateDto();
     this.contacto = new ContactoDto();
@@ -27,9 +29,9 @@ export class ContactoComponent {
   ngOnInit(){
     const id = localStorage.getItem('access_id');
     this.findUsuario(id!);
-
   }
 
+ 
   
   public async findUsuario(id :string){
     const url: string = `http://localhost:6969/api/users/find/${id}`;
@@ -46,6 +48,7 @@ export class ContactoComponent {
       this.httpClient.get(url).toPromise().then((data: any) => {
         console.log(data);
         this.usuario = data as UserDto;
+        this.utilsService.alert('success','Se ha añadido correctamente');
       }).catch((error) => {
         console.error('Se ha producido un error al recuperar el usuario:', error);
       });
@@ -80,6 +83,7 @@ export class ContactoComponent {
       this.httpClient.post(url, this.contactoNew, { headers }).toPromise().then((response: any) => {
         console.log('Contacto añadido correctamente');
         this.contactoNew.descripcion = '';
+        this.utilsService.alert('success','Se ha añadido correctamente');
       }).catch((error) => {
         console.error('Se ha producido un error al añadir el contacto:', error);
       });

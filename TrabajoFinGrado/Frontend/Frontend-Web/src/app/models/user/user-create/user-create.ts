@@ -5,7 +5,7 @@ export class UserCreate {
     public image: string | null;
     public password: string;
     public username: string;
-    public description : string;
+    public descripcion : string;
   
     constructor(){
       this.nombre ='';
@@ -14,7 +14,7 @@ export class UserCreate {
       this.image = null ;
       this.rol ='CLIENTE';
       this.password ='';
-      this.description ='';
+      this.descripcion ='';
     }
   }
   
