@@ -49,11 +49,14 @@ export class UsuarioComponent implements OnInit{
       if (result !== undefined) {
         if (result === 'Si') {
           this.deleteUsuarioById(usuarioId);
+          this.getUsuariosAll();
         } else {
           console.log("Usuario borrado")
         }
       }
     });
+    this.getUsuariosAll();
+
   }
 
   ngOnInit(): void {

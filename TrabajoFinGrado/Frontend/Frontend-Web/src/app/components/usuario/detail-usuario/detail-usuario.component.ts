@@ -45,7 +45,7 @@ export class DetailUsuarioComponent implements OnInit{
       this.usuarioUpdate.username = this.usuario.username;
       this.usuarioUpdate.nombre = usuario.nombre;
       this.usuarioUpdate.descripcion = usuario.descripcion;
-      this.usuarioUpdate.rol = usuario.rol[0];
+      this.usuarioUpdate.rol = usuario.rol;
       this.usuarioUpdate.email = usuario.email;
 
 

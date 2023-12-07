@@ -16,11 +16,16 @@ export class NewAutomovilGeneralComponent {
   public tipos : string[];
   selectedFile: File | null = null;
   private fileContentBase64: string | null = null;
+  public colores : string[];
+  public marcas : string[];
+  public capacidades : string[];
 
 
   constructor(private newAutomovilPropertyService : NewAutomovilPropertyService){
 
-    
+    this.capacidades = ['1', '2', '3', '4', '5'];
+    this.colores = ['Blanco', 'Negro', 'Naranja', 'Rojo', 'Verde'];
+    this.marcas = ['Audi', 'Mercedes', 'Porsche', 'BMW'];
     this.tipos = ['COCHE', 'CAMION', 'FURGONETA', 'MOTO'];
     this.automovil = new AutomovilDto();
   }

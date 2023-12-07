@@ -53,9 +53,15 @@
         <div class="col-md-6">
             <div class="form-group fg-asset">
                 <label class="txt-default-color form-label-asset txt-fz-12">Roles
-					del Usuario</label> <select multiple class="form-control form-line" (change)="focusOutRoles()" name="perfilProteccion" [(ngModel)]="usuario.rol">
-                        <option *ngFor="let item of roles" (value)="item">{{item}}</option>
-                    </select>
+					del Usuario</label> 
+                    <mat-form-field appearance="fill">
+                        <mat-label>Selecciona un Rol</mat-label>
+                        <mat-select [(ngModel)]="usuario.rol" (selectionChange)="focusOutRoles()">
+                          <mat-option *ngFor="let rol of roles" [value]="rol">
+                            {{ rol }}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
             </div>
         </div>
     </div>

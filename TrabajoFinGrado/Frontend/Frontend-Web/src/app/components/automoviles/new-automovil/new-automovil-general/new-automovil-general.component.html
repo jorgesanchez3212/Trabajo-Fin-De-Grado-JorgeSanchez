@@ -1,18 +1,7 @@
 
 <div class="col-md-12">
     <div class="row">
-        <!-- <div class="col-md-3">
-            <div class="form-group fg-asset">
-                <label class="txt-default-color form-label-asset txt-fz-12">Username <span class="txt-color-red">*</span>
-				</label> <input class="form-control form-line" name="usernameUsuario" type="text" (focusout)="focusOutUsuario()" [(ngModel)]="usuario.username" #usernameUsuario="ngModel" minlength="3" maxlength="200" required>
-            </div>
-            <div *ngIf="(usernameUsuario.invalid && (usernameUsuario.dirty || usernameUsuario.touched)) ||(usernameUsuario.errors?.['minlength']) || (usernameUsuario.errors?.['maxlength'])">
-                <div class="error-message">
-                    <fa-icon class="fa red" [icon]="faWarning"></fa-icon>&nbsp;&nbsp;Campo obligatorio (min.3, m&aacute;x 200 carac.)
-                </div>
-            </div>
-        </div> -->
-
+   
         <div class="col-md-3">
             <div class="form-group fg-asset">
                 <label class="txt-default-color form-label-asset txt-fz-12">Foto de Perfil </label>
@@ -37,7 +26,14 @@
             <div class="form-group fg-asset">
                 <label class="txt-default-color form-label-asset txt-fz-12">Marca del 
 					Automovil <span class="txt-color-red">*</span>
-				</label> <input class="form-control form-line" name="marcaAutomovil" type="text" (focusout)="focusOutAutomovil()" [(ngModel)]="automovil.marca" #marcaAutomovil="ngModel" minlength="3" maxlength="200" required>
+				</label> <mat-form-field appearance="fill" class="example-full-width">
+                    <mat-label>Selecciona una Marca</mat-label>
+                    <mat-select (focusout)="focusOutAutomovil()" [(ngModel)]="automovil.marca" #marcaAutomovil="ngModel" minlength="3" maxlength="200" required>
+                      <mat-option *ngFor="let tipo of marcas" [value]="tipo">
+                        {{ tipo }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>  
             </div>
             <div *ngIf="(marcaAutomovil.invalid && (marcaAutomovil.dirty || marcaAutomovil.touched)) ||(marcaAutomovil.errors?.['minlength']) || (marcaAutomovil.errors?.['maxlength'])">
                 <div class="error-message">
@@ -63,7 +59,15 @@
             <div class="form-group fg-asset">
                 <label class="txt-default-color form-label-asset txt-fz-12">Color del 
 					Automovil <span class="txt-color-red">*</span>
-				</label> <input class="form-control form-line" name="usernameUsuario" type="text" (focusout)="focusOutAutomovil()" [(ngModel)]="automovil.color" #colorAutomovil="ngModel" minlength="3" maxlength="200" required>
+				</label> <mat-form-field appearance="fill" class="example-full-width">
+                    <mat-label>Selecciona un Color</mat-label>
+                    <mat-select (focusout)="focusOutAutomovil()" [(ngModel)]="automovil.color" #colorAutomovil="ngModel" minlength="3" maxlength="200" required>
+                      <mat-option *ngFor="let tipo of colores" [value]="tipo">
+                        {{ tipo }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field> 
+            
             </div>
             <div *ngIf="(colorAutomovil.invalid && (colorAutomovil.dirty || colorAutomovil.touched)) ||(colorAutomovil.errors?.['minlength']) || (colorAutomovil.errors?.['maxlength'])">
                 <div class="error-message">
@@ -75,7 +79,15 @@
             <div class="form-group fg-asset">
                 <label class="txt-default-color form-label-asset txt-fz-12">Capacidad del 
 					Automovil <span class="txt-color-red">*</span>
-				</label> <input class="form-control form-line" name="passwordUsuario" type="text" (focusout)="focusOutAutomovil()" [(ngModel)]="automovil.capacidad" #capacidadAutomovil="ngModel"  required>
+				</label> <mat-form-field appearance="fill" class="example-full-width">
+                    <mat-label>Selecciona una Capacidad</mat-label>
+                    <mat-select (focusout)="focusOutAutomovil()" [(ngModel)]="automovil.capacidad" #capacidadAutomovil="ngModel"  required>
+                      <mat-option *ngFor="let tipo of capacidades" [value]="tipo">
+                        {{ tipo }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field> 
+            
             </div>
             <div *ngIf="(capacidadAutomovil.invalid && (capacidadAutomovil.dirty || capacidadAutomovil.touched))">
                 <div class="error-message">

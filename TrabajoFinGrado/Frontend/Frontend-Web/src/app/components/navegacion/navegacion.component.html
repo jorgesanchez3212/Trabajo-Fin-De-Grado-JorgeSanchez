@@ -26,15 +26,15 @@
           Catalogo
         </a>
         <a mat-list-item [routerLink]="'perfil'" *ngIf="perfil">
-          <mat-icon>account_circle</mat-icon>
+          <mat-icon>person</mat-icon>
           Mi Perfil
         </a>
         <a mat-list-item [routerLink]="'misreservas'" *ngIf="isClienteVisible">
-          <mat-icon>account_circle</mat-icon>
+          <mat-icon>event</mat-icon>
           Mis Reservas
         </a>
         <a mat-list-item [routerLink]="'misvaloraciones'" *ngIf="isClienteVisible">
-          <mat-icon>account_circle</mat-icon>
+          <mat-icon>star</mat-icon>
           Mis Valoraciones
         </a>
         <a mat-list-item [routerLink]="'usuarios'" *ngIf="isAdminVisible">
@@ -46,15 +46,15 @@
           Automoviles
         </a>
         <a mat-list-item [routerLink]="'comentarios'" *ngIf="isAdminVisible">
-          <mat-icon>directions_car</mat-icon>
+          <mat-icon>comment</mat-icon>
           Comentarios
         </a>
         <a mat-list-item [routerLink]="'reservas'" *ngIf="isAdminVisible">
-          <mat-icon>group</mat-icon>
+          <mat-icon>calendar_today</mat-icon>
           Reservas
         </a>
         <a mat-list-item [routerLink]="['mapas']" *ngIf="isAdminVisible">
-          <mat-icon>home</mat-icon>
+          <mat-icon>place</mat-icon>
           Tiendas
         </a>
         <a mat-list-item [routerLink]="'contacto'" *ngIf="isClienteVisible">
