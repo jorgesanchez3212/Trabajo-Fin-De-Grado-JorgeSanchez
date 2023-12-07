@@ -25,6 +25,6 @@ data class Automovil(
     val deleted: Boolean = false,
 ) {
     enum class TipoAutomovil{
-        COCHE, FURGONETA, CAMION
+        COCHE, FURGONETA, CAMION, MOTO
     }
 }

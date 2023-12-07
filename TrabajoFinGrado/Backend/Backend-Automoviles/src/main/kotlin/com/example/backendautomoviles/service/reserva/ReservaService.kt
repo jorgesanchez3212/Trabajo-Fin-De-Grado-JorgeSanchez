@@ -45,17 +45,17 @@ class ReservaService @Autowired constructor(
         if (reservaFilter.fechaInicio != null){
             if (reservaFilter.fechaFin != null){
                 println("Entra aqui 1")
-                return@withContext repository.findAllByFechaInicioBeforeAndFechaFinalAfter(LocalDate.parse(reservaFilter.fechaInicio), LocalDate.parse(reservaFilter.fechaFin))
+                return@withContext repository.findAllByFechaInicioBetweenAndFechaFinalAfter(LocalDate.parse(reservaFilter.fechaInicio), LocalDate.parse(reservaFilter.fechaFin))
             }else{
                 println("Entra aqui 2")
-                return@withContext repository.findAllByFechaInicioBefore(LocalDate.parse(reservaFilter.fechaInicio))
+                return@withContext repository.findAllByFechaInicioAfter(LocalDate.parse(reservaFilter.fechaInicio))
 
             }
 
         }else{
             if(reservaFilter.fechaFin != null){
                 println("Entra aqui 3")
-                return@withContext repository.findAllByFechaFinalAfter(LocalDate.parse(reservaFilter.fechaFin))
+                return@withContext repository.findAllByFechaFinalBefore(LocalDate.parse(reservaFilter.fechaFin))
 
             } else {
                 println("Entra aqui 4")

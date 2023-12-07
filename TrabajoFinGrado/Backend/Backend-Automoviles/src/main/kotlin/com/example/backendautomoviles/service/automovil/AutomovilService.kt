@@ -6,7 +6,9 @@ import com.example.backendautomoviles.exceptions.AutomovilesNotFoundException
 import com.example.backendautomoviles.filters.AutomovilFilter
 import com.example.backendautomoviles.models.Automovil
 import com.example.backendautomoviles.repositories.AutomovilesRepository
+import com.example.backendautomoviles.repositories.ReservasRepository
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.filterNot
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.withContext
@@ -14,6 +16,7 @@ import mu.KotlinLogging
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.cache.annotation.Cacheable
 import org.springframework.stereotype.Service
+import java.time.LocalDate
 
 private val logger = KotlinLogging.logger {}
 
@@ -21,12 +24,23 @@ private val logger = KotlinLogging.logger {}
 class AutomovilService
 @Autowired constructor(
     private val repository : AutomovilesRepository,
+    private val reservasRepository: ReservasRepository
 ){
     suspend fun findAll() = withContext(Dispatchers.IO) {
         return@withContext repository.findAll()
     }
 
 
+    suspend fun buscarAutomovilesDisponibles(fechaInicio: LocalDate, fechaFinal: LocalDate): List<Automovil> {
+        // Buscar reservas que están dentro del rango de fechas
+        val reservas = reservasRepository.findAllByFechaInicioBetweenAndFechaFinalAfter(fechaInicio, fechaFinal).toList()
+
+        // Extraer IDs de los automóviles reservados
+        val automovilesReservadosIds = reservas.map { it.automovilId }.toSet()
+
+        // Buscar automóviles que no están reservados
+        return repository.findAll().filterNot { automovilesReservadosIds.contains(it.id) }.toList()
+    }
 
 
 

@@ -15,4 +15,8 @@ interface AutomovilesRepository : CoroutineCrudRepository<Automovil, String> {
     fun findByMarca(marca: String): Flow<List<Automovil>>
     fun findByColor(color: String): Flow<List<Automovil>>
 
+    fun findAllByTipo(tipo: String): Flow<Automovil>
+
+
+
 }
