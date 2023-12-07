@@ -164,9 +164,21 @@ export class CatalogoComponent {
 
 
 onContextFiltrarClick(){
-  const url : string = 'http://localhost:6969/api/automoviles/catalogoFiltro'
+  const url : string = 'http://localhost:6969/api/automoviles/catalogoFiltros'
+
+  
+    // Para fechaFin
+if (this.reservaFilterFin) {
+  this.catalogoDto.fechaFinal = formatDate(this.reservaFilterFin, 'yyyy-MM-dd', 'en-US');
+}
+
+// Para fechaInicio
+if (this.reservaFilterInicio) {
+  this.catalogoDto.fechaInicio = formatDate(this.reservaFilterInicio, 'yyyy-MM-dd', 'en-US');
+} 
 
   const token = localStorage.getItem('access_token');
+  if(this.catalogoDto.fechaFinal != null && this.catalogoDto.fechaFinal != null && this.catalogoDto.tipoAutomovil != null){
 
   if (token) {
     const headers = new HttpHeaders({
@@ -181,6 +193,7 @@ onContextFiltrarClick(){
     
     console.log('Se ha producido un error al obtener los automoviles');
   });
+}
 }
 
 }
@@ -206,7 +219,7 @@ if (this.reservaFilterInicio) {
   this.catalogoDto.fechaInicio = formatDate(this.reservaFilterInicio, 'yyyy-MM-dd', 'en-US');
 } 
  const token = localStorage.getItem('access_token');
-if(this.catalogoDto.fechaFinal != null && this.catalogoDto.fechaFinal != null)
+if(this.catalogoDto.fechaFinal != null && this.catalogoDto.fechaFinal != null && this.catalogoDto.tipoAutomovil != null){
  if (token) {
    const headers = new HttpHeaders({
      Authorization: `Bearer ${token}`
@@ -221,6 +234,7 @@ if(this.catalogoDto.fechaFinal != null && this.catalogoDto.fechaFinal != null)
    
    console.log('Se ha producido un error al obtener los automoviles');
  });
+}
 }
 }
 

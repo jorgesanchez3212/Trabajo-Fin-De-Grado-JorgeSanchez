@@ -64,7 +64,7 @@
           <label class="txt-default-color form-label-asset txt-fz-12">Color </label>
           <mat-form-field appearance="fill" class="example-full-width">
             <mat-label>Selecciona un Color</mat-label>
-            <mat-select [(ngModel)]="catalogoDto.tipoAutomovil">
+            <mat-select [(ngModel)]="catalogoDto.color">
               <mat-option *ngFor="let tipo of colores" [value]="tipo">
                 {{ tipo }}
               </mat-option>

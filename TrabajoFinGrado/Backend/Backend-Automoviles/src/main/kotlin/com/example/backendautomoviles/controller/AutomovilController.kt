@@ -31,6 +31,12 @@ class AutomovilController
         return ResponseEntity.ok(service.buscarAutomovilesDisponibles(LocalDate.parse(catalogoDto.fechaInicio), LocalDate.parse(catalogoDto.fechaFinal), catalogoDto.tipoAutomovil).map { it.toDto() })
     }
 
+    @PostMapping("/catalogoFiltros")
+    suspend fun listaAutomovilesCatalogoFiltros(@Valid @RequestBody catalogoDto: CatalogoDto) : ResponseEntity<List<AutomovilDto>>{
+        logger.info { "Obteniendo lista de todos los automoviles $catalogoDto"}
+        return ResponseEntity.ok(service.buscarAutomovilesDisponiblesFiltros(LocalDate.parse(catalogoDto.fechaInicio), LocalDate.parse(catalogoDto.fechaFinal), catalogoDto.tipoAutomovil, catalogoDto.capacidad, catalogoDto.marca,catalogoDto.color).map { it.toDto() })
+    }
+
     @GetMapping("/listaAutomoviles")
     suspend fun listaAutomoviles() : ResponseEntity<List<AutomovilDto>>{
         logger.info { "Obteniendo lista de todos los automoviles"}

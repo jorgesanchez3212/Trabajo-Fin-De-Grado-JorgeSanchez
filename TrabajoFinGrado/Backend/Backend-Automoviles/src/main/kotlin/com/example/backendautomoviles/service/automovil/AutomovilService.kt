@@ -46,6 +46,33 @@ class AutomovilService
     }
 
 
+    suspend fun buscarAutomovilesDisponiblesFiltros(
+        fechaInicio: LocalDate,
+        fechaFinal: LocalDate,
+        tipoAutomovil: String,
+        capacidad: String?,
+        marca: String?,
+        color: String?
+    ): List<Automovil> {
+        // Convertir capacidad de String a Int, manejando posibles errores de conversión
+        val capacidad = capacidad?.toIntOrNull()
+
+        // Buscar reservas que están dentro del rango de fechas
+        val reservas = reservasRepository.findByFechaInicioLessThanEqualAndFechaFinalGreaterThanEqual(fechaInicio, fechaFinal).toList()
+
+        // Extraer IDs de los automóviles reservados
+        val automovilesReservadosIds = reservas.map { it.automovilId }.toSet()
+
+        // Buscar automóviles que no están reservados y aplicar filtros adicionales
+        return repository.findAll()
+            .filterNot { automovilesReservadosIds.contains(it.id) }
+            .filter { it.tipo.equals(tipoAutomovil, ignoreCase = true) }
+            .filter { capacidad == null || it.capacidad == capacidad }
+            .filter { marca == null || it.marca.equals(marca, ignoreCase = true) }
+            .filter { color == null || it.color.equals(color, ignoreCase = true) }
+            .toList()
+    }
+
 
     suspend fun findAllFiltros(automovilFilter: AutomovilFilter) = withContext(Dispatchers.IO) {
         var listaFiltros = repository.findAll().toList()
