@@ -40,6 +40,10 @@ class ComentarioService
         return@withContext repository.findAllByIdUser(id)
     }
 
+    suspend fun findAllByAutomovil(id: String) = withContext(Dispatchers.IO) {
+        return@withContext repository.findAllByIdAutomovil(id)
+    }
+
     @Cacheable("comentarios")
     suspend fun loadComentarioByUUID(uuid: String) = withContext(Dispatchers.IO) {
         return@withContext repository.findByUuid(uuid).firstOrNull()

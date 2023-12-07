@@ -42,8 +42,15 @@ class ComentarioController
 
     }
 
+    @GetMapping("/listaComentariosByAutmovilId/{id}")
+    suspend fun listaComentariosByAutmovilId(@PathVariable id : String) : ResponseEntity<List<ComentarioDto>>{
+        logger.info { "Buscando comentario con el  id del automovil ${id}"}
+        return ResponseEntity.ok(service.findAllByAutomovil(id).toList().map { it.toDto() })
 
-    @PreAuthorize("hasRole('ADMINISTRADOR')")
+    }
+
+
+    //@PreAuthorize("hasRole('ADMINISTRADOR')")
     @PostMapping("/newComentarios")
     suspend fun new(@Valid @RequestBody entityDto: ComentarioCreateDto): ResponseEntity<ComentarioCreateDto> {
         logger.info { "Creacion de comentario: ${entityDto}" }

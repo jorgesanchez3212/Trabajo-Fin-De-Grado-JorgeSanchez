@@ -11,6 +11,9 @@ import { Map, marker, tileLayer } from 'leaflet';
 import { MapaDto } from 'src/app/models/mapa/mapa-dto';
 import { CatalogoDto } from 'src/app/models/catalogo/catalogo-dto';
 import { formatDate } from '@angular/common';
+import { DetailComentarioCatalogoComponent } from './detail-comentario-catalogo/detail-comentario-catalogo.component';
+import { ComentarioDto } from 'src/app/models/comentario/comentario-dto/comentario-dto';
+import { NewComentariosPropertyService } from 'src/app/services/new-comentarios-property.service';
 
 
 @Component({
@@ -32,6 +35,7 @@ export class CatalogoComponent {
   public colores : string[];
   public marcas : string[];
   public capacidades : string[];
+  public comentarios : ComentarioDto[] = [];
 
 
 
@@ -63,7 +67,7 @@ export class CatalogoComponent {
    // marker([Number(this.ubicaciones[0].latitud), Number(this.ubicaciones[0].longitud)]).addTo(map);
   }
  
-  constructor(private httpService: HttpClient, private utilsService : UtilsService, public dialog: MatDialog){
+  constructor(private httpService: HttpClient, private utilsService : UtilsService, public dialog: MatDialog,private newComentariosProperty: NewComentariosPropertyService,){
     this.automoviles = [];
     this.automovil = new AutomovilDto();
     this.tipos = ['COCHE', 'CAMION', 'FURGONETA', 'MOTO'];
@@ -236,6 +240,39 @@ if(this.catalogoDto.fechaFinal != null && this.catalogoDto.fechaFinal != null &&
  });
 }
 }
+}
+
+openModal(automovilId:string){
+  const url: string = `http://localhost:6969/api/comentarios/listaComentariosByAutmovilId/${automovilId}`;
+  //const url: string = `http://128.140.34.184:8080/api/comentarios/listaComentariosByAutmovilId/${automovilId}`; 
+
+  this.loadData(automovilId);
+  this.httpService.get(url).toPromise().then((data: any) => {
+    console.log(data);
+    this.comentarios = data as ComentarioDto[];
+    this.dialog.open(DetailComentarioCatalogoComponent, {
+      width: '70%', height: '70%', data: {
+        comentario: this.comentarios,
+      }
+    }).afterClosed().subscribe(() => {
+      this.getAutomovilesAll();
+      //this.clearEmit();
+    });
+  }).catch(() => {
+    console.log('Se ha producido un error al obtener los automoviles');
+  })
+
+}
+
+
+
+comentario(automovil : AutomovilDto){
+  this.openModal( automovil.id as string);
+
+}
+
+private loadData(id:string){
+  this.newComentariosProperty.emitStringProperty(id);
 }
 
 }

@@ -1,0 +1,11 @@
+<div class="col-md-12">
+    <div class="row">
+        <div *ngFor="let tipo of comentarios" class="col-md-12">
+            <div class="form-group fg-asset">
+                <label class="form-label-asset txt-fz-12" style="color: black;"><strong>Comentario:</strong> <span class="txt-color-red">*</span>
+				</label>
+                <div><strong>{{ tipo.descripcion }}</strong></div>
+            </div>
+        </div>
+    </div>
+</div>

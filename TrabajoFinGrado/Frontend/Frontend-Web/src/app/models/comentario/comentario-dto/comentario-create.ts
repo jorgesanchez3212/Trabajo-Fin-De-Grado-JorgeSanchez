@@ -1,10 +1,8 @@
-export class ComentarioDto{
-    public id : string;
+export class ComentarioCreateDto{
     public descripcion : string;
     public idUser : string;
     public idAutomovil : string;
-    public createdAt : string;
-    public deleted : string;
+    
     
     
     
@@ -12,12 +10,10 @@ export class ComentarioDto{
     
     
         constructor(){
-            this.id = '';
             this.descripcion = '';
             this.idUser = '';
             this.idAutomovil = '';
-            this.createdAt = '';
-            this.deleted = '';
+          
     
         }
     }

@@ -67,6 +67,8 @@ import { DetailMisvaloracionesComponent } from './components/misvaloraciones/det
 import { GeneralMisvaloracionesComponent } from './components/misvaloraciones/detail-misvaloraciones/general-misvaloraciones/general-misvaloraciones.component';
 import { ContactoComponent } from './components/contacto/contacto.component';
 import { CatalogoComponent } from './components/catalogo/catalogo.component';
+import { DetailComentarioCatalogoComponent } from './components/catalogo/detail-comentario-catalogo/detail-comentario-catalogo.component';
+import { GeneralComentarioCatalogoComponent } from './components/catalogo/detail-comentario-catalogo/general-comentario-catalogo/general-comentario-catalogo.component';
 
 
 
@@ -105,6 +107,8 @@ import { CatalogoComponent } from './components/catalogo/catalogo.component';
     GeneralMisvaloracionesComponent,
     ContactoComponent,
     CatalogoComponent,
+    DetailComentarioCatalogoComponent,
+    GeneralComentarioCatalogoComponent,
     ],
   imports: [
     BrowserModule,

@@ -11,4 +11,5 @@ interface ComentariosRepository : CoroutineCrudRepository<Comentario, String> {
     fun findByIdUserAndIdAutomovil(idUser: String, idAutomovil:String): Flow<List<Comentario>>
     fun findByIdUser(idUser: String): Flow<List<Comentario>>
     fun findAllByIdUser(idUser: String) : Flow<Comentario>
+    fun findAllByIdAutomovil(idAutomovil: String) : Flow<Comentario>
 }
