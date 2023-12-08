@@ -14,6 +14,8 @@ import { formatDate } from '@angular/common';
 import { DetailComentarioCatalogoComponent } from './detail-comentario-catalogo/detail-comentario-catalogo.component';
 import { ComentarioDto } from 'src/app/models/comentario/comentario-dto/comentario-dto';
 import { NewComentariosPropertyService } from 'src/app/services/new-comentarios-property.service';
+import { ReservaDto } from 'src/app/models/reserva/reserva-dto';
+import { ReservaCreateDto } from 'src/app/models/reserva/reserva-create';
 
 
 @Component({
@@ -36,6 +38,10 @@ export class CatalogoComponent {
   public marcas : string[];
   public capacidades : string[];
   public comentarios : ComentarioDto[] = [];
+
+  public reservas : ReservaCreateDto;
+
+  public costeReserva : Number = 0
 
 
 
@@ -74,6 +80,7 @@ export class CatalogoComponent {
     this.capacidades = ['1', '2', '3', '4', '5'];
     this.colores = ['Blanco', 'Negro', 'Naranja', 'Rojo', 'Verde'];
     this.marcas = ['Audi', 'Mercedes', 'Porsche', 'BMW'];
+    this.reservas = new ReservaCreateDto();
 
 
   }
@@ -273,6 +280,83 @@ comentario(automovil : AutomovilDto){
 
 private loadData(id:string){
   this.newComentariosProperty.emitStringProperty(id);
+}
+
+
+reservar(automovil : AutomovilDto){
+this.saveReserva(automovil)
+this.buscar()
+}
+
+
+public async saveReserva(automovil : AutomovilDto){
+  const url: string = 'http://localhost:6969/api/reservas/newReserva';
+  //const url: string = 'http://128.140.34.184:8080/api/reservas/newReserva';
+
+
+
+
+  const idd = localStorage.getItem('access_id');
+if(idd != null){
+  this.reservas.clienteId = idd
+  
+
+  
+    // Para fechaFin
+if (this.reservaFilterFin) {
+  this.reservas.fechaFin = formatDate(this.reservaFilterFin, 'yyyy-MM-dd', 'en-US');
+}
+
+// Para fechaInicio
+if (this.reservaFilterInicio) {
+  this.reservas.fechaInicio = formatDate(this.reservaFilterInicio, 'yyyy-MM-dd', 'en-US');
+} 
+
+
+
+
+if (this.reservas.fechaFin.trim() === "" || this.reservas.fechaFin.trim() === "" ) {
+
+  this.utilsService.alert('error','Tienes que buscar tipo de automovil y fechas para reservar');
+
+
+
+} else {
+
+
+
+
+
+
+let diferenciaEnMilisegundos =  this.reservaFilterFin!.getTime() - this.reservaFilterInicio!.getTime();
+
+// Convierte la diferencia a días
+let diferenciaEnDias = diferenciaEnMilisegundos / (1000 * 3600 * 24);
+
+this.costeReserva = Number(automovil.coste) * diferenciaEnDias
+this.reservas.costo = this.costeReserva.toString()
+this.reservas.recogidoPorCliente = false
+this.reservas.automovilId = automovil.id
+
+  const token = localStorage.getItem('access_token');
+
+  if (token) {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+
+    this.httpService.post(url, this.reservas, { headers }).toPromise().then((response: any) => {
+      console.log('Reserva añadida correctamente');
+      this.utilsService.alert('success','Has reservado correctamente');
+    }).catch((error) => {
+      console.error('Se ha producido un error al updatear la reserva:', error);
+    });
+  }
+}
+}else{
+  this.utilsService.alert('error','Tienes que inicar sesión');
+
+}
 }
 
 }

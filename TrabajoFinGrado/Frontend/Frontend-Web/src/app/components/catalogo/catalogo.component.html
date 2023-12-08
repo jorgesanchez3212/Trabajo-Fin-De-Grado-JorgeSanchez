@@ -106,11 +106,15 @@
         </div>
         <div class="user-datos">
           <mat-card-title>{{ automovil.marca }} </mat-card-title>
-          <mat-card-subtitle>{{ automovil.modelo }}    <br>   {{ automovil.color }}   
+          <mat-card-subtitle>Modelo -> {{ automovil.modelo }}    <br>  Color -> {{ automovil.color }}   
           </mat-card-subtitle>
+          
+          <br><br><br><br>
+          <mat-card-title>Precio Por Día -> {{ automovil.coste }}$ </mat-card-title>
+
         </div>
         <div class="botones">
-          <button mat-flat-button color="primary"><mat-icon>bookmark</mat-icon>Reservar</button><br><br>
+          <button mat-flat-button color="primary" (click)="reservar(automovil)"><mat-icon>bookmark</mat-icon>Reservar</button><br><br>
           <button mat-flat-button color="warn" (click)="comentario(automovil)" ><mat-icon>chat_bubble</mat-icon> Comentarios</button>
         </div>
       </mat-card-header>
