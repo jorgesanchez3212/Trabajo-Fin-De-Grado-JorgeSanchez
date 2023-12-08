@@ -7,6 +7,7 @@ import com.example.backendautomoviles.models.Usuario
 import com.example.backendautomoviles.repositories.UsuariosRepository
 import com.example.backendautomoviles.service.BcryptService
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.runBlocking
@@ -43,26 +44,13 @@ class UsuarioService
         return@withContext repository.findAll()
     }
 
-    suspend fun findAllFiltros(usuarioFilter: UsuarioFilter) = withContext(Dispatchers.IO) {
-        var listaFiltros = repository.findAll().toList()
-
-        usuarioFilter.id?.let {
-            listaFiltros = listaFiltros.filter { it.id == usuarioFilter.id }
-        }
-
-        usuarioFilter.email?.let {
-            listaFiltros = listaFiltros.filter { it.email == usuarioFilter.email }
-        }
-
-        usuarioFilter.rol?.let {
-            listaFiltros = listaFiltros.filter { it.rol == usuarioFilter.rol }
-        }
-
-        usuarioFilter.username?.let {
-            listaFiltros = listaFiltros.filter { it.username == usuarioFilter.username }
-        }
-        
-        return@withContext listaFiltros
+    suspend fun findAllFiltros(usuarioFilter: UsuarioFilter) : List<Usuario> {
+        return repository.findAll()
+            .filter { usuarioFilter.nombre == null || it.nombre == usuarioFilter.nombre }
+            .filter { usuarioFilter.username == null || it.username == usuarioFilter.username }
+            .filter { usuarioFilter.email == null || it.email.equals(usuarioFilter.email, ignoreCase = true) }
+            .filter { usuarioFilter.rol == null || it.rol.equals(usuarioFilter.rol, ignoreCase = true) }
+            .filter { usuarioFilter.id == null || it.id.equals(usuarioFilter.id, ignoreCase = true) }.toList()
     }
 
 

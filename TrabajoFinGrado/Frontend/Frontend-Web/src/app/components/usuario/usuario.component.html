@@ -6,19 +6,43 @@
     </mat-panel-title>
   </mat-expansion-panel-header>
 
-    <br>
+    <div class="row">
+    <div class="col-md-3">
+      <label class="txt-default-color form-label-asset txt-fz-12">ID Usuario </label>
+      <input class="form-control form-line" name="idUserFilter" type="text" [(ngModel)]="userFilter.id" #idUserFilter="ngModel">
+    </div> 
     <div class="col-md-3">
     <label class="txt-default-color form-label-asset txt-fz-12">Username </label>
     <input class="form-control form-line" name="usernameUserFilter" type="text" [(ngModel)]="userFilter.username" #usernameUserFilter="ngModel">
   </div> 
+  
   <div class="col-md-3">
-    <label class="txt-default-color form-label-asset txt-fz-12">ID Usuario </label>
-    <input class="form-control form-line" name="idUserFilter" type="text" [(ngModel)]="userFilter.id" #idUserFilter="ngModel">
+    <label class="txt-default-color form-label-asset txt-fz-12">Rol </label>
+    <mat-form-field appearance="fill" class="example-full-width">
+      <mat-label>Selecciona un Rol</mat-label>
+      <mat-select  [(ngModel)]="userFilter.rol" #rolUserFilter="ngModel">
+        <mat-option *ngFor="let tipo of roles" [value]="tipo">
+          {{ tipo }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field> 
   </div> 
-  <div class="botonesFiltros">
-    <button mat-flat-button color="primary" (click)="onContextFiltrarClick()"><mat-icon>edit</mat-icon>Filtrar</button>
-    <button mat-flat-button color="warn" (click)="clearFilters()" ><mat-icon>delete</mat-icon> Limpiar</button><br><br>
-  </div>
+  
+</div>
+<div class="row">
+  <div class="col-md-3">
+    <label class="txt-default-color form-label-asset txt-fz-12">E-mail </label>
+    <input class="form-control form-line" name="emailUserFilter" type="text" [(ngModel)]="userFilter.email" #emailUserFilter="ngModel">
+  </div> 
+  <div class="col-md-3">
+    <label class="txt-default-color form-label-asset txt-fz-12">Nombre </label>
+    <input class="form-control form-line" name="nombreUserFilter" type="text" [(ngModel)]="userFilter.nombre" #nombreUserFilter="ngModel">
+  </div> 
+</div>
+<div class="botonesFiltros">
+  <button mat-flat-button color="primary" (click)="onContextFiltrarClick()"><mat-icon>edit</mat-icon>Filtrar</button>
+  <button mat-flat-button color="warn" (click)="clearFilters()" ><mat-icon>delete</mat-icon> Limpiar</button><br><br>
+</div>
 </mat-expansion-panel>
 
   

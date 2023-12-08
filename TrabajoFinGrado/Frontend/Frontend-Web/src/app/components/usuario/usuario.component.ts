@@ -20,11 +20,13 @@ export class UsuarioComponent implements OnInit{
   panelOpenState = false;
   filterUsername = '';
   public userFilter : UserFilter = new UserFilter();
+  public roles : string[] 
 
 
   constructor(private httpService: HttpClient, private utilsService : UtilsService, public dialog: MatDialog){
     this.usuarios = [];
     this.user = new UserDto();
+    this.roles = ['ADMINISTRADOR', 'CLIENTE']
    
   }
 
@@ -169,8 +171,11 @@ export class UsuarioComponent implements OnInit{
 }
 
 clearFilters() {
-  this.userFilter.username = '';
-  this.userFilter.id = '';
+  this.userFilter.username = null;
+  this.userFilter.id = null;
+  this.userFilter.nombre = null;
+  this.userFilter.rol = null;
+  this.userFilter.email = null;
   this.getUsuariosAll();
 }
 
