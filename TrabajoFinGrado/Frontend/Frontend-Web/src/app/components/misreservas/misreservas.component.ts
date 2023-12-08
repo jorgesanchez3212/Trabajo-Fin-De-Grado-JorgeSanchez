@@ -78,6 +78,12 @@ export class MisreservasComponent {
       if (result !== undefined) {
         if (result === 'Si') {
           this.deleteReservaById(id);
+          this.utilsService.alert('success','Se ha anulado la reserva correctamente');
+          let idd = localStorage.getItem('access_id');
+          if(idd === null){
+            idd = '0'
+          }
+          this.getReservasAllByClienteId(idd);
         } else {
           console.log("Reserva borrado")
         }
@@ -147,6 +153,8 @@ export class MisreservasComponent {
 
       // Descarga el PDF
       doc.save('reserva.pdf');
+      this.utilsService.alert('success','Se ha descargado el pdf correctamente');
+
     }
 
     public async findUsuario(id :string){

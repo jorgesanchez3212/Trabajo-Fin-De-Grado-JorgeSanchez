@@ -72,6 +72,12 @@ export class MisvaloracionesComponent {
       if (result !== undefined) {
         if (result === 'Si') {
           this.deleteComentarioById(id);
+          this.utilsService.alert('success','Se ha eliminado la valoración correctamente')
+          let idd = localStorage.getItem('access_id');
+          if(idd === null){
+          idd = '0'
+          }
+          this.getComentariosAllByClienteId(idd);
         } else {
           console.log("Automovil borrado")
         }

@@ -5,6 +5,7 @@ import { faFilePdf, faTimes, faInfo, faSave, faExclamationTriangle } from '@fort
 import { ComentarioCreateDto } from 'src/app/models/comentario/comentario-dto/comentario-create';
 import { ComentarioDto } from 'src/app/models/comentario/comentario-dto/comentario-dto';
 import { NewComentariosPropertyService } from 'src/app/services/new-comentarios-property.service';
+import { UtilsService } from 'src/app/services/utils.service';
 
 
 
@@ -24,7 +25,7 @@ export class DetailComentarioCatalogoComponent {
   public faInfo = faInfo;
   public faFloppy = faSave;
 
-  constructor(private httpClient: HttpClient, @Inject(MAT_DIALOG_DATA) private data: any,  private newComentariosProperty: NewComentariosPropertyService,
+  constructor(private httpClient: HttpClient, private utilsService : UtilsService ,@Inject(MAT_DIALOG_DATA) private data: any,  private newComentariosProperty: NewComentariosPropertyService,
   private dialogRef: MatDialogRef<DetailComentarioCatalogoComponent>){
 
     this.comentarios = data.comentario;
@@ -67,6 +68,8 @@ export class DetailComentarioCatalogoComponent {
 
       this.httpClient.post(url, this.comentarioTuyo, { headers }).toPromise().then((response: any) => {
         console.log('Comentario insertado correctamente');
+        this.utilsService.alert('success','Se ha añadido el comentario correctamente');
+
         this.dialogRef.close();
       }).catch((error) => {
         console.error('Se ha producido un error al insertar el comentario:', error);

@@ -5,6 +5,7 @@ import { UserDto } from 'src/app/models/user/user-dto/user-dto';
 import { NewUsuarioPropertyService } from 'src/app/services/new-usuario-proerty.service';
 import { faFilePdf, faTimes, faInfo, faSave } from '@fortawesome/free-solid-svg-icons';
 import { UserUpdate } from 'src/app/models/user/user-update';
+import { UtilsService } from 'src/app/services/utils.service';
 
 
 @Component({
@@ -22,7 +23,7 @@ export class DetailUsuarioComponent implements OnInit{
   public faInfo = faInfo;
   public faFloppy = faSave;
 
-  constructor(private httpClient: HttpClient, @Inject(MAT_DIALOG_DATA) private data: any,  private newUsuarioPropertyService: NewUsuarioPropertyService,
+  constructor(private httpClient: HttpClient, private utilsService : UtilsService ,@Inject(MAT_DIALOG_DATA) private data: any,  private newUsuarioPropertyService: NewUsuarioPropertyService,
   private dialogRef: MatDialogRef<DetailUsuarioComponent>){
 
     this.usuario = data.usuario;
@@ -67,6 +68,8 @@ export class DetailUsuarioComponent implements OnInit{
 
       this.httpClient.put(url, this.usuarioUpdate, { headers }).toPromise().then((response: any) => {
         console.log('Usuario updateado correctamente');
+        this.utilsService.alert('success','Se ha actualizado el usuario correctamente');
+
         this.dialogRef.close();
       }).catch((error) => {
         console.error('Se ha producido un error al updatear el usuario:', error);

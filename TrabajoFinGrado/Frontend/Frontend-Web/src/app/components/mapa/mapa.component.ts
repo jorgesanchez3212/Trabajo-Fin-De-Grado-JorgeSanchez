@@ -64,6 +64,7 @@ export class MapaComponent {
       if (result !== undefined) {
         if (result === 'Si') {
           this.deleteMapaById(numeroChasis);
+          this.utilsService.alert('success','Se ha eliminado el mapa correctamente');
         } else {
           console.log("Mapa borrado")
         }

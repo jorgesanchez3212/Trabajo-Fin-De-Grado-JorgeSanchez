@@ -5,6 +5,7 @@ import { faFilePdf, faTimes, faInfo, faSave } from '@fortawesome/free-solid-svg-
 import { ReservaDto } from 'src/app/models/reserva/reserva-dto';
 import { ReservaUpdateDto } from 'src/app/models/reserva/reserva-update-dto';
 import { NewReservaPropertyService } from 'src/app/services/new-reserva-property.service';
+import { UtilsService } from 'src/app/services/utils.service';
 
 
 
@@ -22,7 +23,7 @@ export class DetailReservaComponent {
   public faInfo = faInfo;
   public faFloppy = faSave;
 
-  constructor(private httpClient: HttpClient, @Inject(MAT_DIALOG_DATA) private data: any,  private newReservaPropertyService: NewReservaPropertyService,
+  constructor(private httpClient: HttpClient, private utilsService : UtilsService, @Inject(MAT_DIALOG_DATA) private data: any,  private newReservaPropertyService: NewReservaPropertyService,
   private dialogRef: MatDialogRef<DetailReservaComponent>){
 
     this.reserva = data.reserva;
@@ -67,6 +68,7 @@ export class DetailReservaComponent {
 
       this.httpClient.put(url, this.reservaUpdate, { headers }).toPromise().then((response: any) => {
         console.log('Reserva updateado correctamente');
+        this.utilsService.alert('success','Se ha actualizado correctamente');
         this.dialogRef.close();
       }).catch((error) => {
         console.error('Se ha producido un error al updatear la reserva:', error);

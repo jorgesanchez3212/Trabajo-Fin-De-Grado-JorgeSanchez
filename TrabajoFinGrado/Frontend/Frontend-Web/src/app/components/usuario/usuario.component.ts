@@ -49,6 +49,7 @@ export class UsuarioComponent implements OnInit{
       if (result !== undefined) {
         if (result === 'Si') {
           this.deleteUsuarioById(usuarioId);
+          this.utilsService.alert('success','Se ha eliminado el usuario correctamente');
           this.getUsuariosAll();
         } else {
           console.log("Usuario borrado")

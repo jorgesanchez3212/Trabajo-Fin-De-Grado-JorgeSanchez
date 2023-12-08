@@ -5,6 +5,7 @@ import { faFilePdf, faTimes, faInfo, faSave } from '@fortawesome/free-solid-svg-
 import { ComentarioDto } from 'src/app/models/comentario/comentario-dto/comentario-dto';
 import { ComentarioUpdate } from 'src/app/models/comentario/comentario-dto/comentario-update';
 import { NewComentarioPropertyService } from 'src/app/services/new-comentario-property.service';
+import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
   selector: 'app-detail-misvaloraciones',
@@ -21,7 +22,7 @@ export class DetailMisvaloracionesComponent {
   public faInfo = faInfo;
   public faFloppy = faSave;
 
-  constructor(private httpClient: HttpClient, @Inject(MAT_DIALOG_DATA) private data: any,  private newComentarioPropertyService: NewComentarioPropertyService,
+  constructor(private httpClient: HttpClient, private utilsService : UtilsService ,@Inject(MAT_DIALOG_DATA) private data: any,  private newComentarioPropertyService: NewComentarioPropertyService,
   private dialogRef: MatDialogRef<DetailMisvaloracionesComponent>){
 
     this.comentario = data.comentario;
@@ -61,6 +62,8 @@ export class DetailMisvaloracionesComponent {
 
       this.httpClient.put(url, this.comentarioUpdate, { headers }).toPromise().then((response: any) => {
         console.log('Comentario updateado correctamente');
+        this.utilsService.alert('success','Se ha actualizado la valoracion correctamente');
+
         this.dialogRef.close();
       }).catch((error) => {
         console.error('Se ha producido un error al updatear el comentario:', error);

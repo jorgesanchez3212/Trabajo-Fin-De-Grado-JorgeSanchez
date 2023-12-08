@@ -5,6 +5,7 @@ import { UserDto } from 'src/app/models/user/user-dto/user-dto';
 import { NewUsuarioPropertyService } from 'src/app/services/new-usuario-proerty.service';
 import { faFilePdf, faTimes, faInfo, faSave } from '@fortawesome/free-solid-svg-icons';
 import { UserUpdate } from 'src/app/models/user/user-update';
+import { UtilsService } from 'src/app/services/utils.service';
 
 
 
@@ -25,7 +26,7 @@ export class NewUsuarioComponent {
   public usuario : UserDto;
   public usuarioUpdate : UserUpdate;
 
-  constructor(private httpClient: HttpClient, @Inject(MAT_DIALOG_DATA) private data: any,  private newUsuarioPropertyService: NewUsuarioPropertyService,
+  constructor(private httpClient: HttpClient, private utilsService : UtilsService ,@Inject(MAT_DIALOG_DATA) private data: any,  private newUsuarioPropertyService: NewUsuarioPropertyService,
   private dialogRef: MatDialogRef<NewUsuarioComponent>){
 
     this.usuario = new UserDto();
@@ -67,6 +68,8 @@ export class NewUsuarioComponent {
 
       this.httpClient.post(url, this.usuario, { headers }).toPromise().then((response: any) => {
         console.log('Usuario insertado correctamente');
+        this.utilsService.alert('success','Se ha insertado el usuario correctamente');
+
         this.dialogRef.close();
       }).catch((error) => {
         console.error('Se ha producido un error al insertar el usuario:', error);

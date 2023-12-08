@@ -4,6 +4,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { faFilePdf, faTimes, faInfo, faSave } from '@fortawesome/free-solid-svg-icons';
 import { MapaDto } from 'src/app/models/mapa/mapa-dto';
 import { NewMapasPropertyService } from 'src/app/services/new-mapas-property.service';
+import { UtilsService } from 'src/app/services/utils.service';
 
 
 @Component({
@@ -19,7 +20,7 @@ export class DetailMapaComponentComponent {
   public faInfo = faInfo;
   public faFloppy = faSave;
 
-  constructor(private httpClient: HttpClient, @Inject(MAT_DIALOG_DATA) private data: any,  private newMapaPropertyService: NewMapasPropertyService,
+  constructor(private httpClient: HttpClient, private utilsService : UtilsService ,@Inject(MAT_DIALOG_DATA) private data: any,  private newMapaPropertyService: NewMapasPropertyService,
   private dialogRef: MatDialogRef<DetailMapaComponentComponent>){
 
     this.mapa = data.mapa;
@@ -57,6 +58,7 @@ export class DetailMapaComponentComponent {
 
       this.httpClient.put(url, this.mapa, { headers }).toPromise().then((response: any) => {
         console.log('Mapa updateado correctamente');
+        this.utilsService.alert('success','Se ha actualizado el mapa correctamente');
         this.dialogRef.close();
       }).catch((error) => {
         console.error('Se ha producido un error al updatear el mapa:', error);

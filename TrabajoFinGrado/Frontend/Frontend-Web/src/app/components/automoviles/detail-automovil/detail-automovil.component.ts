@@ -5,6 +5,7 @@ import { faFilePdf, faTimes, faInfo, faSave } from '@fortawesome/free-solid-svg-
 import { AutomovilDto } from 'src/app/models/automovil/automovil-dto/automovil-dto';
 import { AutomovilUpdate } from 'src/app/models/automovil/automovil-update/automovil-update';
 import { NewAutomovilPropertyService } from 'src/app/services/new-automovil-property.service';
+import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
   selector: 'app-detail-automovil',
@@ -20,7 +21,7 @@ export class DetailAutomovilComponent {
   public faInfo = faInfo;
   public faFloppy = faSave;
 
-  constructor(private httpClient: HttpClient, @Inject(MAT_DIALOG_DATA) private data: any,  private newAutomovilPropertyService: NewAutomovilPropertyService,
+  constructor(private httpClient: HttpClient, private utilsService : UtilsService,@Inject(MAT_DIALOG_DATA) private data: any,  private newAutomovilPropertyService: NewAutomovilPropertyService,
   private dialogRef: MatDialogRef<DetailAutomovilComponent>){
 
     this.automovil = data.automovil;
@@ -64,6 +65,8 @@ export class DetailAutomovilComponent {
 
       this.httpClient.put(url, this.automovilUpdate, { headers }).toPromise().then((response: any) => {
         console.log('Automovil updateado correctamente');
+        this.utilsService.alert('success','Se ha actualizado el automovil correctamente');
+
         this.dialogRef.close();
       }).catch((error) => {
         console.error('Se ha producido un error al updatear el automovil:', error);

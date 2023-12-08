@@ -4,6 +4,7 @@ import { NewUsuarioPropertyService } from 'src/app/services/new-usuario-proerty.
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { UserUpdate } from 'src/app/models/user/user-update';
+import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
   selector: 'app-perfil',
@@ -17,7 +18,7 @@ export class PerfilComponent {
   public usuarioUpdate : UserUpdate;
   public actualizar : boolean = false;
   
-  constructor(private httpClient: HttpClient){
+  constructor(private httpClient: HttpClient, private utilsService : UtilsService){
 
     this.usuarioUpdate = new UserUpdate();
 
@@ -83,6 +84,8 @@ export class PerfilComponent {
 
       this.httpClient.put(url, this.usuarioUpdate, { headers }).toPromise().then((response: any) => {
         console.log('Usuario updateado correctamente');
+        this.utilsService.alert('success','Se ha actualizado tu perfil correctamente');
+
       }).catch((error) => {
         console.error('Se ha producido un error al updatear el usuario:', error);
       });

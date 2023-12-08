@@ -46,6 +46,8 @@ export class AutomovilesComponent {
       if (result !== undefined) {
         if (result === 'Si') {
           this.deleteAutomovilByNumeroChasis(numeroChasis);
+          this.utilsService.alert('success','Se ha eliminado el automovil correctamente');
+
         } else {
           console.log("Automovil borrado")
         }
