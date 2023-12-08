@@ -20,6 +20,7 @@ export class MisreservasComponent {
   public reserva : ReservaDto;
   public isReservasIsNull = false;
   httpClient: any;
+  auto : AutomovilDto = new AutomovilDto();
 
   
   constructor(private httpService: HttpClient, private utilsService : UtilsService, public dialog: MatDialog){
@@ -77,24 +78,22 @@ export class MisreservasComponent {
     dialogRef.afterClosed().subscribe(result => {
       if (result !== undefined) {
         if (result === 'Si') {
-          this.deleteReservaById(id);
-          this.utilsService.alert('success','Se ha anulado la reserva correctamente');
-          let idd = localStorage.getItem('access_id');
-          if(idd === null){
-            idd = '0'
-          }
-          this.getReservasAllByClienteId(idd);
+          this.deleteReservaById(id);        
         } else {
           console.log("Reserva borrado")
         }
       }
     });
+    
+
   }
 
   private deleteReservaById(id: string) {
     const url: string = `http://localhost:6969/api/reservas/delete/${id}`; 
 
     const token = localStorage.getItem('access_token');
+    const ids = localStorage.getItem('access_id');
+
   
     if (token) {
       const headers = new HttpHeaders({
@@ -103,12 +102,17 @@ export class MisreservasComponent {
   
       this.httpService.post(url, { headers }).toPromise().then((response: any) => {
         console.log('Reserva eliminada correctamente');
-        this.getReservasAllByClienteId(id);
+        this.utilsService.alert('success','Se ha anulado la reserva correctamente');
+        this.getReservasAllByClienteId(ids!);
+        
       }).catch((error) => {
         console.error('Se ha producido un error al eliminar la reserva:', error);
       });
+
     }
-    this.getReservasAllByClienteId(id);
+    this.getReservasAllByClienteId(ids!);
+
+          
   }
 
 
@@ -116,39 +120,87 @@ export class MisreservasComponent {
 
       this.automovil = await this.findAutmovil(reservaa.automovilId);
 
+
+
+    
+        
+  
+
       const doc = new jsPDF();
-      doc.setFontSize(22); // Tamaño de fuente grande
-      doc.setFont('helvetica', 'bold'); // Fuente en negrita
-      // Añade contenido al PDF
-      doc.text('Reserva', 10, 10);
+
+
+
+
+      const pageWidth = doc.internal.pageSize.getWidth();
+      const pageHeight = doc.internal.pageSize.getHeight();
+      const logoImg = new Image();
+      logoImg.src = '/assets/img/logopdf.png'; 
+      logoImg.onload = () => {
+      // Convertir la imagen a base64
+      const canvas = document.createElement('canvas');
+      canvas.width = logoImg.width;
+      canvas.height = logoImg.height;
+      const ctx = canvas.getContext('2d');
+      ctx!.drawImage(logoImg, 0, 0);
+      const imgData = canvas.toDataURL('image/png');
+      
+      const imgWidth = 70;
+      const imgHeight = 40; 
+      const x = (pageWidth - imgWidth) / 2; 
+      const y = 5;
+
+      doc.addImage(imgData, 'PNG', x, y, imgWidth, imgHeight)
+
+
+
+      doc.setFontSize(22); 
+      doc.setFont('helvetica', 'bold'); 
+
+      doc.text('Reserva', 20, 45);
       doc.setFontSize(12);
       doc.setFont('helvetica', 'normal');
-      doc.text(`ID Reserva:  ${reservaa.id}`, 10, 20);
+      doc.text(`ID Reserva:  ${reservaa.id}`, 20, 50);
+
+      doc.setFontSize(16);
+      doc.setFont('helvetica', 'bold'); 
+      doc.text('Cliente', 20, 70);
+
+
+      doc.setFontSize(12);
+      doc.setFont('helvetica', 'normal');
+      doc.text(`Nombre del Cliente:  ${this.usuario.nombre}`, 20, 75);
+      doc.text(`Email del Cliente:  ${this.usuario.email}`, 20, 80);
+      doc.text(`Username del Cliente:  ${this.usuario.username}`, 20, 85);
 
       doc.setFontSize(16); // Tamaño de fuente grande
       doc.setFont('helvetica', 'bold'); // Fuente en negrita
-      doc.text('Cliente', 10, 60);
+      doc.text('Automovil', 20, 105);
 
 
       doc.setFontSize(12);
       doc.setFont('helvetica', 'normal');
-      doc.text(`Nombre del Cliente:  ${this.usuario.nombre}`, 10, 70);
-      doc.text(`Email del Cliente:  ${this.usuario.email}`, 10, 80);
-      doc.text(`Username del Cliente:  ${this.usuario.username}`, 10, 90);
+      doc.text(`Marca del Automovil:  ${this.automovil!.marca}`, 20, 110);
+      doc.text(`Modelo del Automovil:  ${this.automovil!.modelo}`, 20, 115);
+      doc.text(`Color del Automovil:  ${this.automovil!.color}`, 20, 120);
+      doc.text(`Tipo de Automovil:  ${this.automovil!.tipo}`, 20, 125);
 
-      doc.setFontSize(16); // Tamaño de fuente grande
+
+
+      doc.setFontSize(14); // Tamaño de fuente grande
       doc.setFont('helvetica', 'bold'); // Fuente en negrita
-      doc.text('Automovil', 10, 110);
+      doc.text(`Coste del Automovil: ${reservaa.costo}$`, 115, 135);
 
 
-      doc.setFontSize(12);
-      doc.setFont('helvetica', 'normal');
-      doc.text(`Marca del Automovil:  ${this.automovil!.marca}`, 10, 120);
-      doc.text(`Modelo del Automovil:  ${this.automovil!.modelo}`, 10, 130);
-      doc.text(`Color del Automovil:  ${this.automovil!.color}`, 10, 140);
-      doc.text(`Tipo de Automovil:  ${this.automovil!.tipo}`, 10, 150);
 
+      const imageSrcc = this.automovil!.image; // Esto debería ser tu cadena base64
 
+  // Podrías necesitar ajustar estas dimensiones
+      const imgWidthh = 70;
+      const imgHeightt = 60; 
+      const xx = (pageWidth - imgWidth) / 2; 
+      const yy = 165;
+
+      doc.addImage(imageSrcc!, 'PNG', xx, yy, imgWidthh, imgHeightt);
 
 
       // Descarga el PDF
@@ -156,6 +208,7 @@ export class MisreservasComponent {
       this.utilsService.alert('success','Se ha descargado el pdf correctamente');
 
     }
+  }
 
     public async findUsuario(id :string){
       const url: string = `http://localhost:6969/api/users/find/${id}`;
@@ -201,9 +254,6 @@ export class MisreservasComponent {
         return undefined;
       }
     }
-  
-    
-  
   
   
 }
