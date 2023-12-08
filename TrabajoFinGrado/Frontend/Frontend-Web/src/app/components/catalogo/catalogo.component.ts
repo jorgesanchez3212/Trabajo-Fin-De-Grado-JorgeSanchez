@@ -97,12 +97,9 @@ export class CatalogoComponent {
 
   const token = localStorage.getItem('access_token');
 
-  if (token) {
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${token}`
-    });
+ 
 
-  this.httpService.get(url, { headers }).toPromise().then((value: any) => {
+  this.httpService.get(url).toPromise().then((value: any) => {
     this.ubicaciones = value as MapaDto[];
     console.log("Ubicaciones")
     console.log(this.ubicaciones)
@@ -119,7 +116,7 @@ export class CatalogoComponent {
     
     console.log('Se ha producido un error al obtener los mpaas');
   });
-}
+
   }
 
   
@@ -151,12 +148,9 @@ export class CatalogoComponent {
 
     const token = localStorage.getItem('access_token');
 
-    if (token) {
-      const headers = new HttpHeaders({
-        Authorization: `Bearer ${token}`
-      });
+    
 
-    this.httpService.get(url, { headers }).toPromise().then((value: any) => {
+    this.httpService.get(url).toPromise().then((value: any) => {
       this.automoviles = value as AutomovilDto[];
       this.titulo = `Resultados totales: ${this.automoviles.length} Automoviles`
 
@@ -165,7 +159,7 @@ export class CatalogoComponent {
       
       console.log('Se ha producido un error al obtener los automoviles');
     });
-  }
+  
   }
 
 
@@ -191,12 +185,9 @@ if (this.reservaFilterInicio) {
   const token = localStorage.getItem('access_token');
   if(this.catalogoDto.fechaFinal != null && this.catalogoDto.fechaFinal != null && this.catalogoDto.tipoAutomovil != null){
 
-  if (token) {
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${token}`
-    });
+ 
 
-  this.httpService.post(url, this.catalogoDto , { headers }).toPromise().then((value: any) => {
+  this.httpService.post(url, this.catalogoDto ).toPromise().then((value: any) => {
     this.automoviles = value as AutomovilDto[];
     console.log(this.automoviles)
     this.titulo = `Resultados totales: ${this.automoviles.length} Automoviles`
@@ -204,7 +195,7 @@ if (this.reservaFilterInicio) {
     
     console.log('Se ha producido un error al obtener los automoviles');
   });
-}
+
 }
 
 }
@@ -231,12 +222,9 @@ if (this.reservaFilterInicio) {
 } 
  const token = localStorage.getItem('access_token');
 if(this.catalogoDto.fechaFinal != null && this.catalogoDto.fechaFinal != null && this.catalogoDto.tipoAutomovil != null){
- if (token) {
-   const headers = new HttpHeaders({
-     Authorization: `Bearer ${token}`
-   });
+ 
 
- this.httpService.post(url,this.catalogoDto, { headers }).toPromise().then((value: any) => {
+ this.httpService.post(url,this.catalogoDto).toPromise().then((value: any) => {
    this.automoviles = value as AutomovilDto[];
    this.titulo = `Resultados disponibles: ${this.automoviles.length} Automoviles`
 
@@ -245,7 +233,7 @@ if(this.catalogoDto.fechaFinal != null && this.catalogoDto.fechaFinal != null &&
    
    console.log('Se ha producido un error al obtener los automoviles');
  });
-}
+
 }
 }
 
@@ -285,7 +273,6 @@ private loadData(id:string){
 
 reservar(automovil : AutomovilDto){
 this.saveReserva(automovil)
-this.buscar()
 }
 
 

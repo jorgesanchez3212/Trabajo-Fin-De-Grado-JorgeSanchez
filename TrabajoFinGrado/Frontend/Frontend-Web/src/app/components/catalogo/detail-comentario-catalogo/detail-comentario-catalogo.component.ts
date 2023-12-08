@@ -74,6 +74,8 @@ export class DetailComentarioCatalogoComponent {
       }).catch((error) => {
         console.error('Se ha producido un error al insertar el comentario:', error);
       });
+    }else{
+      this.utilsService.alert('error','Tienes que inicar sesión');
     }
   }
 }
