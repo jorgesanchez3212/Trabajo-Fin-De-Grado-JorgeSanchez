@@ -9,10 +9,6 @@ import java.time.LocalDateTime
 fun Automovil.toDto() : AutomovilDto{
 
 
-    val reservass : ArrayList<String>? = null
-    this.reservas?.forEach{item ->
-        reservass?.add(item.toString())
-    }
     return AutomovilDto(
         id = this.id,
         numeroChasis = this.numeroChasis,
@@ -22,7 +18,7 @@ fun Automovil.toDto() : AutomovilDto{
         capacidad = this.capacidad.toString(),
         coste = this.coste,
         image= this.image,
-        reservas = reservass?.toList(),
+        reservas = null,
         tipo = this.tipo.trim()
     )
 

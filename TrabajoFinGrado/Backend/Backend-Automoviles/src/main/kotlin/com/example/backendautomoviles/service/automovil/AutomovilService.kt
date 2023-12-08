@@ -74,34 +74,13 @@ class AutomovilService
     }
 
 
-    suspend fun findAllFiltros(automovilFilter: AutomovilFilter) = withContext(Dispatchers.IO) {
-        var listaFiltros = repository.findAll().toList()
-
-        automovilFilter.numeroChasis?.let {
-            listaFiltros = listaFiltros.filter { it.numeroChasis == automovilFilter.numeroChasis }
-        }
-
-        automovilFilter.marca?.let {
-            listaFiltros = listaFiltros.filter { it.marca == automovilFilter.marca }
-        }
-
-        automovilFilter.modelo?.let {
-            listaFiltros = listaFiltros.filter { it.modelo == automovilFilter.modelo }
-        }
-
-        automovilFilter.capacidad?.let {
-            listaFiltros = listaFiltros.filter { it.capacidad == automovilFilter.capacidad }
-        }
-
-        automovilFilter.coste?.let {
-            listaFiltros = listaFiltros.filter { it.coste == automovilFilter.coste }
-        }
-
-        automovilFilter.tipo?.let {
-            listaFiltros = listaFiltros.filter { it.tipo == automovilFilter.tipo }
-        }
-
-        return@withContext listaFiltros
+    suspend fun findAllFiltros(automovilFilter: AutomovilFilter) :List<Automovil> {
+        println(automovilFilter)
+        return repository.findAll()
+            .filter { automovilFilter.numeroChasis == null || it.numeroChasis == automovilFilter.numeroChasis }
+            .filter { automovilFilter.capacidad == null || it.capacidad == automovilFilter.capacidad }
+            .filter { automovilFilter.marca == null || it.marca.equals(automovilFilter.marca, ignoreCase = true) }
+            .filter { automovilFilter.color == null || it.color.equals(automovilFilter.color, ignoreCase = true) }.toList()
     }
 
 

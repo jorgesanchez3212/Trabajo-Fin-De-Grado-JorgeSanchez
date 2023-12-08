@@ -7,18 +7,52 @@
   </mat-expansion-panel-header>
 
     <br>
+    <div class="row">
+      <div class="col-md-3">
+        <label class="txt-default-color form-label-asset txt-fz-12">Numero de Chasis </label>
+        <input class="form-control form-line" name="idUserFilter" type="text" [(ngModel)]="automovilFilter.numeroChasis" #numeroChasisAutomovilFilter="ngModel">
+      </div> 
     <div class="col-md-3">
-    <label class="txt-default-color form-label-asset txt-fz-12">Marca </label>
-    <input class="form-control form-line" name="usernameUserFilter" type="text" [(ngModel)]="automovilFilter.marca" #marcaAutomovilFilter="ngModel">
-  </div> 
-  <div class="col-md-3">
-    <label class="txt-default-color form-label-asset txt-fz-12">ID Automovil </label>
-    <input class="form-control form-line" name="idUserFilter" type="text" [(ngModel)]="automovilFilter.id" #idAutomovilFilter="ngModel">
-  </div> 
+      <label class="txt-default-color form-label-asset txt-fz-12">Marca </label>
+      <mat-form-field appearance="fill" class="example-full-width">
+        <mat-label>Selecciona una Marca</mat-label>
+        <mat-select  [(ngModel)]="automovilFilter.marca" #marcaAutomovilFilter="ngModel">
+          <mat-option *ngFor="let tipo of marcas" [value]="tipo">
+            {{ tipo }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field> 
+    </div> 
+
+    <div class="col-md-3">
+      <label class="txt-default-color form-label-asset txt-fz-12">Color </label>
+      <mat-form-field appearance="fill" class="example-full-width">
+        <mat-label>Selecciona una Color</mat-label>
+        <mat-select  [(ngModel)]="automovilFilter.color" #colorAutomovilFilter="ngModel">
+          <mat-option *ngFor="let tipo of colores" [value]="tipo">
+            {{ tipo }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field> 
+    </div> 
+
+    <div class="col-md-3">
+      <label class="txt-default-color form-label-asset txt-fz-12">Capacidad </label>
+      <mat-form-field appearance="fill" class="example-full-width">
+        <mat-label>Selecciona una Capacidad</mat-label>
+        <mat-select  [(ngModel)]="automovilFilter.capacidad" #capacidadAutomovilFilter="ngModel">
+          <mat-option *ngFor="let tipo of capacidades" [value]="tipo">
+            {{ tipo }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field> 
+    </div>
+  
   <div class="botonesFiltros">
     <button mat-flat-button color="primary" (click)="onContextFiltrarClick()"><mat-icon>edit</mat-icon>Filtrar</button>
     <button mat-flat-button color="warn" (click)="clearFilters()" ><mat-icon>delete</mat-icon> Limpiar</button><br><br>
   </div>
+</div>
 </mat-expansion-panel>
 
   

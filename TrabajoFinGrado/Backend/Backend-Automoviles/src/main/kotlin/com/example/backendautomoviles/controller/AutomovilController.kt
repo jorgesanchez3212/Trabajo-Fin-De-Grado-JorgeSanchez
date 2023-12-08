@@ -45,9 +45,9 @@ class AutomovilController
 
 
     @PostMapping("/listaAutomovilesFiltro")
-    suspend fun listaAutomovilesFiltro(automovilFilter: AutomovilFilter) : ResponseEntity<List<AutomovilDto>>{
+    suspend fun listaAutomovilesFiltro(@Valid @RequestBody automovilFilter: AutomovilFilter) : ResponseEntity<List<AutomovilDto>>{
         logger.info { "Obteniendo lista de todos los automoviles"}
-        return ResponseEntity.ok(service.findAllFiltros(automovilFilter).toList().map { it.toDto() })
+        return ResponseEntity.ok(service.findAllFiltros(automovilFilter).map { it.toDto() })
     }
 
     //@PreAuthorize("hasRole('ADMINISTRADOR')")

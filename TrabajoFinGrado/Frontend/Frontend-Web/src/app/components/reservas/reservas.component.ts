@@ -190,8 +190,8 @@ if (this.reservaFilterInicio) {
   }
   
   clearFilters() {
-  this.reservaFilter.fechaFin = null;
-  this.reservaFilter.fechaInicio = null;
+    this.reservaFilterFin = null;
+    this.reservaFilterInicio = null;
   this.getReservasAll();
   }
   

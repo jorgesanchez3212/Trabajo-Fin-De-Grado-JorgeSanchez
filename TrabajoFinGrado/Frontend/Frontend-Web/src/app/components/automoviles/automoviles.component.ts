@@ -20,12 +20,17 @@ export class AutomovilesComponent {
   public automovil : AutomovilDto;
   panelOpenState = false;
   public automovilFilter : AutomovilFilter = new AutomovilFilter();
-
+  public colores : string[];
+  public marcas : string[];
+  public capacidades : string[];
 
 
   constructor(private httpService: HttpClient, private utilsService : UtilsService, public dialog: MatDialog){
     this.automoviles = [];
     this.automovil = new AutomovilDto();
+    this.capacidades = ['1', '2', '3', '4', '5'];
+    this.colores = ['Blanco', 'Negro', 'Naranja', 'Rojo', 'Verde'];
+    this.marcas = ['Audi', 'Mercedes', 'Porsche', 'BMW'];
    
   }
 
@@ -164,7 +169,6 @@ onContextFiltrarClick(){
   this.httpService.post(url, this.automovilFilter , { headers }).toPromise().then((value: any) => {
     this.automoviles = value as AutomovilDto[];
     console.log(this.automoviles)
-    this.getAutomovilesAll()
   }).catch((error) => {
     
     console.log('Se ha producido un error al obtener los automoviles');
@@ -174,8 +178,12 @@ onContextFiltrarClick(){
 }
 
 clearFilters() {
-this.automovilFilter.marca = '';
-this.automovilFilter.id = '';
+this.automovilFilter.marca =null;
+this.automovilFilter.numeroChasis = null;
+this.automovilFilter.color = null;
+this.automovilFilter.capacidad = null;
+
+
 this.getAutomovilesAll();
 }
 
