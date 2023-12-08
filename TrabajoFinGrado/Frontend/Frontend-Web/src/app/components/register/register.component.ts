@@ -16,8 +16,13 @@ export class RegisterComponent {
   public showSpinner = false;
   public errorString = '';
 
+  selectedFile: File | null = null;
+  private fileContentBase64: string | null = null;
+
+
   registroForm: FormGroup;
 
+  image : string = '';
   nombre: string = '';
   email: string = '';
   username: string = '';
@@ -36,9 +41,32 @@ export class RegisterComponent {
       username: ['', Validators.required],
       password: ['', Validators.required],
       confirmPassword: ['', Validators.required],
-      description: ['']
+      description: [''],
+      image : [''],
     });
   }
+
+
+
+  onFileSelected(event: any): void {
+    this.selectedFile = event.target.files[0];
+    if (this.selectedFile) {
+      this.convertFileToBase64(this.selectedFile);
+    }
+  }
+
+private convertFileToBase64(file: File) {
+  const reader = new FileReader();
+  reader.readAsDataURL(file);
+  reader.onload = () => {
+    this.fileContentBase64 = reader.result as string;
+    this.image = this.fileContentBase64;
+  };
+  reader.onerror = error => {
+    console.error('Error al leer el archivo:', error);
+  };
+}
+
 
   public register(): void {
     this.isLoading = true;
@@ -50,7 +78,7 @@ export class RegisterComponent {
         nombre: this.registroForm.value.nombre,
         email: this.registroForm.value.email,
         username: this.registroForm.value.username,
-        image: null,
+        image: this.image,
         rol: 'CLIENTE',
         password: this.registroForm.value.password,
         descripcion: this.registroForm.value.description,
