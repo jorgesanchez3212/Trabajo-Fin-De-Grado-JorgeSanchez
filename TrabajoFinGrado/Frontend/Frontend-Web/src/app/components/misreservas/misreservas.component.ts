@@ -187,12 +187,13 @@ export class MisreservasComponent {
       doc.text(`Modelo del Automovil:  ${this.automovil!.modelo}`, 20, 115);
       doc.text(`Color del Automovil:  ${this.automovil!.color}`, 20, 120);
       doc.text(`Tipo de Automovil:  ${this.automovil!.tipo}`, 20, 125);
+      doc.text(`Dirección para la recogida de Automóvil: Calle de Serrano - Madrid`, 20, 130);
 
 
 
       doc.setFontSize(14); // Tamaño de fuente grande
       doc.setFont('helvetica', 'bold'); // Fuente en negrita
-      doc.text(`Coste del Automovil: ${reservaa.costo}$`, 115, 135);
+      doc.text(`Coste del Automovil: ${reservaa.costo}$`, 115, 140);
 
 
 
