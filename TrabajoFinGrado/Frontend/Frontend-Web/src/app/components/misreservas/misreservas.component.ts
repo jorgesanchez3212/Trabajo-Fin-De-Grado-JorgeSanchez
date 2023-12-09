@@ -53,7 +53,7 @@ export class MisreservasComponent {
         Authorization: `Bearer ${token}`
       });
 
-    this.httpService.get(url).toPromise().then((value: any) => {
+    this.httpService.get(url, { headers }).toPromise().then((value: any) => {
       this.reservas = value as ReservaDto[];
       if(this.reservas.length === 0){
         this.isReservasIsNull = true;
@@ -69,6 +69,7 @@ export class MisreservasComponent {
   }
 
   openDialog(id : string, enterAnimationDuration: string, exitAnimationDuration: string): void {
+    const ids = localStorage.getItem('access_id');
     const dialogRef = this.dialog.open(DialogAnimationsComponent, {
       width: '250px',
       enterAnimationDuration,
@@ -78,13 +79,16 @@ export class MisreservasComponent {
     dialogRef.afterClosed().subscribe(result => {
       if (result !== undefined) {
         if (result === 'Si') {
-          this.deleteReservaById(id);        
+          this.deleteReservaById(id);         
+          this.utilsService.alert('success','Se ha anulado la reserva correctamente');
+       
         } else {
           console.log("Reserva borrado")
         }
       }
     });
-    
+    this.getReservasAllByClienteId(ids!);
+
 
   }
 
@@ -102,9 +106,8 @@ export class MisreservasComponent {
         Authorization: `Bearer ${token}`
       });
   
-      this.httpService.post(url, { headers }).toPromise().then((response: any) => {
+      this.httpService.post(url, null,{ headers }).toPromise().then((response: any) => {
         console.log('Reserva eliminada correctamente');
-        this.utilsService.alert('success','Se ha anulado la reserva correctamente');
         this.getReservasAllByClienteId(ids!);
         
       }).catch((error) => {
@@ -112,7 +115,6 @@ export class MisreservasComponent {
       });
 
     }
-    this.getReservasAllByClienteId(ids!);
 
           
   }
@@ -224,7 +226,7 @@ export class MisreservasComponent {
           Authorization: `Bearer ${token}`
         });
   
-        this.httpService.get(url).toPromise().then((data: any) => {
+        this.httpService.get(url, { headers }).toPromise().then((data: any) => {
           console.log(data);
           this.usuario = data as UserDto;
         }).catch((error) => {

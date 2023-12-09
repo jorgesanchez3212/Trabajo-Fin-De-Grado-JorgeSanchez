@@ -26,7 +26,6 @@ class ComentarioController
     private val service: ComentarioService,
 ){
 
-    //@PreAuthorize("hasRole('CLIENTE')")
     @GetMapping("/listaComentarios")
     suspend fun listaComentarios() : ResponseEntity<List<ComentarioDto>> {
         logger.info { "Obteniendo lista de todos los comentarios"}
@@ -50,7 +49,6 @@ class ComentarioController
     }
 
 
-    //@PreAuthorize("hasRole('ADMINISTRADOR')")
     @PostMapping("/newComentarios")
     suspend fun new(@Valid @RequestBody entityDto: ComentarioCreateDto): ResponseEntity<ComentarioCreateDto> {
         logger.info { "Creacion de comentario: ${entityDto}" }
@@ -66,7 +64,6 @@ class ComentarioController
         return ResponseEntity.ok(comentario?.toDto())
     }
 
-    //@PreAuthorize("hasRole('ADMINISTRADOR')")
     @PutMapping("/update")
     suspend fun updateMe(@Valid @RequestBody comentarioDto: ComentarioUpdateDto): Any {
         logger.info { "Actualizando comentario con id: ${comentarioDto.id}" }
@@ -89,7 +86,6 @@ class ComentarioController
 
 
 
-    //@PreAuthorize("hasRole('ADMINISTRADOR')")
     @PostMapping("/delete/{id}")
     suspend fun delete(@PathVariable id : String): ResponseEntity<String> {
         logger.info { "Borrar comentario con id: $id" }

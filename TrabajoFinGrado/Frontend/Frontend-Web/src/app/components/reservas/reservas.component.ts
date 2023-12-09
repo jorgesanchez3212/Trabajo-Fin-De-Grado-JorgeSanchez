@@ -103,7 +103,7 @@ export class ReservasComponent {
         Authorization: `Bearer ${token}`
       });
   
-      this.httpService.post(url, { headers }).toPromise().then((response: any) => {
+      this.httpService.post(url, null ,{ headers }).toPromise().then((response: any) => {
         console.log('Reserva eliminada correctamente');
         this.utilsService.alert('success','Reserva eliminada correctamente');
         this.getReservasAll();
@@ -121,7 +121,16 @@ export class ReservasComponent {
     //const url: string = `http://localhost:6969/api/reservas/find/${id}`;
     const url: string = `https://alquilaenmadrid.com/api/reservas/find/${id}`; 
 
-    this.httpService.get(url).toPromise().then((data: any) => {
+
+    const token = localStorage.getItem('access_token');
+
+    if (token) {
+      const headers = new HttpHeaders({
+        Authorization: `Bearer ${token}`
+      });
+
+
+    this.httpService.get(url , { headers }).toPromise().then((data: any) => {
       console.log(data);
       this.reserva = data as ReservaDto;
       this.dialog.open(DetailReservaComponent, {
@@ -135,7 +144,7 @@ export class ReservasComponent {
     }).catch(() => {
       console.log('Se ha producido un error al obtener la reserva');
     })
-
+  }
   }
   
 

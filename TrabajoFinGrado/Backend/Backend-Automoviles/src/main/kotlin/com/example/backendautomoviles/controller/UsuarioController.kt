@@ -68,7 +68,6 @@ class UsuarioController
         return ResponseEntity.ok(UserWithTokenDto(userSaved.toDto(), jwtToken))
     }
 
-    //@PreAuthorize("hasRole('ADMINISTRADOR')")
     @PostMapping("/añadir")
     suspend fun añadirUsuario(@AuthenticationPrincipal usuario : Usuario, @Valid @RequestBody usuarioDto: UsuarioCreateDto ): ResponseEntity<UsuarioDto> {
         logger.info { "Añadir usuario por parte del administrador: ${usuarioDto.username}" }
@@ -80,7 +79,7 @@ class UsuarioController
 
     }
 
-    @PreAuthorize("hasRole('CLIENTE')")
+    @PreAuthorize("hasAnyRole('ADMINISTRADOR','CLIENTE')")
     @GetMapping("/me")
     fun meGet(@AuthenticationPrincipal usuario : Usuario) : ResponseEntity<UsuarioDto>{
         logger.info { "Obteniendo informacion de usuario: ${usuario.username}"}
@@ -88,14 +87,14 @@ class UsuarioController
     }
 
 
-    //@PreAuthorize("hasRole('ADMINISTRADOR')")
+    @PreAuthorize("hasRole('ADMINISTRADOR')")
     @GetMapping("/listaUsuarios")
     suspend fun listaUsuarios(@AuthenticationPrincipal usuario : Usuario) : ResponseEntity<List<UsuarioDto>>{
         logger.info { "Obteniendo lista de todos los usuarios"}
         return ResponseEntity.ok(usuariosService.findAll().toList().map { it.toDto() })
     }
 
-    //@PreAuthorize("hasRole('ADMINISTRADOR')")
+    @PreAuthorize("hasRole('ADMINISTRADOR')")
     @PostMapping("/listaUsuariosFiltro")
     suspend fun listaUsuariosFiltro(@AuthenticationPrincipal usuario : Usuario,@Valid @RequestBody usuarioFiltro: UsuarioFilter ) : ResponseEntity<List<UsuarioDto>>{
         logger.info { "Obteniendo lista de todos los usuarios"}
@@ -103,7 +102,7 @@ class UsuarioController
     }
 
 
-    //@PreAuthorize("hasRole('ADMINISTRADOR')")
+    @PreAuthorize("hasRole('ADMINISTRADOR')")
     @PostMapping("/delete/{id}")
     suspend fun deleteUsuario(@AuthenticationPrincipal usuario : Usuario, @PathVariable id : String) : ResponseEntity<Boolean>{
         logger.info { "Borradno usuario con id ${id}"}
@@ -111,7 +110,7 @@ class UsuarioController
         return ResponseEntity.ok(true)
     }
 
-    //@PreAuthorize("hasRole('ADMINISTRADOR')")
+    @PreAuthorize("hasAnyRole('ADMINISTRADOR','CLIENTE')")
     @GetMapping("/find/{id}")
     suspend fun findById(@AuthenticationPrincipal usuario : Usuario, @PathVariable id : String) : ResponseEntity<UsuarioDto>{
         logger.info { "Buscando usuario con id ${id}"}
@@ -119,7 +118,7 @@ class UsuarioController
         return ResponseEntity.ok(user?.toDto())
     }
 
-
+    @PreAuthorize("hasAnyRole('ADMINISTRADOR','CLIENTE')")
     @PutMapping("/updateMe")
     suspend fun updateMe(
         @AuthenticationPrincipal user: Usuario,
@@ -139,7 +138,7 @@ class UsuarioController
         return ResponseEntity.ok(userUpdated.toDto())
     }
 
-    //@PreAuthorize("hasRole('ADMINISTRADOR')")
+    @PreAuthorize("hasAnyRole('ADMINISTRADOR','CLIENTE')")
     @PutMapping("/update")
     suspend fun updateUsuario(
         @AuthenticationPrincipal user: Usuario,

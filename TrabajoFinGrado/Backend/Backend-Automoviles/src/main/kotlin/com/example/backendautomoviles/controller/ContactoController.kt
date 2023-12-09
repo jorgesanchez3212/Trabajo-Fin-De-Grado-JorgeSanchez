@@ -15,6 +15,7 @@ import kotlinx.coroutines.flow.toList
 import mu.KotlinLogging
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
+import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.web.bind.annotation.*
 
 private val logger = KotlinLogging.logger {}
@@ -27,7 +28,7 @@ class ContactoController
     private val service: ContactoService,
 ) {
 
-    //@PreAuthorize("hasRole('CLIENTE')")
+    @PreAuthorize("hasRole('ADMINISTRADOR')")
     @GetMapping("/listaContactos")
     suspend fun listaContactos() : ResponseEntity<List<ContactoDto>> {
         logger.info { "Obteniendo lista de todos los contactos"}
@@ -45,7 +46,6 @@ class ContactoController
 
 
 
-    //@PreAuthorize("hasRole('ADMINISTRADOR')")
     @PostMapping("/newContactos")
     suspend fun new(@Valid @RequestBody entityDto: ContactoCreateDto): ResponseEntity<ContactoCreateDto> {
         logger.info { "Creacion de contacto: ${entityDto}" }
@@ -62,7 +62,6 @@ class ContactoController
     }
 
 
-    //@PreAuthorize("hasRole('ADMINISTRADOR')")
     @PutMapping("/update")
     suspend fun updateMe(@Valid @RequestBody contactoDto: ContactoUpdateDto): Any {
         logger.info { "Actualizando contacto con id: ${contactoDto.id}" }

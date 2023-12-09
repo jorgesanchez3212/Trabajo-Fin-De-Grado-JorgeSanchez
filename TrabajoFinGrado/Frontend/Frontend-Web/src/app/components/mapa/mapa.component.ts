@@ -84,7 +84,7 @@ export class MapaComponent {
         Authorization: `Bearer ${token}`
       });
   
-      this.httpService.post(url, { headers }).toPromise().then((response: any) => {
+      this.httpService.post(url, null ,{ headers }).toPromise().then((response: any) => {
         console.log('Mapa eliminado correctamente');
         this.getMapasAll()
       }).catch((error) => {

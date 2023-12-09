@@ -62,6 +62,8 @@ export class MisvaloracionesComponent {
 
   
   openDialog(id : string, enterAnimationDuration: string, exitAnimationDuration: string): void {
+    const idd = localStorage.getItem('access_id');
+
     const dialogRef = this.dialog.open(DialogAnimationsComponent, {
       width: '250px',
       enterAnimationDuration,
@@ -71,18 +73,16 @@ export class MisvaloracionesComponent {
     dialogRef.afterClosed().subscribe(result => {
       if (result !== undefined) {
         if (result === 'Si') {
-          this.deleteComentarioById(id);
+          this.deleteComentarioById(id)
           this.utilsService.alert('success','Se ha eliminado la valoración correctamente')
-          let idd = localStorage.getItem('access_id');
-          if(idd === null){
-          idd = '0'
-          }
-          this.getComentariosAllByClienteId(idd);
+          
         } else {
           console.log("Automovil borrado")
         }
       }
     });
+    this.getComentariosAllByClienteId(idd!);
+
   }
 
   
@@ -98,20 +98,15 @@ export class MisvaloracionesComponent {
         Authorization: `Bearer ${token}`
       });
   
-      this.httpService.post(url, { headers }).toPromise().then((response: any) => {
+      this.httpService.post(url, null ,{ headers }).toPromise().then((response: any) => {
         console.log('Comentario eliminado correctamente');
-        if(idd === null){
-          idd = '0'
-        }
-        this.getComentariosAllByClienteId(idd);
+        this.getComentariosAllByClienteId(idd!);
+
       }).catch((error) => {
         console.error('Se ha producido un error al eliminar el comentario:', error);
       });
     }
-    if(idd === null){
-      idd = '0'
-    }
-    this.getComentariosAllByClienteId(idd);
+  
   }
 
 

@@ -52,7 +52,6 @@ export class UsuarioComponent implements OnInit{
         if (result === 'Si') {
           this.deleteUsuarioById(usuarioId);
           this.utilsService.alert('success','Se ha eliminado el usuario correctamente');
-          this.getUsuariosAll();
         } else {
           console.log("Usuario borrado")
         }
@@ -78,8 +77,10 @@ export class UsuarioComponent implements OnInit{
         Authorization: `Bearer ${token}`
       });
   
-      this.httpService.post(url, { headers }).toPromise().then((response: any) => {
+      this.httpService.post(url, null,{ headers }).toPromise().then((response: any) => {
         console.log('Usuario eliminado correctamente');
+        this.getUsuariosAll();
+
       }).catch((error) => {
         console.error('Se ha producido un error al eliminar el usuario:', error);
       });
@@ -111,8 +112,13 @@ export class UsuarioComponent implements OnInit{
   openModal(id:string){
     //const url: string = `http://localhost:6969/api/users/find/${id}`;
     const url: string = `https://alquilaenmadrid.com/api/users/find/${id}`; 
+    const token = localStorage.getItem('access_token');
 
-    this.httpService.get(url).toPromise().then((data: any) => {
+    if (token) {
+      const headers = new HttpHeaders({
+        Authorization: `Bearer ${token}`
+      });
+    this.httpService.get(url, { headers }).toPromise().then((data: any) => {
       console.log(data);
       this.user = data as UserDto;
       this.dialog.open(DetailUsuarioComponent, {
@@ -126,6 +132,7 @@ export class UsuarioComponent implements OnInit{
     }).catch(() => {
       console.log('Se ha producido un error al obtener el usuario');
     })
+  }
 
   }
   

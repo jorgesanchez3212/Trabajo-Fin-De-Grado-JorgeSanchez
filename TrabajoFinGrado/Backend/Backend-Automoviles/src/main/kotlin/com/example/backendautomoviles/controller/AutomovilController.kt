@@ -12,6 +12,7 @@ import kotlinx.coroutines.flow.toList
 import mu.KotlinLogging
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
+import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.web.bind.annotation.*
 import java.time.LocalDate
 
@@ -50,7 +51,7 @@ class AutomovilController
         return ResponseEntity.ok(service.findAllFiltros(automovilFilter).map { it.toDto() })
     }
 
-    //@PreAuthorize("hasRole('ADMINISTRADOR')")
+    @PreAuthorize("hasRole('ADMINISTRADOR')")
     @PostMapping("/newAutomovil")
     suspend fun new(@Valid @RequestBody automovilDto: AutomovilCreateDto): ResponseEntity<AutomovilCreateDto> {
         logger.info { "Creacion de automovil: ${automovilDto.numeroChasis}" }
@@ -63,7 +64,7 @@ class AutomovilController
 
 
 
-    //@PreAuthorize("hasRole('ADMINISTRADOR')")
+    @PreAuthorize("hasRole('ADMINISTRADOR')")
     @PutMapping("/update")
     suspend fun updateMe(@Valid @RequestBody automovilDto: AutomovilUpdateDto): Any {
         logger.info { "Actualizando automovil con numero de chasis: ${automovilDto.numeroChasis}" }
@@ -89,7 +90,6 @@ class AutomovilController
         }
     }
 
-    //@PreAuthorize("hasRole('ADMINISTRADOR')")
     @GetMapping("/find/{id}")
     suspend fun findById(@PathVariable id : String) : ResponseEntity<AutomovilDto>{
         logger.info { "Buscando automovil con id ${id}"}
@@ -99,7 +99,7 @@ class AutomovilController
 
 
 
-    //@PreAuthorize("hasRole('ADMINISTRADOR')")
+    @PreAuthorize("hasRole('ADMINISTRADOR')")
     @PostMapping("/delete/{numeroChasis}")
     suspend fun delete(@PathVariable numeroChasis : String): ResponseEntity<String> {
         logger.info { "Borrar automovil con numeroChasis: $numeroChasis" }

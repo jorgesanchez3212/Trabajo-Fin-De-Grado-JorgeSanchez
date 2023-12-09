@@ -45,7 +45,7 @@ export class ContactoComponent {
         Authorization: `Bearer ${token}`
       });
 
-      this.httpClient.get(url).toPromise().then((data: any) => {
+      this.httpClient.get(url, { headers }).toPromise().then((data: any) => {
         console.log(data);
         this.usuario = data as UserDto;
       }).catch((error) => {

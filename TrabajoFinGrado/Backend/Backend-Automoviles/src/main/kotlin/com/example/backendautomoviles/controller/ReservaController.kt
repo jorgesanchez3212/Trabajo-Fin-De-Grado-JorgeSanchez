@@ -30,13 +30,14 @@ class ReservaController@Autowired constructor(
         private val reservasService: ReservaService,
 ){
 
-    //@PreAuthorize("hasRole('ADMINISTRADOR')")
+    @PreAuthorize("hasRole('ADMINISTRADOR')")
     @GetMapping("/listaReservas")
     suspend fun listaReservas() : ResponseEntity<List<ReservaDto>> {
         logger.info { "Obteniendo lista de todos las reservas"}
         return ResponseEntity.ok(reservasService.findAll().toList().map { it.toDto() })
     }
 
+    @PreAuthorize("hasAnyRole('ADMINISTRADOR','CLIENTE')")
     @GetMapping("/listaReservasByClienteId/{id}")
     suspend fun findReservasByClienteId(@PathVariable id : String) : ResponseEntity<List<ReservaDto>>{
         logger.info { "Buscando reserva con el  id del cliente ${id}"}
@@ -45,7 +46,7 @@ class ReservaController@Autowired constructor(
     }
 
 
-    //@PreAuthorize("hasRole('ADMINISTRADOR')")
+    @PreAuthorize("hasRole('ADMINISTRADOR')")
     @PostMapping("/listaReservasFiltro")
     suspend fun listaReservasFiltro(@Valid @RequestBody reservaFilter: ReservaFilter) : ResponseEntity<List<ReservaDto>> {
         logger.info { "Obteniendo lista de todos las reservas con filtro"}
@@ -54,7 +55,7 @@ class ReservaController@Autowired constructor(
     }
 
 
-    //@PreAuthorize("hasRole('ADMINISTRADOR')")
+    @PreAuthorize("hasAnyRole('ADMINISTRADOR','CLIENTE')")
     @PostMapping("/newReserva")
     suspend fun new(@Valid @RequestBody reservaDto: ReservaCreateDto): ResponseEntity<ReservaCreateDto> {
         logger.info { "Creacion de  la reserva con uuid: ${reservaDto}" }
@@ -64,7 +65,7 @@ class ReservaController@Autowired constructor(
     }
 
 
-    //@PreAuthorize("hasRole('ADMINISTRADOR')")
+    @PreAuthorize("hasAnyRole('ADMINISTRADOR','CLIENTE')")
     @PutMapping("/update")
     suspend fun updateReserva(
         @Valid @RequestBody reservaDto: ReservaUpdateDto
@@ -93,7 +94,7 @@ class ReservaController@Autowired constructor(
         }
     }
 
-
+    @PreAuthorize("hasAnyRole('ADMINISTRADOR','CLIENTE')")
     @GetMapping("/find/{id}")
     suspend fun findById(@PathVariable id : String) : ResponseEntity<ReservaDto>{
         logger.info { "Buscando reserva con id ${id}"}
@@ -102,7 +103,7 @@ class ReservaController@Autowired constructor(
     }
 
 
-    //@PreAuthorize("hasRole('ADMINISTRADOR')")
+    @PreAuthorize("hasAnyRole('ADMINISTRADOR','CLIENTE')")
     @PostMapping("/delete/{id}")
     suspend fun delete(@PathVariable id : String): ResponseEntity<String> {
         logger.info { "Borrar reserva con id: $id" }

@@ -27,14 +27,13 @@ class MapaController
 
 
 
-    //@PreAuthorize("hasRole('ADMINISTRADOR')")
     @GetMapping("/listaMapas")
     suspend fun listaComentarios() : ResponseEntity<List<MapaDto>> {
         logger.info { "Obteniendo lista de todos las mapas"}
         return ResponseEntity.ok(service.findAll().toList().map { it.toDto() })
     }
 
-    //@PreAuthorize("hasRole('ADMINISTRADOR')")
+    @PreAuthorize("hasRole('ADMINISTRADOR')")
     @PostMapping("/newMapas")
     suspend fun new(@Valid @RequestBody entityDto : MapaCreateDto): ResponseEntity<MapaCreateDto> {
         logger.info { "Creacion de mapa: ${entityDto}" }
@@ -50,7 +49,7 @@ class MapaController
         return ResponseEntity.ok(reserva?.toDto())
     }
 
-    //@PreAuthorize("hasRole('ADMINISTRADOR')")
+    @PreAuthorize("hasRole('ADMINISTRADOR')")
     @PutMapping("/update")
     suspend fun updateMe(@Valid @RequestBody mapaDto: MapaUpdateDto): Any {
         logger.info { "Actualizando mapa con uuid: ${mapaDto.id}" }
@@ -66,7 +65,7 @@ class MapaController
 
     }
 
-    //@PreAuthorize("hasRole('ADMINISTRADOR')")
+    @PreAuthorize("hasRole('ADMINISTRADOR')")
     @PostMapping("/delete/{id}")
     suspend fun delete(@PathVariable id : String): ResponseEntity<String> {
         logger.info { "Borrar mapa con id: $id" }

@@ -74,7 +74,7 @@ export class AutomovilesComponent {
         Authorization: `Bearer ${token}`
       });
   
-      this.httpService.post(url, { headers }).toPromise().then((response: any) => {
+      this.httpService.post(url, null  ,{ headers }).toPromise().then((response: any) => {
         console.log('Automovil eliminado correctamente');
         this.getAutomovilesAll()
       }).catch((error) => {
