@@ -33,8 +33,8 @@ export class PerfilComponent {
   }
 
   public async findUsuario(id :string){
-    const url: string = `http://localhost:6969/api/users/find/${id}`;
-    //const url: string = `http://128.140.34.184:8080/api/users/find/${id}`; 
+    //const url: string = `http://localhost:6969/api/users/find/${id}`;
+    const url: string = `https://alquilaenmadrid.com/api/users/find/${id}`; 
 
 
     const token = localStorage.getItem('access_token');
@@ -71,8 +71,8 @@ export class PerfilComponent {
     this.usuarioUpdate.rol = this.usuario.rol.toString();
 
     
-    const url: string = 'http://localhost:6969/api/users/update';
-    //const url: string = 'http://128.140.34.184:8080/api/users/update';
+    //const url: string = 'http://localhost:6969/api/users/update';
+    const url: string = 'https://alquilaenmadrid.com/api/users/update';
 
 
     const token = localStorage.getItem('access_token');

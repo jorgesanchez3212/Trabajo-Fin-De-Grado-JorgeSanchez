@@ -34,8 +34,8 @@ export class ContactoComponent {
  
   
   public async findUsuario(id :string){
-    const url: string = `http://localhost:6969/api/users/find/${id}`;
-    //const url: string = `http://128.140.34.184:8080/api/users/find/${id}`; 
+    //const url: string = `http://localhost:6969/api/users/find/${id}`;
+    const url: string = `https://alquilaenmadrid.com/api/users/find/${id}`; 
 
 
     const token = localStorage.getItem('access_token');
@@ -68,8 +68,8 @@ export class ContactoComponent {
     this.contactoNew.idCliente = this.usuario.id;
 
     
-    const url: string = 'http://localhost:6969/api/contactos/newContactos';
-    //const url: string = 'http://128.140.34.184:8080/api/contactos/newContactos';
+    //const url: string = 'http://localhost:6969/api/contactos/newContactos';
+    const url: string = 'https://alquilaenmadrid.com/api/contactos/newContactos';
 
 
     const token = localStorage.getItem('access_token');

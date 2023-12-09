@@ -51,8 +51,8 @@ export class ReservasComponent {
 
 
   private getReservasAll(){
-    //const url : string = 'http://128.140.34.184:8080/api/reservas/listaReservas'
-    const url : string = 'http://localhost:6969/api/reservas/listaReservas'
+    const url : string = 'https://alquilaenmadrid.com/api/reservas/listaReservas'
+    //const url : string = 'http://localhost:6969/api/reservas/listaReservas'
 
     const token = localStorage.getItem('access_token');
 
@@ -93,7 +93,8 @@ export class ReservasComponent {
 
 
   private deleteReservaById(id: string) {
-    const url: string = `http://localhost:6969/api/reservas/delete/${id}`; 
+    //const url: string = `http://localhost:6969/api/reservas/delete/${id}`; 
+    const url: string = `https://alquilaenmadrid.com/api/reservas/delete/${id}`; 
   
     const token = localStorage.getItem('access_token');
   
@@ -117,8 +118,8 @@ export class ReservasComponent {
 
 
   openModal(id:string){
-    const url: string = `http://localhost:6969/api/reservas/find/${id}`;
-    //const url: string = `http://128.140.34.184:8080/api/reservas/find/${id}`; 
+    //const url: string = `http://localhost:6969/api/reservas/find/${id}`;
+    const url: string = `https://alquilaenmadrid.com/api/reservas/find/${id}`; 
 
     this.httpService.get(url).toPromise().then((data: any) => {
       console.log(data);
@@ -155,7 +156,8 @@ export class ReservasComponent {
 
 
   onContextFiltrarClick(){
-    const url : string = 'http://localhost:6969/api/reservas/listaReservasFiltro'
+    //const url : string = 'http://localhost:6969/api/reservas/listaReservasFiltro'
+    const url : string = 'https://alquilaenmadrid.com/api/reservas/listaReservasFiltro'
   
     // Para fechaFin
 if (this.reservaFilterFin) {

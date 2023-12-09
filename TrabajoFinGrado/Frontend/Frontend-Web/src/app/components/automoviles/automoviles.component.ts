@@ -63,7 +63,9 @@ export class AutomovilesComponent {
 
 
   private deleteAutomovilByNumeroChasis(numeroChasis: string) {
-    const url: string = `http://localhost:6969/api/automoviles/delete/${numeroChasis}`; 
+    const url: string = `https://alquilaenmadrid.com/api/automoviles/delete/${numeroChasis}`; 
+    //const url: string = `http://localhost:6969/api/automoviles/delete/${numeroChasis}`; 
+
   
     const token = localStorage.getItem('access_token');
   
@@ -85,8 +87,8 @@ export class AutomovilesComponent {
 
 
   private getAutomovilesAll(){
-    //const url : string = 'http://128.140.34.184:8080/api/automoviles/listaAutomoviles'
-    const url : string = 'http://localhost:6969/api/automoviles/listaAutomoviles'
+    const url : string = 'https://alquilaenmadrid.com/api/automoviles/listaAutomoviles'
+    //const url : string = 'http://localhost:6969/api/automoviles/listaAutomoviles'
 
     const token = localStorage.getItem('access_token');
 
@@ -109,8 +111,8 @@ export class AutomovilesComponent {
 
 
   openModal(id:string){
-    const url: string = `http://localhost:6969/api/automoviles/find/${id}`;
-    //const url: string = `http://128.140.34.184:8080/api/automoviles/find/${id}`; 
+    //const url: string = `http://localhost:6969/api/automoviles/find/${id}`;
+    const url: string = `https://alquilaenmadrid.com/api/automoviles/find/${id}`; 
 
     this.httpService.get(url).toPromise().then((data: any) => {
       console.log(data);
@@ -157,7 +159,9 @@ onContextNewClick(){
 
 
 onContextFiltrarClick(){
-  const url : string = 'http://localhost:6969/api/automoviles/listaAutomovilesFiltro'
+  //const url : string = 'http://localhost:6969/api/automoviles/listaAutomovilesFiltro'
+  const url : string = 'https://alquilaenmadrid.com/api/automoviles/listaAutomovilesFiltro'
+
 
   const token = localStorage.getItem('access_token');
 

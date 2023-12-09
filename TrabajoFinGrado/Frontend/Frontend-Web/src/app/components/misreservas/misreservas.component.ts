@@ -42,8 +42,8 @@ export class MisreservasComponent {
 
 
   private getReservasAllByClienteId(id:string){
-    //const url : string = `http://128.140.34.184:8080/api/reservas/listaReservasByClienteId/${id}`
-    const url : string = `http://localhost:6969/api/reservas/listaReservasByClienteId/${id}`
+    const url : string = `https://alquilaenmadrid.com/api/reservas/listaReservasByClienteId/${id}`
+    //const url : string = `http://localhost:6969/api/reservas/listaReservasByClienteId/${id}`
 
     const token = localStorage.getItem('access_token');
 
@@ -89,7 +89,9 @@ export class MisreservasComponent {
   }
 
   private deleteReservaById(id: string) {
-    const url: string = `http://localhost:6969/api/reservas/delete/${id}`; 
+    //const url: string = `http://localhost:6969/api/reservas/delete/${id}`; 
+    const url: string = `https://alquilaenmadrid.com/api/reservas/delete/${id}`; 
+
 
     const token = localStorage.getItem('access_token');
     const ids = localStorage.getItem('access_id');
@@ -211,8 +213,8 @@ export class MisreservasComponent {
   }
 
     public async findUsuario(id :string){
-      const url: string = `http://localhost:6969/api/users/find/${id}`;
-      //const url: string = `http://128.140.34.184:8080/api/users/find/${id}`; 
+      //const url: string = `http://localhost:6969/api/users/find/${id}`;
+      const url: string = `https://alquilaenmadrid.com/api/users/find/${id}`; 
   
   
       const token = localStorage.getItem('access_token');
@@ -233,7 +235,9 @@ export class MisreservasComponent {
 
 
     private async findAutmovil(id: string): Promise<AutomovilDto | undefined> {
-      const url: string = `http://localhost:6969/api/automoviles/find/${id}`;
+      //const url: string = `http://localhost:6969/api/automoviles/find/${id}`;
+      const url: string = `https://alquilaenmadrid.com/api/automoviles/find/${id}`;
+
       const token = localStorage.getItem('access_token');
     
       if (!token) {

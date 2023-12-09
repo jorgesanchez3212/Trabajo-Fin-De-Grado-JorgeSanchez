@@ -45,8 +45,8 @@ export class DetailMapaComponentComponent {
 
   
   public async saveMapa(){
-    const url: string = 'http://localhost:6969/api/mapas/update';
-    //const url: string = 'http://128.140.34.184:8080/api/mapas/update';
+    //const url: string = 'http://localhost:6969/api/mapas/update';
+    const url: string = 'https://alquilaenmadrid.com/api/mapas/update';
 
 
     const token = localStorage.getItem('access_token');

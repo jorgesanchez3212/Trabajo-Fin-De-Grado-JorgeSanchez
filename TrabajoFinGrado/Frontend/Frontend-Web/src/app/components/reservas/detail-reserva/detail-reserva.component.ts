@@ -55,8 +55,8 @@ export class DetailReservaComponent {
 
 
   public async saveReserva(){
-    const url: string = 'http://localhost:6969/api/reservas/update';
-    //const url: string = 'http://128.140.34.184:8080/api/reservas/update';
+    //const url: string = 'http://localhost:6969/api/reservas/update';
+    const url: string = 'https://alquilaenmadrid.com/api/reservas/update';
 
 
     const token = localStorage.getItem('access_token');

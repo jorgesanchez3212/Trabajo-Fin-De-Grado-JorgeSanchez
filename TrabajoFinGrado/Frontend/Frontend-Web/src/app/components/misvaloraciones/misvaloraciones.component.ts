@@ -32,8 +32,8 @@ export class MisvaloracionesComponent {
 
 
   private getComentariosAllByClienteId(id:string){
-    //const url : string = `http://128.140.34.184:8080/api/comentarios/listaComentariosByClienteId/${id}`
-    const url : string = `http://localhost:6969/api/comentarios/listaComentariosByClienteId/${id}`
+    const url : string = `https://alquilaenmadrid.com/api/comentarios/listaComentariosByClienteId/${id}`
+    //const url : string = `http://localhost:6969/api/comentarios/listaComentariosByClienteId/${id}`
 
     const token = localStorage.getItem('access_token');
 
@@ -87,7 +87,8 @@ export class MisvaloracionesComponent {
 
   
   private deleteComentarioById(id: string) {
-    const url: string = `http://localhost:6969/api/comentarios/delete/${id}`; 
+    //const url: string = `http://localhost:6969/api/comentarios/delete/${id}`; 
+    const url: string = `https://alquilaenmadrid.com/api/comentarios/delete/${id}`; 
     let idd = localStorage.getItem('access_id');
 
     const token = localStorage.getItem('access_token');
@@ -115,8 +116,8 @@ export class MisvaloracionesComponent {
 
 
   openModal(id:string){
-    const url: string = `http://localhost:6969/api/comentarios/find/${id}`;
-    //const url: string = `http://128.140.34.184:8080/api/reservas/find/${id}`; 
+    //const url: string = `http://localhost:6969/api/comentarios/find/${id}`;
+    const url: string = `https://alquilaenmadrid.com/api/comentarios/find/${id}`; 
     let idd = localStorage.getItem('access_id');
 
 

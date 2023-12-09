@@ -52,8 +52,8 @@ export class DetailAutomovilComponent {
   }
 
   public async saveAutomovil(){
-    const url: string = 'http://localhost:6969/api/automoviles/update';
-    //const url: string = 'http://128.140.34.184:8080/api/automoviles/update';
+    //const url: string = 'http://localhost:6969/api/automoviles/update';
+    const url: string = 'https://alquilaenmadrid.com/api/automoviles/update';
 
 
     const token = localStorage.getItem('access_token');

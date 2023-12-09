@@ -55,8 +55,8 @@ export class NewAutomovilComponent {
 
 
     public async saveAutomovil(){
-      const url: string = 'http://localhost:6969/api/automoviles/newAutomovil';
-      //const url: string = 'http://128.140.34.184:8080/api/automoviles/newAutomovil';
+      //const url: string = 'http://localhost:6969/api/automoviles/newAutomovil';
+      const url: string = 'https://alquilaenmadrid.com/api/automoviles/newAutomovil';
   
   
       const token = localStorage.getItem('access_token');

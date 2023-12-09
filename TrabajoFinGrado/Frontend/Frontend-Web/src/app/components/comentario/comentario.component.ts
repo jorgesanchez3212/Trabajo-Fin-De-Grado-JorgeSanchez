@@ -33,8 +33,8 @@ export class ComentarioComponent implements OnInit {
 
 
   private getComentariosAll(){
-    //const url : string = 'http://128.140.34.184:8080/api/contactos/listaContactos'
-    const url : string = 'http://localhost:6969/api/contactos/listaContactos'
+    const url : string = 'https://alquilaenmadrid.com/api/contactos/listaContactos'
+    //const url : string = 'http://localhost:6969/api/contactos/listaContactos'
 
     const token = localStorage.getItem('access_token');
 

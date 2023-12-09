@@ -49,8 +49,8 @@ export class DetailComentarioCatalogoComponent {
   }
 
   public async saveComentario(){
-    const url: string = 'http://localhost:6969/api/comentarios/newComentarios';
-    //const url: string = 'http://128.140.34.184:8080/api/automoviles/newComentarios';
+    //const url: string = 'http://localhost:6969/api/comentarios/newComentarios';
+    const url: string = 'https://alquilaenmadrid.com/api/comentarios/newComentarios';
 
 
     const token = localStorage.getItem('access_token');

@@ -49,8 +49,8 @@ export class DetailMisvaloracionesComponent {
 
   
   public async saveValoracion(){
-    const url: string = 'http://localhost:6969/api/comentarios/update';
-    //const url: string = 'http://128.140.34.184:8080/api/comentarios/update';
+    //const url: string = 'http://localhost:6969/api/comentarios/update';
+    const url: string = 'https://alquilaenmadrid.com/api/comentarios/update';
 
 
     const token = localStorage.getItem('access_token');

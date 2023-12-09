@@ -32,8 +32,8 @@ export class MapaComponent {
 
 
   private getMapasAll(){
-    //const url : string = 'http://128.140.34.184:8080/api/mapas/listaMapas'
-    const url : string = 'http://localhost:6969/api/mapas/listaMapas'
+    const url : string = 'https://alquilaenmadrid.com/api/mapas/listaMapas'
+    //const url : string = 'http://localhost:6969/api/mapas/listaMapas'
 
     const token = localStorage.getItem('access_token');
 
@@ -73,7 +73,9 @@ export class MapaComponent {
   }
 
   private deleteMapaById(id: string) {
-    const url: string = `http://localhost:6969/api/mapas/delete/${id}`; 
+    //const url: string = `http://localhost:6969/api/mapas/delete/${id}`; 
+    const url: string = `https://alquilaenmadrid.com/api/mapas/delete/${id}`; 
+
   
     const token = localStorage.getItem('access_token');
   
@@ -94,8 +96,8 @@ export class MapaComponent {
 
 
   openModal(id:string){
-    const url: string = `http://localhost:6969/api/mapas/find/${id}`;
-    //const url: string = `http://128.140.34.184:8080/api/mapas/find/${id}`; 
+    //const url: string = `http://localhost:6969/api/mapas/find/${id}`;
+    const url: string = `https://alquilaenmadrid.com/api/mapas/find/${id}`; 
 
     this.httpService.get(url).toPromise().then((data: any) => {
       console.log(data);

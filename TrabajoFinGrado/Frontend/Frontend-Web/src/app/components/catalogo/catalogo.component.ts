@@ -92,8 +92,8 @@ export class CatalogoComponent {
   }
 
   findAllMapas(){
-  //const url : string = 'http://128.140.34.184:8080/api/mapas/listaMapas'
-  const url : string = 'http://localhost:6969/api/mapas/listaMapas'
+  const url : string = 'https://alquilaenmadrid.com/api/mapas/listaMapas'
+  //const url : string = 'http://localhost:6969/api/mapas/listaMapas'
 
   const token = localStorage.getItem('access_token');
 
@@ -124,7 +124,8 @@ export class CatalogoComponent {
 
 
   private deleteAutomovilByNumeroChasis(numeroChasis: string) {
-    const url: string = `http://localhost:6969/api/automoviles/delete/${numeroChasis}`; 
+    //const url: string = `http://localhost:6969/api/automoviles/delete/${numeroChasis}`; 
+    const url: string = `https://alquilaenmadrid.com/api/automoviles/delete/${numeroChasis}`; 
   
     const token = localStorage.getItem('access_token');
   
@@ -143,8 +144,8 @@ export class CatalogoComponent {
 
 
   private getAutomovilesAll(){
-    //const url : string = 'http://128.140.34.184:8080/api/automoviles/listaAutomoviles'
-    const url : string = 'http://localhost:6969/api/automoviles/listaAutomoviles'
+    const url : string = 'https://alquilaenmadrid.com/api/automoviles/listaAutomoviles'
+    //const url : string = 'http://localhost:6969/api/automoviles/listaAutomoviles'
 
     const token = localStorage.getItem('access_token');
 
@@ -169,7 +170,8 @@ export class CatalogoComponent {
 
 
 onContextFiltrarClick(){
-  const url : string = 'http://localhost:6969/api/automoviles/catalogoFiltros'
+  const url : string = 'https://alquilaenmadrid.com/api/automoviles/catalogoFiltros'
+  //const url : string = 'http://localhost:6969/api/automoviles/catalogoFiltros'
 
   
     // Para fechaFin
@@ -208,8 +210,8 @@ this.getAutomovilesAll();
 
 
 buscar(){
- //const url : string = 'http://128.140.34.184:8080/api/automoviles/catalogo'
- const url : string = 'http://localhost:6969/api/automoviles/catalogo'
+ const url : string = 'https://alquilaenmadrid.com/api/automoviles/catalogo'
+ //const url : string = 'http://localhost:6969/api/automoviles/catalogo'
 
     // Para fechaFin
 if (this.reservaFilterFin) {
@@ -238,8 +240,8 @@ if(this.catalogoDto.fechaFinal != null && this.catalogoDto.fechaFinal != null &&
 }
 
 openModal(automovilId:string){
-  const url: string = `http://localhost:6969/api/comentarios/listaComentariosByAutmovilId/${automovilId}`;
-  //const url: string = `http://128.140.34.184:8080/api/comentarios/listaComentariosByAutmovilId/${automovilId}`; 
+  //const url: string = `http://localhost:6969/api/comentarios/listaComentariosByAutmovilId/${automovilId}`;
+  const url: string = `https://alquilaenmadrid.com/api/comentarios/listaComentariosByAutmovilId/${automovilId}`; 
 
   this.loadData(automovilId);
   this.httpService.get(url).toPromise().then((data: any) => {
@@ -277,8 +279,8 @@ this.saveReserva(automovil)
 
 
 public async saveReserva(automovil : AutomovilDto){
-  const url: string = 'http://localhost:6969/api/reservas/newReserva';
-  //const url: string = 'http://128.140.34.184:8080/api/reservas/newReserva';
+  //const url: string = 'http://localhost:6969/api/reservas/newReserva';
+  const url: string = 'https://alquilaenmadrid.com/api/reservas/newReserva';
 
 
 

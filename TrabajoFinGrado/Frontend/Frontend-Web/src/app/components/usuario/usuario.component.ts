@@ -67,7 +67,9 @@ export class UsuarioComponent implements OnInit{
   }
 
   private deleteUsuarioById(id: string) {
-    const url: string = `http://localhost:6969/api/users/delete/${id}`; 
+    //const url: string = `http://localhost:6969/api/users/delete/${id}`;
+    const url: string = `https://alquilaenmadrid.com/api/users/delete/${id}`; 
+ 
   
     const token = localStorage.getItem('access_token');
   
@@ -86,8 +88,8 @@ export class UsuarioComponent implements OnInit{
   
 
   private getUsuariosAll(){
-    //const url : string = 'http://128.140.34.184:8080/api/users/listaUsuarios'
-    const url : string = 'http://localhost:6969/api/users/listaUsuarios'
+    const url : string = 'https://alquilaenmadrid.com/api/users/listaUsuarios'
+    //const url : string = 'http://localhost:6969/api/users/listaUsuarios'
 
     const token = localStorage.getItem('access_token');
 
@@ -107,8 +109,8 @@ export class UsuarioComponent implements OnInit{
   }
 
   openModal(id:string){
-    const url: string = `http://localhost:6969/api/users/find/${id}`;
-    //const url: string = `http://128.140.34.184:8080/api/users/find/${id}`; 
+    //const url: string = `http://localhost:6969/api/users/find/${id}`;
+    const url: string = `https://alquilaenmadrid.com/api/users/find/${id}`; 
 
     this.httpService.get(url).toPromise().then((data: any) => {
       console.log(data);
@@ -150,7 +152,8 @@ export class UsuarioComponent implements OnInit{
   }
 
   onContextFiltrarClick(){
-    const url : string = 'http://localhost:6969/api/users/listaUsuariosFiltro'
+    const url : string = 'https://alquilaenmadrid.com/api/users/listaUsuariosFiltro'
+    //const url : string = 'http://localhost:6969/api/users/listaUsuariosFiltro'
 
     const token = localStorage.getItem('access_token');
 
