@@ -49,28 +49,16 @@ export class CatalogoComponent {
 
   myFilter = (d: Date | null): boolean => {
     const today = new Date();
-    // Restablece la hora de hoy a la medianoche para la comparación
     today.setHours(0, 0, 0, 0);
     
     const selectedDate = (d || new Date());
-    // Restablece la hora de la fecha seleccionada a la medianoche para la comparación
     selectedDate.setHours(0, 0, 0, 0);
   
-    // Verifica si la fecha seleccionada es anterior a hoy
     return selectedDate >= today;
   };
 
   ngAfterViewInit(){
-    // const map = new Map('map').setView([40.42517,-3.68718], 13);
-    // tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    //   maxZoom: 19,
-    //   attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-    // }).addTo(map);
 
-    // this.ubicaciones.forEach(location =>{
-    //   marker([Number(location.latitud), Number(location.longitud)]).addTo(map)
-    // });
-   // marker([Number(this.ubicaciones[0].latitud), Number(this.ubicaciones[0].longitud)]).addTo(map);
   }
  
   constructor(private httpService: HttpClient, private utilsService : UtilsService, public dialog: MatDialog,private newComentariosProperty: NewComentariosPropertyService,){

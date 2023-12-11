@@ -1,15 +1,15 @@
 .card-container {
     display: flex;
     flex-direction: column;
-    align-items: center; /* esto alinea al centro los elementos hijos, si quieres que las tarjetas ocupen todo el ancho, puedes remover esta línea */
+    align-items: center; 
     justify-content: center;
     background-color: dark;
   }
   
   .titulo-incidencia {
-    font-weight: bold; /* Negrita */
-    font-size: 24px; /* Tamaño de fuente más grande */
-    text-align: center; /* Centrado */
+    font-weight: bold; 
+    font-size: 24px; 
+    text-align: center; 
     margin-left: 45%;
     margin-right: auto;
   }
@@ -26,17 +26,16 @@
   }
   
   .example-card {
-    width: auto; /* Esto hará que la tarjeta se extienda según el contenido */
-    max-width: 90%; /* ajusta al ancho deseado, por ejemplo, el 90% del contenedor padre */
-    margin-bottom: 20px; /* espacio entre cartas */
-    /* Alinea el contenido de la tarjeta (incluida la imagen) a la derecha */
+    width: auto; 
+    max-width: 90%; 
+    margin-bottom: 20px; 
     text-align: right; 
     width: 100%;
     border-radius: 15px;
   }
   
   .form-control.form-line {
-    background-color: white; /* Esto establece el color de fondo a blanco */
+    background-color: white; 
   }
   
   .user-image {

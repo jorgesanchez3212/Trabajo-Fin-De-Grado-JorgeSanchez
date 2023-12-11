@@ -147,44 +147,4 @@ export class NavegacionComponent implements OnInit, OnDestroy {
   shouldRun = true;
 
 
-  /*
-
-  // Iconos
-  public faUser : any;
-  public faUsers : any;
-  public faCars : any;
-  public faLeaf : any;
-  public faBuilding = faBuilding;
-
-
-
-
-
-
-  isNavbarVisible: boolean = false;
-
-  public imgSrc: string = 'assets/img/logo-oc.png';
-  public navAutomovil: boolean = false;
-  public navLogin: boolean = true;
-  private activeTab = '';
-
-  constructor(private router: Router, private location: Location) {
-    this.faUsers = faUsers;
-    this.faUser = faUser;
-    this.faCars = faCar;
-    this.faLeaf = faLeaf;
-
-    this.router.events.subscribe(event => {
-      if (event instanceof NavigationEnd) {
-        console.log('Ruta actual:', event.url);
-        this.isNavbarVisible = event.url !== '/login' && event.url !== '/register';
-      }
-    });
-  }
-
-  ngOnInit() {
-  }
-
-  
-  */
 }

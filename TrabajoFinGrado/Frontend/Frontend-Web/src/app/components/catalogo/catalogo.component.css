@@ -9,11 +9,10 @@
   
   .example-full-width {
     flex: 1;
-    min-width: 100px; /* Adjust the min-width as needed */
-    margin: 8px; /* Provides spacing between form fields */
+    min-width: 100px;
+    margin: 8px; 
   }
   
-  /* Responsive adjustments */
   @media (max-width: 600px) {
     .toolbar-content {
       flex-direction: column;
@@ -22,7 +21,7 @@
     .example-full-width {
       width: 100%;
       min-width: 0;
-      margin: 4px 0; /* Adjust spacing for smaller devices */
+      margin: 4px 0;
     }
   }
 
@@ -49,7 +48,7 @@
   .card-container {
     display: flex;
     flex-direction: column;
-    align-items: center; /* esto alinea al centro los elementos hijos, si quieres que las tarjetas ocupen todo el ancho, puedes remover esta línea */
+    align-items: center; 
     justify-content: center;
     background-color: dark;
   }
@@ -69,17 +68,16 @@
   }
   
   .example-card {
-    width: auto; /* Esto hará que la tarjeta se extienda según el contenido */
-    max-width: 90%; /* ajusta al ancho deseado, por ejemplo, el 90% del contenedor padre */
-    margin-bottom: 20px; /* espacio entre cartas */
-    /* Alinea el contenido de la tarjeta (incluida la imagen) a la derecha */
+    width: auto; 
+    max-width: 90%; 
+    margin-bottom: 20px; 
     text-align: right; 
     width: 100%;
     border-radius: 15px;
   }
   
   .form-control.form-line {
-    background-color: white; /* Esto establece el color de fondo a blanco */
+    background-color: white; 
   }
   
   .user-image {
@@ -132,8 +130,7 @@
  }
   
   .card-container {
-    flex-grow: 1; /* Ocupa el espacio restante */
-    /* Estilos adicionales para el contenedor de tarjetas si es necesario */
+    flex-grow: 1;
     width: 50%;
   }
 

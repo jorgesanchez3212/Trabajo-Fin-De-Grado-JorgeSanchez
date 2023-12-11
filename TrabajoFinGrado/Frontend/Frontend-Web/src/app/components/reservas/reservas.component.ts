@@ -25,14 +25,11 @@ export class ReservasComponent {
 
   myFilter = (d: Date | null): boolean => {
     const today = new Date();
-    // Restablece la hora de hoy a la medianoche para la comparación
     today.setHours(0, 0, 0, 0);
     
     const selectedDate = (d || new Date());
-    // Restablece la hora de la fecha seleccionada a la medianoche para la comparación
     selectedDate.setHours(0, 0, 0, 0);
   
-    // Verifica si la fecha seleccionada es anterior a hoy
     return selectedDate >= today;
   };
   

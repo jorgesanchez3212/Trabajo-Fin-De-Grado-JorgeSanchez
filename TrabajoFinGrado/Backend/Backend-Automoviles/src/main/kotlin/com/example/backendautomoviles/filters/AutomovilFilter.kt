@@ -1,6 +1,5 @@
 package com.example.backendautomoviles.filters
 
-import com.example.backendautomoviles.models.Automovil
 
 data class AutomovilFilter (
     val id : String?,

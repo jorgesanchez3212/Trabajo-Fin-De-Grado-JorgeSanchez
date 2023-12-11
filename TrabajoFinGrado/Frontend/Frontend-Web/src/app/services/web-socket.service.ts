@@ -16,7 +16,6 @@ export class WebSocketService {
 
     this.socket.onmessage = event => {
       console.log('WebSocket Message: ', event.data);
-      // Aquí puedes manejar los datos recibidos
     };
 
     this.socket.onclose = event => {
@@ -32,32 +31,8 @@ export class WebSocketService {
     this.socket?.close();
   }
 
-  // Método para enviar mensajes al servidor, si es necesario
   public sendMessage(message: string) {
     this.socket?.send(message);
   }
 }
-/*
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { WebSocketService } from './web-socket.service';
 
-@Component({
-  selector: 'app-contact',
-  template: `
-    <!-- Tu código HTML aquí -->
-  `
-})
-export class ContactComponent implements OnInit, OnDestroy {
-
-  constructor(private webSocketService: WebSocketService) {}
-
-  ngOnInit() {
-    // Reemplaza con la URL de tu WebSocket
-    this.webSocketService.openWebSocket('ws://your-websocket-url');
-  }
-
-  ngOnDestroy() {
-    this.webSocketService.closeWebSocket();
-  }
-}
-*/

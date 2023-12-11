@@ -61,9 +61,9 @@ class SecurityConfig @Autowired constructor(
             } .and()
             .authorizeHttpRequests()
             .requestMatchers("/error/**").permitAll()
-            .requestMatchers("/assets/*","/","/svg/", "/index.html", "/static/", ".css", "*.js").permitAll() // Permitir acceso a la raíz y a la carpeta static
+            .requestMatchers("/assets/*","/","/svg/", "/index.html", "/static/", ".css", "*.js").permitAll()
             .requestMatchers("/api/**").permitAll()
-            .requestMatchers("/**").permitAll() //Por esto de aqui debajo fallaba, solo le permitia a los que tenian api
+            .requestMatchers("/**").permitAll()
             .requestMatchers( "/api/users/register").permitAll()
             .requestMatchers( "/api/users/login").permitAll()
             .requestMatchers("/static/**").permitAll()

@@ -24,6 +24,7 @@ private val logger = KotlinLogging.logger {}
 class ReservaService @Autowired constructor(
         private val repository : ReservasRepository,
 ){
+
     suspend fun findAll() = withContext(Dispatchers.IO) {
         return@withContext repository.findAll()
     }
@@ -44,21 +45,17 @@ class ReservaService @Autowired constructor(
 
         if (reservaFilter.fechaInicio != null){
             if (reservaFilter.fechaFin != null){
-                println("Entra aqui 1")
                 return@withContext repository.findAllByFechaInicioBetweenAndFechaFinalAfter(LocalDate.parse(reservaFilter.fechaInicio), LocalDate.parse(reservaFilter.fechaFin))
             }else{
-                println("Entra aqui 2")
                 return@withContext repository.findAllByFechaInicioAfter(LocalDate.parse(reservaFilter.fechaInicio))
 
             }
 
         }else{
             if(reservaFilter.fechaFin != null){
-                println("Entra aqui 3")
                 return@withContext repository.findAllByFechaFinalBefore(LocalDate.parse(reservaFilter.fechaFin))
 
             } else {
-                println("Entra aqui 4")
                 return@withContext repository.findAll()
 
             }

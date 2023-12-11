@@ -21,21 +21,3 @@ class CorsConfig {
         }
     }
 }
-
-/*
-    @Bean
-    fun corsConfigurerSSL(): WebMvcConfigurer {
-        return object : WebMvcConfigurer {
-            override fun addCorsMappings(registry: CorsRegistry) {
-                registry.addMapping("/rest/**")
-                    .allowedOrigins("http://localhost:6963")
-                    .allowedHeaders("*")
-                    .allowedMethods("GET", "POST", "PUT", "DELETE")
-                    .maxAge(3600)
-            }
-        }
-    }
-
-}
-
- */

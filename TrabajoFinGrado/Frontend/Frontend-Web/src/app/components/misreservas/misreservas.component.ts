@@ -176,8 +176,8 @@ export class MisreservasComponent {
       doc.text(`Email del Cliente:  ${this.usuario.email}`, 20, 80);
       doc.text(`Username del Cliente:  ${this.usuario.username}`, 20, 85);
 
-      doc.setFontSize(16); // Tamaño de fuente grande
-      doc.setFont('helvetica', 'bold'); // Fuente en negrita
+      doc.setFontSize(16); 
+      doc.setFont('helvetica', 'bold'); 
       doc.text('Automovil', 20, 105);
 
 
@@ -191,15 +191,14 @@ export class MisreservasComponent {
 
 
 
-      doc.setFontSize(14); // Tamaño de fuente grande
-      doc.setFont('helvetica', 'bold'); // Fuente en negrita
+      doc.setFontSize(14); 
+      doc.setFont('helvetica', 'bold');
       doc.text(`Coste del Automovil: ${reservaa.costo}$`, 115, 140);
 
 
 
-      const imageSrcc = this.automovil!.image; // Esto debería ser tu cadena base64
+      const imageSrcc = this.automovil!.image; 
 
-  // Podrías necesitar ajustar estas dimensiones
       const imgWidthh = 70;
       const imgHeightt = 60; 
       const xx = (pageWidth - imgWidth) / 2; 

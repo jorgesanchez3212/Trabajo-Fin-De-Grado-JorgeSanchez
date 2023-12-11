@@ -32,12 +32,10 @@ export class UsuarioComponent implements OnInit{
 
 
   applyFilter() {
-    // Implementa la lógica para filtrar los usuarios por username
   }
 
   clearFilter() {
     this.filterUsername = '';
-    // Implementa la lógica para limpiar el filtro y mostrar todos los usuarios
   }
 
   openDialog(usuarioId : string, enterAnimationDuration: string, exitAnimationDuration: string): void {

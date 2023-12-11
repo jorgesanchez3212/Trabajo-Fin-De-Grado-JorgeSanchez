@@ -103,7 +103,6 @@ class AutomovilController
     @PostMapping("/delete/{numeroChasis}")
     suspend fun delete(@PathVariable numeroChasis : String): ResponseEntity<String> {
         logger.info { "Borrar automovil con numeroChasis: $numeroChasis" }
-        //val automovil = service.loadAutomovilByNumeroChasis(numeroChasis)
         service.delete(numeroChasis)
         return ResponseEntity.ok("Borrado")
     }

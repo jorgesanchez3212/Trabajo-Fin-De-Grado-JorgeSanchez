@@ -128,7 +128,6 @@ export class MisvaloracionesComponent {
           idd = '0'
         }
         this.getComentariosAllByClienteId(idd);
-        //this.clearEmit();
       });
     }).catch(() => {
       console.log('Se ha producido un error al obtener el comentario');
